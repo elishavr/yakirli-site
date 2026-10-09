@@ -73,7 +73,7 @@ T = {
                lang_long='English – לאתר באנגלית', lang_short='EN', nav='ניווט', contact='יצירת קשר',
                phone='טלפון ווטסאפ', email='אימייל', mail='דואר', address='ת"ד 1208, אפרת 9043500',
                newsletter='הצטרפות לרשימת התפוצה', join='הצטרפות', nl_sent='זו גרסת תצוגה: ההרשמה לא נשמרה.',
-               access='הצהרת נגישות', privacy='מדיניות פרטיות', reg='יקיר לי – יד ולב לשכול האזרחי (ע"ר 580616001)',
+               access='הצהרת נגישות', privacy='מדיניות פרטיות', reg='יקיר לי – יד ולב לשכול האזרחי (ע"ר 580616001)', credits='סמלי הרשויות: ויקישיתוף (CC BY-SA) והאתרים הרשמיים',
                wa='שליחת הודעת ווטסאפ ליקיר לי', foot_tag='יד ולב לשכול האזרחי (ע"ר 580616001)',
                sub_toggle='פתיחת תפריט משנה', site='יקיר לי', site_long='יקיר לי – יד ולב לשכול האזרחי'),
     'en': dict(skip='Skip to content', brand_aria='Yakir Li – home', brand_name='Yakir Li',
@@ -82,7 +82,7 @@ T = {
                phone='Phone / WhatsApp', email='Email', mail='Mail', address='P.O. Box 1208, Efrat 9043500, Israel',
                newsletter='Join our mailing list', join='Join', nl_sent='Preview version: the sign-up was not saved.',
                access='Accessibility statement', privacy='Privacy policy',
-               reg='Yakir Li – Civilian Bereavement Support (Registered Nonprofit 580616001)',
+               reg='Yakir Li – Civilian Bereavement Support (Registered Nonprofit 580616001)', credits='Municipal emblems: Wikimedia Commons (CC BY-SA) and official sites',
                wa='Send Yakir Li a WhatsApp message', foot_tag='Civilian Bereavement Support (Reg. Nonprofit 580616001)',
                sub_toggle='Open submenu', site='Yakir Li', site_long='Yakir Li – Civilian Bereavement Support'),
 }
