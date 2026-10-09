@@ -143,6 +143,8 @@ def main():
             ctx = {
                 'lang': lang, 'dir': 'ltr' if lang == 'en' else 'rtl', 'title': html.escape(full_title, quote=True),
                 'description': description_of(body), 'canonical': site + path,
+                'og_image': site + '/assets/img/og-' + lang + '.png',
+                'og_alt': html.escape(t['site_long'], quote=True),
                 'alt_he': site + path_of('he', pid), 'alt_en': site + path_of('en', pid),
                 'og_locale': 'en_US' if lang == 'en' else 'he_IL', 'base': base, 'build': build_id,
                 'page': pid, 'group': group or 'none', 'home': path_of(lang, 'home'),

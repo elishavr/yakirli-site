@@ -79,3 +79,19 @@ python3 build.py && python3 -m http.server 8787 --directory dist
 - העיצוב כולו ב־`site.css` אחד, עם משתני צבע בראש הקובץ.
 - הטפסים הם תצוגה מקדימה בלבד; החיבור לווטסאפ של פיני ול־info@yakirli.org ייעשה בוורדפרס.
 - תרומות דרך JGive (קישור חיצוני), ללא סליקה באתר.
+
+## צילומי מסך לביקורת PR
+
+`Review screenshots` מופעל בכל PR ל־`main`. הוא בונה את גרסת הבסיס ואת הגרסה המוצעת, ומצרף להרצת הבדיקה ארכיון `before-after-desktop-mobile`: כל 36 העמודים, לפני ואחרי, ברוחב 1440px ו־360px (144 צילומים). הצילומים אינם נשמרים בגיט. ניתן להוריד אותם מ־Checks → Review screenshots → Artifacts, למשך 90 יום.
+
+כלי הפיתוח Playwright 1.56.1 ו־axe-core 4.10.3 מותקנים בתיקייה זמנית בלבד, מחוץ לאתר. להרצה מקומית מתקינים אותם מחוץ לריפו, מגדירים `NODE_PATH` לתיקיית `node_modules` שלהם, בונים עם `python3 build.py`, ומריצים:
+
+```bash
+AXE_PATH="$NODE_PATH/axe-core/axe.min.js" REVIEW_OUT=/tmp/yakirli-review node tools/capture_review.cjs
+```
+
+הסקריפט מפעיל שרת מקומי זמני בעצמו, מצלם ושומר `results.json` עם בדיקות גלישה אופקית, תוויות, תמונות ו־axe. ניתן לבחור Chromium מותקן בעזרת `CHROME_PATH`. זהו איסוף ראיות, לא הבטחה שהאתר עבר את כל בדיקות הנגישות; התוצאות והחריגים מפורטים בדוח של כל PR.
+
+### גרפיקות
+
+מפת האיורים, האייקונים, תמונות השיתוף ומגבלות הלוגו: `docs/graphics.md`. איורי ההירו נבחרים דרך `--page-art` ב־CSS. קובצי המקור לתמונות השיתוף הם `assets/img/og-he.svg` ו־`og-en.svg`; יש לייצא PNG בגודל 1200×630 עם גופן Assistant לאחר עריכה.

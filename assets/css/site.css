@@ -354,3 +354,29 @@ img.photo { display: block; width: 100%; max-width: 440px; height: auto; margin-
   .hero, .cta, .stat { background: #fff !important; color: var(--ink) !important; }
   .hero h1, .cta h2, .stat .n { color: var(--navy) !important; }
 }
+
+/* Illustrations: body classes keep content and page structure unchanged. */
+body { --page-art: url(../img/heroes/home.svg); }
+.page-eighth, .page-parents, .page-grandparents, .page-volunteers { --page-art: url(../img/heroes/support.svg); }
+.page-public, .page-legislation, .page-week, .page-lectures { --page-art: url(../img/heroes/public.svg); }
+.page-data, .page-research { --page-art: url(../img/heroes/knowledge.svg); }
+.page-memorial { --page-art: url(../img/heroes/remembrance.svg); }
+.page-media { --page-art: url(../img/heroes/media.svg); }
+.page-contact { --page-art: url(../img/heroes/contact.svg); }
+.page-donate { --page-art: url(../img/heroes/donate.svg); }
+.ph::before { background-image: var(--page-art); background-size: 100% auto; animation: none; }
+.ph { background: var(--teal-bg); }
+.ph span { border-radius: 12px; padding: 8px 12px; }
+.hero .ph { background: rgba(154, 220, 211, .04); border-color: rgba(154, 220, 211, .15); }
+.hero-in:not(.has-img) { max-width: calc(var(--wrap) + 2 * var(--gut)); grid-template-columns: minmax(0, 1.35fr) minmax(220px, .65fr); }
+.hero-in:not(.has-img)::after { content: ""; display: block; width: 100%; aspect-ratio: 4 / 3; background: var(--page-art) center / contain no-repeat; pointer-events: none; }
+.page-access .hero-in:not(.has-img), .page-privacy .hero-in:not(.has-img) { grid-template-columns: 1fr; max-width: 900px; }
+.page-access .hero-in::after, .page-privacy .hero-in::after { display: none; }
+.ico { flex: none; width: 40px; height: 40px; margin-bottom: 8px; fill: none; stroke: var(--teal); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 860px) {
+  .hero-in:not(.has-img) { grid-template-columns: minmax(0, 1fr); }
+  .hero-in:not(.has-img)::after { width: min(100%, 300px); max-height: 170px; justify-self: center; }
+}
+@media print { .hero-in::after, .ico { display: none !important; } }
+
+.ico > * { vector-effect: non-scaling-stroke; }
