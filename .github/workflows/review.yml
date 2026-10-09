@@ -1,0 +1,41 @@
+name: Review screenshots
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: after
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: before
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install development tools outside the site
+        run: |
+          npm install --prefix "$RUNNER_TEMP/review-deps" playwright@1.56.1 axe-core@4.10.3
+          "$RUNNER_TEMP/review-deps/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Capture base and proposed versions
+        run: |
+          export NODE_PATH="$RUNNER_TEMP/review-deps/node_modules"
+          export AXE_PATH="$NODE_PATH/axe-core/axe.min.js"
+          for version in before after; do
+            (cd "$version" && python3 build.py --base /yakirli-site && python3 build.py)
+            REVIEW_DIST="$GITHUB_WORKSPACE/$version/dist" REVIEW_OUT="$GITHUB_WORKSPACE/evidence/$version" node after/tools/capture_review.cjs > "${version}-review.json"
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: before-after-desktop-mobile
+          path: evidence/
+          retention-days: 90

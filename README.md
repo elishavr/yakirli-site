@@ -81,3 +81,29 @@ python3 build.py && python3 -m http.server 8787 --directory dist
 - העיצוב כולו ב־`site.css` אחד, עם משתני צבע בראש הקובץ.
 - הטפסים הם תצוגה מקדימה בלבד; החיבור לווטסאפ של פיני ול־info@yakirli.org ייעשה בוורדפרס.
 - תרומות דרך JGive (קישור חיצוני), ללא סליקה באתר.
+
+## צילומי מסך לביקורת PR
+
+`Review screenshots` מופעל בכל PR ל־`main`. הוא בונה את גרסת הבסיס ואת הגרסה המוצעת, ומצרף להרצת הבדיקה ארכיון `before-after-desktop-mobile`: כל 36 העמודים, לפני ואחרי, ברוחב 1440px ו־360px (144 צילומים). הצילומים אינם נשמרים בגיט. ניתן להוריד אותם מ־Checks → Review screenshots → Artifacts, למשך 90 יום.
+
+כלי הפיתוח Playwright 1.56.1 ו־axe-core 4.10.3 מותקנים בתיקייה זמנית בלבד, מחוץ לאתר. להרצה מקומית מתקינים אותם מחוץ לריפו, מגדירים `NODE_PATH` לתיקיית `node_modules` שלהם, בונים עם `python3 build.py`, ומריצים:
+
+```bash
+AXE_PATH="$NODE_PATH/axe-core/axe.min.js" REVIEW_OUT=/tmp/yakirli-review node tools/capture_review.cjs
+```
+
+הסקריפט מפעיל שרת מקומי זמני בעצמו, מצלם ושומר `results.json` עם בדיקות גלישה אופקית, תוויות, תמונות ו־axe. ניתן לבחור Chromium מותקן בעזרת `CHROME_PATH`. לצילום העמוד המלא בלבד, הסקריפט טוען מראש תמונות עצלות וממתין לפענוחן; התנהגות הטעינה באתר אינה משתנה. זהו איסוף ראיות, לא הבטחה שהאתר עבר את כל בדיקות הנגישות; התוצאות והחריגים מפורטים בדוח של כל PR.
+
+### בדיקות QA
+
+```bash
+python3 build.py --base /yakirli-site
+python3 tools/check_links.py --base /yakirli-site
+python3 build.py
+python3 tools/check_links.py
+node tools/test_navigation.cjs
+```
+
+בודק הקישורים משתמש רק בספרייה התקנית של Python. הוא בודק קבצים, עוגנים, נכסי CSS, זוגות שפות, מזהים כפולים ושאריות תבנית. כתובות חיצוניות נרשמות לפלט; הוא אינו שולח אליהן בקשות. `test_navigation.cjs` דורש Playwright מחוץ לריפו ובודק מקלדת, מגע, Escape, שינוי גודל, טפסי תצוגה, גלילת טבלה, הפחתת תנועה והדפסה.
+
+בביקורת 9.10.2026 הופעלו גם html-validate 9.7.1 (`html-validate:standard`, ללא כללי סגנון SVG/void וללא h32 שאינו נדרש כאן), css-tree 3.1.0 לבדיקת תחביר ו־Lighthouse 12.8.2. אלה כלי פיתוח בלבד; אין צורך בהם לבנייה. פירוט הכיסוי והמגבלות: `docs/qa-report.md`.
