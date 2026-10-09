@@ -246,6 +246,7 @@ tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
 .circle-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
 .circle-copy h2 { margin-bottom: 12px; }
 .circle-copy .btn { margin-top: 24px; }
+.circle-links, .cnode .ico { display: none; }
 .circle { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 110px 110px; padding: 28px 8px; }
 .ring { position: absolute; inset: 4% 0; border-radius: 50%; border: 1px solid var(--teal-lt); pointer-events: none; }
 .ccenter { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 140px; height: 140px; border-radius: 50%; background: var(--navy); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; box-shadow: 0 0 0 10px #fff, 0 0 0 12px var(--teal-lt); z-index: 2; }
@@ -312,6 +313,30 @@ img.photo { display: block; width: 100%; max-width: 440px; height: auto; margin-
   .nav-extra .btn { width: 100%; }
   .nav-extra .lang { display: inline-block; margin-top: 8px; }
 }
+@media (max-width: 1100px) {
+  .circle-grid { grid-template-columns: 1fr; gap: 32px; }
+  .circle-copy { width: 100%; max-width: 620px; margin-inline: auto; }
+  /* Keep the family at the center on phones, with four connected touchpoints. */
+  .circle { width: 100%; max-width: 620px; margin-inline: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto 160px auto; gap: 0 16px; padding: 10px 0; }
+  .ring { display: none; }
+  .circle-links { display: block; grid-column: 1 / -1; grid-row: 2; width: 100%; height: 100%; fill: none; stroke: var(--teal); stroke-width: 2; pointer-events: none; }
+  .circle-links path { vector-effect: non-scaling-stroke; }
+  .ccenter { position: relative; left: auto; top: auto; transform: none; grid-column: 1 / -1; grid-row: 2; justify-self: center; align-self: center; width: 132px; height: 132px; padding: 8px; box-shadow: 0 0 0 8px #fff, 0 0 0 10px var(--teal-lt); }
+  .cc2 { max-width: 110px; line-height: 1.3; }
+  .cnode { display: flex; flex-direction: column; min-width: 0; padding: 18px 14px 12px; background: var(--teal-bg); border-color: transparent; box-shadow: none; }
+  .cnode.n1, .cnode.n2 { grid-row: 1; }
+  .cnode.n3, .cnode.n4 { grid-row: 3; }
+  .cnode.n1, .cnode.n3 { grid-column: 1; }
+  .cnode.n2, .cnode.n4 { grid-column: 2; }
+  .cnode .ico { display: block; width: 32px; height: 32px; margin: 0 0 14px; stroke: var(--teal-dk); }
+  .circle .cnode .num { top: 18px; inset-inline-start: auto; inset-inline-end: 14px; width: 26px; height: 26px; font-size: 15px; background: #fff; color: var(--teal-dk); box-shadow: none; }
+  .ctext { display: flex; flex-direction: column; flex: 1; }
+  .cnode h3 { font-size: 19px; text-wrap: pretty; }
+  .cnode p { font-size: 16px; line-height: 1.5; }
+  .cnode .more { display: block; color: var(--teal-ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; min-height: 44px; margin-top: auto; padding-top: 8px; line-height: 1.3; align-self: flex-start; }
+  .cnode .more:hover { color: var(--navy); }
+  .cnode .more::after { display: none; }
+}
 @media (max-width: 1000px) {
   .g3, .g4, .steps.g3, .steps.g4 { grid-template-columns: repeat(2, 1fr); }
   .foot-in { grid-template-columns: 1fr 1fr; }
@@ -324,9 +349,6 @@ img.photo { display: block; width: 100%; max-width: 440px; height: auto; margin-
   .mlist li { grid-template-columns: 1fr; gap: 6px; }
   .stats.g3 { grid-template-columns: 1fr; }
   .stats.g3 .stat + .stat { border-inline-start: 0; border-top: 1px solid var(--line); }
-  .circle { grid-template-columns: 1fr; gap: 30px; padding-top: 196px; }
-  .ring { display: none; }
-  .ccenter { top: 0; transform: translate(-50%, 0); }
 }
 @media (max-width: 640px) {
   body { font-size: 17px; }

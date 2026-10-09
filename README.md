@@ -71,6 +71,8 @@ python3 build.py && python3 -m http.server 8787 --directory dist
 
 הוראות הצילום הוסרו מהתמונות לבקשת אלישב ונשמרו ב־[docs/photo-briefs.md](docs/photo-briefs.md). סקירת הגולש והבדיקות מתועדות ב־[docs/visitor-review.md](docs/visitor-review.md).
 
+מעגל התמיכה בעמוד הבית שומר על המשפחה במרכז גם בנייד, עם ארבע תחנות מחוברות ואייקונים. פירוט הפריסה והבדיקות: [docs/mobile-circle.md](docs/mobile-circle.md).
+
 ## פרסום
 
 דחיפה ל־`main` מפעילה את `.github/workflows/pages.yml`: בנייה עם קידומת הנתיב של הריפו ופריסה ל־GitHub Pages.
