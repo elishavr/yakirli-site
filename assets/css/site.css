@@ -410,7 +410,7 @@ body { --page-art: url(../img/art-home.svg); }
 .page-media { --page-art: url(../img/art-media.svg); }
 .page-contact { --page-art: url(../img/art-contact.svg); }
 .page-donate { --page-art: url(../img/art-donate.svg); }
-.ph::before { background-image: var(--page-art); background-size: contain; }
+.ph::before { background-image: var(--page-art); background-size: contain; animation: none; }
 body.page-memorial .hero .ph, body.page-donate .hero .ph { background: radial-gradient(circle at 50% 65%, rgba(230, 137, 111, .30), rgba(230, 137, 111, 0) 62%), rgba(255, 255, 255, .04); }
 .ph { background: var(--teal-bg); }
 .ph span { border-radius: 12px; padding: 8px 12px; }
