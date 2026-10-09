@@ -24,6 +24,15 @@ PATHS = {
     'media': 'media', 'contact': 'contact', 'donate': 'donate',
     'access': 'accessibility', 'privacy': 'privacy',
 }
+# Match the page-specific photo backgrounds in site.css; legal pages have none.
+HERO_PHOTOS = {
+    'home': 'home', 'about': 'public',
+    'eighth': 'support', 'parents': 'support', 'grandparents': 'support', 'volunteers': 'support',
+    'public': 'public', 'legislation': 'public', 'week': 'public', 'lectures': 'public',
+    'data': 'data', 'research': 'data', 'memorial': 'memorial',
+    'media': 'media', 'contact': 'contact', 'donate': 'donate',
+}
+
 def path_of(lang, pid):
     slug = PATHS[pid]
     p = '/' + (slug + '/' if slug else '')
@@ -120,11 +129,13 @@ def render_page(layout, base, site, build_id, lang, pid, path, title, group, bod
                   r'\1 aria-current="page"', body)
     full_title = t['site_long'] if pid == 'home' else f'{title} – {t["site"]}'
     alt_lang = 'en' if lang == 'he' else 'he'
+    hero_photo = HERO_PHOTOS.get(pid)
     ctx = {
         'lang': lang, 'dir': 'ltr' if lang == 'en' else 'rtl', 'title': html.escape(full_title, quote=True),
         'description': description_of(body), 'canonical': site + path,
         'og_image': site + '/assets/img/og-' + lang + '.png',
         'og_alt': html.escape(t['site_long'], quote=True),
+        'hero_preload': (f'<link rel="preload" as="image" href="/assets/img/photos/{hero_photo}-v1.avif" type="image/avif" fetchpriority="high">' if hero_photo else ''),
         'alt_he': site + path_of('he', pid if pid in PATHS else 'home'), 'alt_en': site + path_of('en', pid if pid in PATHS else 'home'),
         'og_locale': 'en_US' if lang == 'en' else 'he_IL', 'base': base, 'site': site, 'build': build_id,
         'page': pid, 'group': group or 'none', 'home': path_of(lang, 'home'),

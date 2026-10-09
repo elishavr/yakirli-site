@@ -116,7 +116,7 @@ bdi { unicode-bidi: isolate; }
 .hero h1 { color: #fff; font-size: clamp(34px, 4.6vw, 58px); font-weight: 800; line-height: 1.15; }
 .hero p { margin-top: 18px; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.55; color: var(--on-navy-muted); max-width: 640px; }
 .hero .ph { aspect-ratio: 4 / 3; background: radial-gradient(circle at 50% 65%, rgba(42, 157, 147, .35), rgba(42, 157, 147, 0) 62%), rgba(255, 255, 255, .04); border: 1px solid rgba(255, 255, 255, .12); }
-.hero .ph span { background: rgba(19, 18, 47, .7); color: var(--on-navy-muted); }
+.hero .ph span { background: var(--navy); color: var(--on-navy-muted); }
 
 /* ---------- אזורים ---------- */
 .sec { padding-block: clamp(56px, 7vw, 96px); }
@@ -298,7 +298,7 @@ img.photo { display: block; width: 100%; max-width: 440px; height: auto; margin-
 .hero h1 { animation-delay: .08s; }
 .hero p { animation-delay: .18s; }
 .hero .btns { animation-delay: .28s; }
-.hero .ph { animation: artIn .9s cubic-bezier(.2, .7, .2, 1) .15s both; }
+.hero .ph { animation: none; }
 .rv { opacity: 0; transform: translateY(18px); transition: opacity .65s cubic-bezier(.2, .7, .2, 1), transform .65s cubic-bezier(.2, .7, .2, 1); transition-delay: calc(var(--i, 0) * 80ms); }
 .rv.in { opacity: 1; transform: none; }
 .card.rv.in:hover { transform: translateY(-4px); }
@@ -400,29 +400,30 @@ a.todo[aria-disabled="true"]::after { content: none; }
   .sec-head { margin-bottom: 28px; }
   .prose p, .card p { font-size: 17px; }
 }
-/* Illustrations: body classes keep content and page structure unchanged. */
-body { --page-art: url(../img/art-home.svg); }
-.page-about { --page-art: url(../img/art-about.svg); }
-.page-eighth, .page-parents, .page-grandparents, .page-volunteers { --page-art: url(../img/art-support.svg); }
-.page-public, .page-legislation, .page-week, .page-lectures { --page-art: url(../img/art-public.svg); }
-.page-data, .page-research { --page-art: url(../img/art-data.svg); }
-.page-memorial { --page-art: url(../img/art-memorial.svg); }
-.page-media { --page-art: url(../img/art-media.svg); }
-.page-contact { --page-art: url(../img/art-contact.svg); }
-.page-donate { --page-art: url(../img/art-donate.svg); }
-.ph::before { background-image: var(--page-art); background-size: contain; animation: none; }
+/* Original AI-generated photo-style scenes; see docs/photo-assets.md. */
+body { --page-art: image-set(url(../img/photos/home-v1.avif) type("image/avif"), url(../img/photos/home-v1.webp) type("image/webp")); }
+.page-about { --page-art: image-set(url(../img/photos/public-v1.avif) type("image/avif"), url(../img/photos/public-v1.webp) type("image/webp")); }
+.page-eighth, .page-parents, .page-grandparents, .page-volunteers { --page-art: image-set(url(../img/photos/support-v1.avif) type("image/avif"), url(../img/photos/support-v1.webp) type("image/webp")); }
+.page-public, .page-legislation, .page-week, .page-lectures { --page-art: image-set(url(../img/photos/public-v1.avif) type("image/avif"), url(../img/photos/public-v1.webp) type("image/webp")); }
+.page-data, .page-research { --page-art: image-set(url(../img/photos/data-v1.avif) type("image/avif"), url(../img/photos/data-v1.webp) type("image/webp")); }
+.page-memorial { --page-art: image-set(url(../img/photos/memorial-v1.avif) type("image/avif"), url(../img/photos/memorial-v1.webp) type("image/webp")); }
+.page-media { --page-art: image-set(url(../img/photos/media-v1.avif) type("image/avif"), url(../img/photos/media-v1.webp) type("image/webp")); }
+.page-contact { --page-art: image-set(url(../img/photos/contact-v1.avif) type("image/avif"), url(../img/photos/contact-v1.webp) type("image/webp")); }
+.page-donate { --page-art: image-set(url(../img/photos/donate-v1.avif) type("image/avif"), url(../img/photos/donate-v1.webp) type("image/webp")); }
+.page-home .split .ph { --page-art: image-set(url(../img/photos/public-v1.avif) type("image/avif"), url(../img/photos/public-v1.webp) type("image/webp")); }
+.ph::before { background-image: var(--page-art); background-size: cover; animation: none; }
 body.page-memorial .hero .ph, body.page-donate .hero .ph { background: radial-gradient(circle at 50% 65%, rgba(230, 137, 111, .30), rgba(230, 137, 111, 0) 62%), rgba(255, 255, 255, .04); }
 .ph { background: var(--teal-bg); }
-.ph span { border-radius: 12px; padding: 8px 12px; }
+.ph span { border-radius: 12px; padding: 8px 12px; background: #fff; }
 .hero .ph { background: rgba(154, 220, 211, .04); border-color: rgba(154, 220, 211, .15); }
 .hero-in:not(.has-img) { max-width: calc(var(--wrap) + 2 * var(--gut)); grid-template-columns: minmax(0, 1.35fr) minmax(220px, .65fr); }
-.hero-in:not(.has-img)::after { content: ""; display: block; width: 100%; aspect-ratio: 4 / 3; background: var(--page-art) center / contain no-repeat; pointer-events: none; }
+.hero-in:not(.has-img)::after { content: ""; display: block; width: 100%; aspect-ratio: 4 / 3; border-radius: calc(var(--radius) + 8px); background: var(--page-art) center / cover no-repeat; pointer-events: none; }
 .page-access .hero-in:not(.has-img), .page-privacy .hero-in:not(.has-img) { grid-template-columns: 1fr; max-width: 900px; }
 .page-access .hero-in::after, .page-privacy .hero-in::after { display: none; }
 .ico { flex: none; width: 40px; height: 40px; margin-bottom: 8px; fill: none; stroke: var(--teal); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 @media (max-width: 860px) {
   .hero-in:not(.has-img) { grid-template-columns: minmax(0, 1fr); }
-  .hero-in:not(.has-img)::after { width: min(100%, 300px); max-height: 170px; justify-self: center; }
+  .hero-in:not(.has-img)::after { width: min(100%, 520px); aspect-ratio: 16 / 10; max-height: 300px; justify-self: center; }
 }
 @media print { .hero-in::after, .ico { display: none !important; } }
 

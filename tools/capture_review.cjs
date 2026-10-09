@@ -3,7 +3,7 @@ const fs=require('fs'),path=require('path');
 (async()=>{
 const site=process.env.REVIEW_URL||'http://127.0.0.1:8787';
 const root=process.env.REVIEW_DIST||process.cwd()+'/dist';
-const server=require('http').createServer((req,res)=>{const u=new URL(req.url,site);const p=path.join(root,decodeURIComponent(u.pathname),u.pathname.endsWith('/')?'index.html':'');try{res.setHeader('Content-Type',({'.html':'text/html; charset=utf-8','.css':'text/css','.js':'application/javascript','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg'})[path.extname(p)]||'application/octet-stream');res.end(fs.readFileSync(p));}catch{res.statusCode=404;res.end('Not found');}});
+const server=require('http').createServer((req,res)=>{const u=new URL(req.url,site);const p=path.join(root,decodeURIComponent(u.pathname),u.pathname.endsWith('/')?'index.html':'');try{res.setHeader('Content-Type',({'.html':'text/html; charset=utf-8','.css':'text/css','.js':'application/javascript','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.webp':'image/webp','.avif':'image/avif'})[path.extname(p)]||'application/octet-stream');res.end(fs.readFileSync(p));}catch{res.statusCode=404;res.end('Not found');}});
 await new Promise(r=>server.listen(8787,'127.0.0.1',r));
 const out=process.env.REVIEW_OUT||'/tmp/yakirli-review';
 fs.mkdirSync(out,{recursive:true});
