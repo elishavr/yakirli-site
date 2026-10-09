@@ -113,6 +113,33 @@ def description_of(body):
     d = html.unescape(re.sub(r'<[^>]+>', '', m.group(1))) if m else ''
     return html.escape(d.strip()[:300], quote=True)
 
+def render_page(layout, base, site, build_id, lang, pid, path, title, group, body):
+    t = T[lang]
+    # סימון העמוד הנוכחי בתת-התפריט
+    body = re.sub(r'(<a href="[^"]*" data-page="' + re.escape(('en-' if lang == 'en' else '') + pid) + '")',
+                  r'\1 aria-current="page"', body)
+    full_title = t['site_long'] if pid == 'home' else f'{title} – {t["site"]}'
+    alt_lang = 'en' if lang == 'he' else 'he'
+    ctx = {
+        'lang': lang, 'dir': 'ltr' if lang == 'en' else 'rtl', 'title': html.escape(full_title, quote=True),
+        'description': description_of(body), 'canonical': site + path,
+        'alt_he': site + path_of('he', pid if pid in PATHS else 'home'), 'alt_en': site + path_of('en', pid if pid in PATHS else 'home'),
+        'og_locale': 'en_US' if lang == 'en' else 'he_IL', 'base': base, 'site': site, 'build': build_id,
+        'page': pid, 'group': group or 'none', 'home': path_of(lang, 'home'),
+        'donate': path_of(lang, 'donate'), 'access': path_of(lang, 'access'), 'privacy': path_of(lang, 'privacy'),
+        'alt_path': path_of(alt_lang, pid if pid in PATHS else 'home'), 'alt_lang': alt_lang,
+        'nav': nav_html(lang, pid, group), 'foot_nav': foot_nav_html(lang), 'content': body,
+    }
+    out = layout
+    for k, v in t.items():
+        out = out.replace('{{t.' + k + '}}', html.escape(v, quote=True) if k not in ('reg',) else html.escape(v, quote=True))
+    for k, v in ctx.items():
+        out = out.replace('{{' + k + '}}', v)
+    if base:
+        out = re.sub(r'(href|src|content|action)="/(?!/)', lambda m: f'{m.group(1)}="{base}/', out)
+        out = out.replace(f'{base}/assets', f'{base}/assets')
+    return out
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--base', default='', help='נתיב בסיס, למשל /yakirli-site (ללא / בסוף)')
@@ -134,41 +161,17 @@ def main():
     for lang in ('he', 'en'):
         for fp in sorted((SRC / lang).glob('*.html')):
             pid, _, path, title, group, body = read_fragment(fp)
-            t = T[lang]
-            # סימון העמוד הנוכחי בתת-התפריט
-            body = re.sub(r'(<a href="[^"]*" data-page="' + re.escape(('en-' if lang == 'en' else '') + pid) + '")',
-                          r'\1 aria-current="page"', body)
-            full_title = t['site_long'] if pid == 'home' else f'{title} – {t["site"]}'
-            alt_lang = 'en' if lang == 'he' else 'he'
-            ctx = {
-                'lang': lang, 'dir': 'ltr' if lang == 'en' else 'rtl', 'title': html.escape(full_title, quote=True),
-                'description': description_of(body), 'canonical': site + path,
-                'alt_he': site + path_of('he', pid), 'alt_en': site + path_of('en', pid),
-                'og_locale': 'en_US' if lang == 'en' else 'he_IL', 'base': base, 'build': build_id,
-                'page': pid, 'group': group or 'none', 'home': path_of(lang, 'home'),
-                'donate': path_of(lang, 'donate'), 'access': path_of(lang, 'access'), 'privacy': path_of(lang, 'privacy'),
-                'alt_path': path_of(alt_lang, pid), 'alt_lang': alt_lang,
-                'nav': nav_html(lang, pid, group), 'foot_nav': foot_nav_html(lang), 'content': body,
-            }
-            out = layout
-            for k, v in t.items():
-                out = out.replace('{{t.' + k + '}}', html.escape(v, quote=True) if k not in ('reg',) else html.escape(v, quote=True))
-            for k, v in ctx.items():
-                out = out.replace('{{' + k + '}}', v)
-            if base:
-                out = re.sub(r'(href|src|content|action)="/(?!/)', lambda m: f'{m.group(1)}="{base}/', out)
-                out = out.replace(f'{base}/assets', f'{base}/assets')
+            out = render_page(layout, base, site, build_id, lang, pid, path, title, group, body)
             dest = DIST / path.strip('/') / 'index.html' if path != '/' else DIST / 'index.html'
             dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_text(out, encoding='utf-8')
             urls.append(site + path)
-    # 404
-    (DIST / '404.html').write_text(
-        '<!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-        '<title>העמוד לא נמצא – יקיר לי</title><link rel="stylesheet" href="' + base + '/assets/css/site.css"></head>'
-        '<body><main id="main"><section class="sec"><div class="wrap sec-head"><h1>העמוד לא נמצא</h1>'
-        '<p class="lead">הקישור שהגעתם אליו אינו קיים. <a href="' + (base or '') + '/">לעמוד הבית</a> · <a href="' + (base or '') + '/en/">English</a></p></div></section></main></body></html>',
-        encoding='utf-8')
+    # 404 – דרך אותה תבנית (GitHub Pages מגיש 404.html לכל נתיב לא קיים)
+    nf_body = ('<section class="hero"><div class="wrap hero-in"><div class="hero-txt"><div class="eyebrow">404</div>'
+               '<h1>העמוד לא נמצא</h1><p>הקישור שהגעתם אליו אינו קיים, או שהעמוד עבר למקום אחר.</p>'
+               '<div class="btns"><a class="btn btn-p" href="/">לעמוד הבית</a><a class="btn btn-s" href="/contact/">צרו קשר</a>'
+               '<a class="btn btn-s" href="/en/" lang="en">English</a></div></div></div></section>')
+    (DIST / '404.html').write_text(render_page(layout, base, site, build_id, 'he', 'notfound', '/404.html', 'העמוד לא נמצא', '', nf_body), encoding='utf-8')
     (DIST / 'sitemap.xml').write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
         ''.join(f'  <url><loc>{u}</loc></url>\n' for u in urls) + '</urlset>\n', encoding='utf-8')

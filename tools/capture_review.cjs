@@ -17,6 +17,8 @@ for(const [label,width,height] of [['desktop',1440,1000],['mobile',360,800]]){
  for(const route of pages){
   let errors=[];const listener=e=>errors.push(e.message);page.on('pageerror',listener);
   await page.goto(site+route,{waitUntil:'networkidle'});await page.evaluate(()=>document.fonts.ready);
+  // Full-page evidence must include images that normally load when scrolled into view.
+  await page.evaluate(async()=>{await Promise.all([...document.images].map(async img=>{if(img.loading==='lazy')img.loading='eager';await img.decode().catch(()=>{});}));});
   const name=(route==='/'?'he-home':route==='/en/'?'en-home':route.slice(1,-1).replaceAll('/','-'));
   await page.screenshot({path:path.join(out,name+'-'+label+'.jpg'),fullPage:true,quality:78});
   const checks=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth>innerWidth,overflowElements:[...document.querySelectorAll('main *,header *,footer *')].filter(e=>{let r=e.getBoundingClientRect();return r.width && (r.right>innerWidth+1||r.left< -1)&&!e.closest('.tbl-wrap,.subnav,.drop,.mainnav:not(.open)')}).slice(0,12).map(e=>e.tagName+'.'+e.className),h1:document.querySelectorAll('h1').length,lang:document.documentElement.lang,dir:document.documentElement.dir,unlabelled:[...document.querySelectorAll('input,select,textarea')].filter(e=>!e.labels?.length&&!e.getAttribute('aria-label')).map(e=>e.id),font:document.fonts.check('18px Assistant'),brokenImages:[...document.images].filter(e=>!e.complete||!e.naturalWidth).map(e=>e.src)}));
