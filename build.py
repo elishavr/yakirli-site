@@ -91,8 +91,8 @@ def nav_html(lang, pid, group):
                 cur_k = ' aria-current="page"' if k == pid else ''
                 items += f'<li><a href="{path_of(lang, k)}"{cur_k}>{html.escape(l)}</a></li>'
             out.append(f'        <li class="has-sub{" on" if on else ""}" data-g="{key}"><a href="{path_of(lang, target)}">{html.escape(label)}</a>'
-                       f'<button class="sub-toggle" type="button" aria-expanded="false" aria-label="{T[lang]["sub_toggle"]}">{CHEVRON}</button>'
-                       f'<ul class="drop">{items}</ul></li>')
+                       f'<button class="sub-toggle" type="button" aria-expanded="false" aria-controls="sub-{key}" aria-label="{T[lang]["sub_toggle"]}: {html.escape(label)}">{CHEVRON}</button>'
+                       f'<ul class="drop" id="sub-{key}">{items}</ul></li>')
         else:
             out.append(f'        <li{on} data-g="{key}"><a href="{path_of(lang, target)}"{cur}>{html.escape(label)}</a></li>')
     return '\n'.join(out)
@@ -164,8 +164,8 @@ def main():
             urls.append(site + path)
     # 404
     (DIST / '404.html').write_text(
-        '<!DOCTYPE html><html lang="he" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-        '<title>העמוד לא נמצא – יקיר לי</title><link rel="stylesheet" href="' + base + '/assets/css/site.css">'
+        '<!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+        '<title>העמוד לא נמצא – יקיר לי</title><link rel="stylesheet" href="' + base + '/assets/css/site.css"></head>'
         '<body><main id="main"><section class="sec"><div class="wrap sec-head"><h1>העמוד לא נמצא</h1>'
         '<p class="lead">הקישור שהגעתם אליו אינו קיים. <a href="' + (base or '') + '/">לעמוד הבית</a> · <a href="' + (base or '') + '/en/">English</a></p></div></section></main></body></html>',
         encoding='utf-8')
