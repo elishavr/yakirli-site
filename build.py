@@ -123,6 +123,8 @@ def render_page(layout, base, site, build_id, lang, pid, path, title, group, bod
     ctx = {
         'lang': lang, 'dir': 'ltr' if lang == 'en' else 'rtl', 'title': html.escape(full_title, quote=True),
         'description': description_of(body), 'canonical': site + path,
+        'og_image': site + '/assets/img/og-' + lang + '.png',
+        'og_alt': html.escape(t['site_long'], quote=True),
         'alt_he': site + path_of('he', pid if pid in PATHS else 'home'), 'alt_en': site + path_of('en', pid if pid in PATHS else 'home'),
         'og_locale': 'en_US' if lang == 'en' else 'he_IL', 'base': base, 'site': site, 'build': build_id,
         'page': pid, 'group': group or 'none', 'home': path_of(lang, 'home'),

@@ -140,17 +140,6 @@ bdi { unicode-bidi: isolate; }
 .ph span { position: relative; margin: 14px; max-width: calc(100% - 28px); text-align: center; font-size: 12.5px; line-height: 1.35; color: var(--muted); background: rgba(255, 255, 255, .85); padding: 5px 12px; border-radius: var(--pill); }
 
 
-/* איור שונה לכל קבוצת עמודים (ראו tools/make_art.py) */
-body.group-about .ph::before { background-image: url(../img/art-about.svg); }
-body.group-support .ph::before { background-image: url(../img/art-support.svg); }
-body.group-public .ph::before { background-image: url(../img/art-public.svg); }
-body.group-data .ph::before { background-image: url(../img/art-data.svg); }
-body.group-memorial .ph::before { background-image: url(../img/art-memorial.svg); }
-body.group-media .ph::before { background-image: url(../img/art-media.svg); }
-body.group-contact .ph::before, body.page-access .ph::before, body.page-privacy .ph::before { background-image: url(../img/art-contact.svg); }
-body.page-donate .ph::before { background-image: url(../img/art-donate.svg); }
-body.page-memorial .hero .ph, body.page-donate .hero .ph { background: radial-gradient(circle at 50% 65%, rgba(230, 137, 111, .30), rgba(230, 137, 111, 0) 62%), rgba(255, 255, 255, .04); }
-
 /* ---------- כרטיסים ---------- */
 .grid { display: grid; gap: 22px; }
 .g2 { grid-template-columns: repeat(2, 1fr); }
@@ -409,3 +398,29 @@ a.todo[aria-disabled="true"]::after { content: none; }
   .sec-head { margin-bottom: 28px; }
   .prose p, .card p { font-size: 17px; }
 }
+/* Illustrations: body classes keep content and page structure unchanged. */
+body { --page-art: url(../img/art-home.svg); }
+.page-about { --page-art: url(../img/art-about.svg); }
+.page-eighth, .page-parents, .page-grandparents, .page-volunteers { --page-art: url(../img/art-support.svg); }
+.page-public, .page-legislation, .page-week, .page-lectures { --page-art: url(../img/art-public.svg); }
+.page-data, .page-research { --page-art: url(../img/art-data.svg); }
+.page-memorial { --page-art: url(../img/art-memorial.svg); }
+.page-media { --page-art: url(../img/art-media.svg); }
+.page-contact { --page-art: url(../img/art-contact.svg); }
+.page-donate { --page-art: url(../img/art-donate.svg); }
+.ph::before { background-image: var(--page-art); background-size: 100% auto; animation: none; }
+.ph { background: var(--teal-bg); }
+.ph span { border-radius: 12px; padding: 8px 12px; }
+.hero .ph { background: rgba(154, 220, 211, .04); border-color: rgba(154, 220, 211, .15); }
+.hero-in:not(.has-img) { max-width: calc(var(--wrap) + 2 * var(--gut)); grid-template-columns: minmax(0, 1.35fr) minmax(220px, .65fr); }
+.hero-in:not(.has-img)::after { content: ""; display: block; width: 100%; aspect-ratio: 4 / 3; background: var(--page-art) center / contain no-repeat; pointer-events: none; }
+.page-access .hero-in:not(.has-img), .page-privacy .hero-in:not(.has-img) { grid-template-columns: 1fr; max-width: 900px; }
+.page-access .hero-in::after, .page-privacy .hero-in::after { display: none; }
+.ico { flex: none; width: 40px; height: 40px; margin-bottom: 8px; fill: none; stroke: var(--teal); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 860px) {
+  .hero-in:not(.has-img) { grid-template-columns: minmax(0, 1fr); }
+  .hero-in:not(.has-img)::after { width: min(100%, 300px); max-height: 170px; justify-self: center; }
+}
+@media print { .hero-in::after, .ico { display: none !important; } }
+
+.ico > * { vector-effect: non-scaling-stroke; }
