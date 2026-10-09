@@ -390,4 +390,22 @@ a.todo[aria-disabled="true"]::after { content: none; }
   .card, .step, .stat { break-inside: avoid; box-shadow: none; }
   .tbl-wrap { overflow: visible; }
   table { min-width: 0; }
+/* Copy review: readable measures, consistent actions and quieter cards. */
+.hero h1 { max-width: 22ch; }
+.hero p { max-width: 58ch; }
+.prose p { max-width: 68ch; line-height: 1.75; }
+.prose h2:not(:first-child) { margin-top: 36px; }
+.card { padding: 32px; gap: 12px; }
+.card p { line-height: 1.7; }
+.card:not(:has(a[href])):hover, .card.rv.in:not(:has(a[href])):hover { transform: none; box-shadow: none; }
+.cta .btn-w { background: var(--teal-lt); color: var(--navy); }
+.cta .btn-w:hover { background: #fff; }
+.sec-head .lead { max-width: 58ch; }
+.ph span { font-size: 13px; line-height: 1.5; padding: 8px 12px; }
+@media (max-width: 640px) {
+  .hero h1 { font-size: clamp(32px, 8.8vw, 42px); line-height: 1.2; }
+  .card { padding: 26px 24px; }
+  .sec { padding-block: 52px; }
+  .sec-head { margin-bottom: 28px; }
+  .prose p, .card p { font-size: 17px; }
 }
