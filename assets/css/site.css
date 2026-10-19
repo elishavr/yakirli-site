@@ -475,3 +475,10 @@ body.page-memorial .hero .ph, body.page-donate .hero .ph { background: radial-gr
 .chips.partners.logos-only { display: flex; flex-wrap: wrap; justify-content: center; }
 .chips.partners.logos-only li { flex: 0 1 170px; }
 @media (max-width: 640px) { .chips.partners.logos-only li { flex-basis: calc(50% - 5px); } }
+
+/* 20.10.2026: Dasi with a sunflower on the memorial hero; Pini in the About hero, logo beside "what is civilian bereavement" */
+.page-memorial .hero .ph { --page-art: image-set(url(../img/photos/dasi-sunflower.avif) type("image/avif"), url(../img/photos/dasi-sunflower.webp) type("image/webp")); }
+.page-memorial .hero .ph::before { background-position: 50% 35%; }
+.hero-photo { display: block; width: 100%; max-width: 320px; height: auto; justify-self: center; border-radius: var(--radius); box-shadow: var(--shadow); }
+.side-logo { display: block; width: 100%; max-width: 220px; height: auto; justify-self: center; }
+@media (max-width: 860px) { .hero-photo { max-width: 240px; } .side-logo { max-width: 150px; } }
