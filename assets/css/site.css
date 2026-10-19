@@ -442,3 +442,6 @@ body.page-memorial .hero .ph, body.page-donate .hero .ph { background: radial-gr
 .ico > * { vector-effect: non-scaling-stroke; }
 .contact-phone { display: inline-flex; align-items: center; min-height: 44px; color: var(--navy); font-size: 24px; font-weight: 600; text-decoration: underline; text-decoration-color: var(--teal-lt); text-underline-offset: 5px; }
 .contact-phone:hover { color: var(--teal-dk); text-decoration-color: currentColor; }
+
+/* Lecturer portraits on the lectures page */
+.card img.lecturer { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; box-shadow: var(--shadow); margin-bottom: 6px; }
