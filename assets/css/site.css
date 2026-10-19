@@ -467,3 +467,11 @@ body.page-memorial .hero .ph, body.page-donate .hero .ph { background: radial-gr
 /* About: mortality data section (moved from its own page, 19.10.2026) */
 #data .tbl-title { margin: 36px 0 14px; font-size: 1.25rem; }
 #data .data-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 28px; }
+
+/* Eighth-day branches: logos already carry the authority name, so no caption (19.10.2026) */
+.chips.partners.logos-only li { justify-content: center; padding: 20px 12px; }
+.chips.partners.logos-only img { height: 84px; max-width: 150px; }
+@media (max-width: 640px) { .chips.partners.logos-only img { height: 68px; } }
+.chips.partners.logos-only { display: flex; flex-wrap: wrap; justify-content: center; }
+.chips.partners.logos-only li { flex: 0 1 170px; }
+@media (max-width: 640px) { .chips.partners.logos-only li { flex-basis: calc(50% - 5px); } }
