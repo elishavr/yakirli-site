@@ -459,3 +459,7 @@ body.page-memorial .hero .ph, body.page-donate .hero .ph { background: radial-gr
   .mainnav > ul > li.nav-cta .btn { width: 100%; }
 }
 @media (max-width: 860px) { .hero-logo { max-width: 170px; padding: 16px 20px; } }
+
+/* Home hero: AI-generated image – couple opening the door after shiva (19.10.2026) */
+.page-home .hero .ph { --page-art: image-set(url(../img/photos/home-v2.avif) type("image/avif"), url(../img/photos/home-v2.webp) type("image/webp")); }
+.page-home .hero .ph::before { background-position: 40% center; }
