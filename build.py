@@ -75,7 +75,7 @@ T = {
                newsletter='הצטרפות לרשימת התפוצה', join='הצטרפות', nl_sent='זו גרסת תצוגה: ההרשמה לא נשמרה.',
                access='הצהרת נגישות', privacy='מדיניות פרטיות', reg='יקיר לי – יד ולב לשכול האזרחי (ע"ר 580616001)', credits='סמלי הרשויות: ויקישיתוף (CC BY-SA) והאתרים הרשמיים',
                wa='שליחת הודעת ווטסאפ ליקיר לי', foot_tag='יד ולב לשכול האזרחי (ע"ר 580616001)',
-               sub_toggle='פתיחת תפריט משנה', site='יקיר לי', site_long='יקיר לי – יד ולב לשכול האזרחי'),
+               sub_toggle='פתיחת תפריט משנה', reach_out='פנו אלינו', site='יקיר לי', site_long='יקיר לי – יד ולב לשכול האזרחי'),
     'en': dict(skip='Skip to content', brand_aria='Yakir Li – home', brand_name='Yakir Li',
                brand_tag='Civilian Bereavement Support', menu='Menu', main_menu='Main menu', donate='Donate',
                lang_long='עברית – לאתר בעברית', lang_short='עב', nav='Navigation', contact='Contact',
@@ -84,7 +84,7 @@ T = {
                access='Accessibility statement', privacy='Privacy policy',
                reg='Yakir Li – Civilian Bereavement Support (Registered Nonprofit 580616001)', credits='Municipal emblems: Wikimedia Commons (CC BY-SA) and official sites',
                wa='Send Yakir Li a WhatsApp message', foot_tag='Civilian Bereavement Support (Reg. Nonprofit 580616001)',
-               sub_toggle='Open submenu', site='Yakir Li', site_long='Yakir Li – Civilian Bereavement Support'),
+               sub_toggle='Open submenu', reach_out='Reach out', site='Yakir Li', site_long='Yakir Li – Civilian Bereavement Support'),
 }
 CHEVRON = '<svg viewBox="0 0 20 20" aria-hidden="true" width="14" height="14"><path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 
@@ -104,6 +104,9 @@ def nav_html(lang, pid, group):
                        f'<ul class="drop" id="sub-{key}">{items}</ul></li>')
         else:
             out.append(f'        <li{on} data-g="{key}"><a href="{path_of(lang, target)}"{cur}>{html.escape(label)}</a></li>')
+    # כפתור קבוע "פנו אלינו" – מיד אחרי "צרו קשר", מוביל לטופס הפנייה
+    anchor = '#en-contact-form' if lang == 'en' else '#contact-form'
+    out.append(f'        <li class="nav-cta"><a class="btn btn-p btn-sm" href="{path_of(lang, "contact")}{anchor}">{html.escape(T[lang]["reach_out"])}</a></li>')
     return '\n'.join(out)
 
 def foot_nav_html(lang):

@@ -445,3 +445,17 @@ body.page-memorial .hero .ph, body.page-donate .hero .ph { background: radial-gr
 
 /* Lecturer portraits on the lectures page */
 .card img.lecturer { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; box-shadow: var(--shadow); margin-bottom: 6px; }
+
+/* About: full Yakir Li logo in the hero, Circles of Joy logo in Dasi's story (19.10.2026) */
+.hero-in.has-logo::after { display: none !important; }
+.hero-logo { display: block; width: 100%; max-width: 260px; height: auto; justify-self: center; background: #fff; padding: 26px 30px; border-radius: var(--radius); box-shadow: var(--shadow); box-sizing: border-box; }
+.joy-logo { display: block; width: 180px; max-width: 60%; height: auto; margin: 22px 0 6px; }
+/* Fixed "reach out" button next to Contact */
+.mainnav > ul > li.nav-cta { border: 0 !important; }
+.mainnav > ul > li.nav-cta > a.btn { color: #fff; padding-inline: 16px; }
+.mainnav > ul > li.nav-cta > a.btn::after { display: none; }
+@media (max-width: 1180px) {
+  .mainnav > ul > li.nav-cta { margin-top: 12px; }
+  .mainnav > ul > li.nav-cta .btn { width: 100%; }
+}
+@media (max-width: 860px) { .hero-logo { max-width: 170px; padding: 16px 20px; } }
