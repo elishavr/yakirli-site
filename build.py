@@ -20,7 +20,7 @@ PATHS = {
     'home': '', 'about': 'about', 'eighth': 'eighth-day', 'parents': 'bereaved-parents',
     'grandparents': 'grandparents', 'volunteers': 'volunteers', 'public': 'public-advocacy',
     'legislation': 'legislation', 'week': 'awareness-week', 'lectures': 'lectures',
-    'data': 'mortality-data', 'research': 'research', 'memorial': 'remembrance',
+    'research': 'research', 'memorial': 'remembrance',
     'media': 'media', 'contact': 'contact', 'donate': 'donate',
     'access': 'accessibility', 'privacy': 'privacy',
 }
@@ -29,7 +29,7 @@ HERO_PHOTOS = {
     'home': 'home', 'about': 'public',
     'eighth': 'support', 'parents': 'support', 'grandparents': 'support', 'volunteers': 'support',
     'public': 'public', 'legislation': 'public', 'week': 'public', 'lectures': 'public',
-    'data': 'data', 'research': 'data', 'memorial': 'memorial',
+    'research': 'data', 'memorial': 'memorial',
     'media': 'media', 'contact': 'contact', 'donate': 'donate',
 }
 
@@ -48,9 +48,9 @@ NAV = {
         ('about', 'אודות', None),
         ('support', 'מעגל התמיכה', [('eighth', 'היום השמיני'), ('parents', 'הורים שכולים'),
                                      ('grandparents', 'סבים וסבתות שחוו אובדן נכד/ה'), ('volunteers', 'מתנדבים והכשרה')]),
-        ('public', 'פעילות ציבורית', [('public', 'מה אנחנו עושים'), ('legislation', 'קידום חקיקה'),
+        ('public', 'פעילות ציבורית', [('public', 'מה אנחנו עושים'),
                                        ('week', 'שבוע המודעות'), ('lectures', 'הרצאות')]),
-        ('data', 'ידע ונתונים', [('data', 'נתוני פטירה'), ('research', 'מחקרים')]),
+        ('data', 'ידע ונתונים', [('legislation', 'קידום חקיקה'), ('research', 'מחקרים')]),
         ('memorial', 'הנצחה', None),
         ('media', 'מדיה', None),
         ('contact', 'צרו קשר', None),
@@ -60,15 +60,15 @@ NAV = {
         ('about', 'About', None),
         ('support', 'Support', [('eighth', 'The Day After Shiva'), ('parents', 'Bereaved Parents'),
                                 ('grandparents', 'Grandparents Who Lost a Grandchild'), ('volunteers', 'Volunteers and Training')]),
-        ('public', 'Public Advocacy', [('public', 'What we do'), ('legislation', 'Legislation'),
+        ('public', 'Public Advocacy', [('public', 'What we do'),
                                        ('week', 'Awareness Week'), ('lectures', 'Lectures')]),
-        ('data', 'Data', [('data', 'Mortality Data'), ('research', 'Research')]),
+        ('data', 'Data', [('legislation', 'Legislation'), ('research', 'Research')]),
         ('memorial', 'Remembrance', None),
         ('media', 'Media', None),
         ('contact', 'Contact', None),
     ],
 }
-GROUP_HOME = {'support': 'eighth', 'public': 'public', 'data': 'data'}  # לאן מוביל שם הקבוצה
+GROUP_HOME = {'support': 'eighth', 'public': 'public', 'data': 'legislation'}  # לאן מוביל שם הקבוצה
 
 T = {
     'he': dict(skip='דילוג לתוכן', brand_aria='יקיר לי – לעמוד הבית', brand_name='יקיר לי',
@@ -191,6 +191,10 @@ def main():
                '<div class="btns"><a class="btn btn-p" href="/">לעמוד הבית</a><a class="btn btn-s" href="/contact/">צרו קשר</a>'
                '<a class="btn btn-s" href="/en/" lang="en">English</a></div></div></div></section>')
     (DIST / '404.html').write_text(render_page(layout, base, site, build_id, 'he', 'notfound', '/404.html', 'העמוד לא נמצא', '', nf_body), encoding='utf-8')
+    # עמודים שהוסרו – הפניה לכתובת החדשה (19.10.2026: נתוני פטירה עברו לאודות)
+    for old, new in (('/mortality-data/', '/about/#data'), ('/en/mortality-data/', '/en/about/#data')):
+        d = DIST / old.strip('/'); d.mkdir(parents=True, exist_ok=True)
+        (d / 'index.html').write_text(f'<!DOCTYPE html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url={base}{new}"><link rel="canonical" href="{site}{new}"><a href="{base}{new}">{base}{new}</a>', encoding='utf-8')
     (DIST / 'sitemap.xml').write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
         ''.join(f'  <url><loc>{u}</loc></url>\n' for u in urls) + '</urlset>\n', encoding='utf-8')

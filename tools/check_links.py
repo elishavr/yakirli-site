@@ -25,11 +25,12 @@ class Page(HTMLParser):
 
 
 def check(root, base):
-    pages = {p.relative_to(root).as_posix(): Page(p.read_text()) for p in root.rglob('*.html')}
+    # Redirect stubs for removed pages (e.g. /mortality-data/ -> /about/#data) are not real pages
+    pages = {p.relative_to(root).as_posix(): Page(p.read_text()) for p in root.rglob('*.html') if 'http-equiv="refresh"' not in p.read_text()}
     errors, external = [], set()
     indexes = [p for p in pages if p.endswith('index.html')]
-    if len(indexes) != 36:
-        errors.append(f'Expected 36 pages, found {len(indexes)}')
+    if len(indexes) != 34:
+        errors.append(f'Expected 34 pages, found {len(indexes)}')
     for required in ('404.html', 'sitemap.xml', 'robots.txt'):
         if not (root / required).is_file():
             errors.append(f'Missing {required}')
@@ -100,8 +101,8 @@ def check(root, base):
                 errors.append(f'{css.name}: missing CSS asset {url}')
     if (root / 'sitemap.xml').exists():
         sitemap = ET.parse(root / 'sitemap.xml')
-        if len(sitemap.getroot()) != 36:
-            errors.append('Sitemap must have 36 entries')
+        if len(sitemap.getroot()) != 34:
+            errors.append('Sitemap must have 34 entries')
     return dict(pages=len(indexes), errors=errors, external_links=sorted(external))
 
 if __name__ == '__main__':

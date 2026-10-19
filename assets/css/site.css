@@ -463,3 +463,7 @@ body.page-memorial .hero .ph, body.page-donate .hero .ph { background: radial-gr
 /* Home hero: AI-generated image – couple opening the door after shiva (19.10.2026) */
 .page-home .hero .ph { --page-art: image-set(url(../img/photos/home-v2.avif) type("image/avif"), url(../img/photos/home-v2.webp) type("image/webp")); }
 .page-home .hero .ph::before { background-position: 40% center; }
+
+/* About: mortality data section (moved from its own page, 19.10.2026) */
+#data .tbl-title { margin: 36px 0 14px; font-size: 1.25rem; }
+#data .data-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 28px; }
