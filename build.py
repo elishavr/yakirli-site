@@ -34,7 +34,7 @@ HERO_PHOTOS = {
 }
 
 # Pages whose hero uses a newer photo than the shared group image
-HERO_FILES = {'home': 'home-v2', 'memorial': 'memorial-garden', 'eighth': 'eighth-training', 'grandparents': 'grandparents-v1'}
+HERO_FILES = {'home': 'home-v2', 'memorial': 'memorial-garden', 'eighth': 'eighth-training', 'grandparents': 'grandparents-v1', 'public': 'knesset-welfare-committee'}
 
 def path_of(lang, pid):
     slug = PATHS[pid]

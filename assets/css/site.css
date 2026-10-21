@@ -488,3 +488,7 @@ body.page-memorial .hero .ph, body.page-donate .hero .ph { background: radial-gr
 .page-memorial .hero .ph::before { background-position: center; }
 .page-eighth .hero .ph, .page-grandparents .hero .ph, .page-memorial .hero .ph { aspect-ratio: 16 / 9; min-height: 0; }
 @media (max-width: 860px) { .page-eighth .hero .ph, .page-grandparents .hero .ph, .page-memorial .hero .ph { aspect-ratio: 16 / 9; max-height: none; } }
+
+/* 21.10.2026 (Pini): Public advocacy hero – Knesset Labor and Welfare Committee discussion on the retirement age law */
+.page-public { --page-art: image-set(url(../img/photos/knesset-welfare-committee.avif) type("image/avif"), url(../img/photos/knesset-welfare-committee.webp) type("image/webp")); }
+.hero-caption { margin-top: 18px; font-size: 15px; opacity: .85; }
