@@ -511,14 +511,6 @@ body.page-memorial .hero .ph, body.page-donate .hero .ph { background: radial-gr
 .aw-candle { display: block; width: 12cqw; height: auto; }
 .aw-ribbon { position: absolute; top: 3.4cqw; inset-inline-start: -4.6cqw; transform: rotate(35deg); background: var(--warm); color: var(--navy); font-weight: 800; font-size: 2.3cqw; padding: .5cqw 6cqw; box-shadow: 0 4px 12px rgba(19, 18, 47, .25); }
 [dir="ltr"] .aw-ribbon { transform: rotate(-35deg); }
-/* גרסה בהירה */
-.aw-banner.light { background: var(--teal-bg); color: var(--navy); box-shadow: var(--shadow); border: 1px solid var(--teal-lt); }
-.aw-banner.light::before { opacity: .55; }
-.aw-banner.light .aw-title { color: var(--navy); }
-.aw-banner.light .aw-title span { color: var(--teal-ink); }
-.aw-banner.light .aw-heb { color: var(--navy); }
-.aw-banner.light .aw-greg { color: var(--warm-dk); }
-.aw-banner.light .aw-logos { box-shadow: var(--shadow); }
 @container (max-width: 620px) {
   .aw-in { aspect-ratio: auto; grid-template-columns: 1fr; padding: 40px 24px 28px; text-align: center; gap: 20px; }
   [dir="ltr"] .aw-in { padding: 40px 24px 28px; }
