@@ -171,7 +171,7 @@ def main():
     if DIST.exists():
         shutil.rmtree(DIST)
     DIST.mkdir()
-    for sub in ('css', 'js', 'img'):
+    for sub in ('css', 'js', 'img', 'files'):
         shutil.copytree(ROOT / 'assets' / sub, DIST / 'assets' / sub)
     (DIST / '.nojekyll').write_text('')
 
