@@ -492,3 +492,42 @@ body.page-memorial .hero .ph, body.page-donate .hero .ph { background: radial-gr
 /* 21.10.2026 (Pini): Public advocacy hero – Knesset Labor and Welfare Committee discussion on the retirement age law */
 .page-public { --page-art: image-set(url(../img/photos/knesset-welfare-committee.avif) type("image/avif"), url(../img/photos/knesset-welfare-committee.webp) type("image/webp")); }
 .hero-caption { margin-top: 18px; font-size: 15px; opacity: .85; }
+
+/* ---------- באנר שבוע המודעות (בצבעי האתר, במקום הבאנר הצהוב) ---------- */
+.aw-sec { padding-block: clamp(32px, 4vw, 56px) 0; }
+.aw-banner { position: relative; container-type: inline-size; overflow: hidden; border-radius: var(--radius); background: var(--navy); color: #fff; box-shadow: var(--shadow-lg); }
+.aw-banner::before { content: ""; position: absolute; inset: 0; background: url(../img/leaves.svg) center / 900px auto repeat; opacity: .22; pointer-events: none; }
+.aw-in { position: relative; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 4cqw; aspect-ratio: 3 / 1; padding: 4cqw 6cqw 4cqw 4cqw; }
+[dir="ltr"] .aw-in { padding: 4cqw 4cqw 4cqw 6cqw; }
+.aw-txt { min-width: 0; }
+.aw-title { margin: 0; color: #fff; font-weight: 800; font-size: 7.4cqw; line-height: 1.02; letter-spacing: -.01em; }
+.aw-title span { display: block; color: var(--teal-lt); }
+.aw-dates { margin-top: 2.4cqw; display: flex; flex-wrap: wrap; align-items: baseline; gap: .4cqw 1.6cqw; }
+.aw-heb { font-size: 3.1cqw; font-weight: 700; color: #fff; }
+.aw-greg { font-size: 3.1cqw; font-weight: 800; color: var(--warm); direction: ltr; unicode-bidi: isolate; }
+.aw-side { display: flex; flex-direction: column; align-items: center; gap: 1.6cqw; }
+.aw-logos { display: flex; align-items: center; gap: 1.6cqw; background: #fff; border-radius: 1.4cqw; padding: 1cqw 1.6cqw; }
+.aw-logos img { display: block; height: 6.4cqw; width: auto; }
+.aw-candle { display: block; width: 12cqw; height: auto; }
+.aw-ribbon { position: absolute; top: 3.4cqw; inset-inline-start: -4.6cqw; transform: rotate(35deg); background: var(--warm); color: var(--navy); font-weight: 800; font-size: 2.3cqw; padding: .5cqw 6cqw; box-shadow: 0 4px 12px rgba(19, 18, 47, .25); }
+[dir="ltr"] .aw-ribbon { transform: rotate(-35deg); }
+/* גרסה בהירה */
+.aw-banner.light { background: var(--teal-bg); color: var(--navy); box-shadow: var(--shadow); border: 1px solid var(--teal-lt); }
+.aw-banner.light::before { opacity: .55; }
+.aw-banner.light .aw-title { color: var(--navy); }
+.aw-banner.light .aw-title span { color: var(--teal-ink); }
+.aw-banner.light .aw-heb { color: var(--navy); }
+.aw-banner.light .aw-greg { color: var(--warm-dk); }
+.aw-banner.light .aw-logos { box-shadow: var(--shadow); }
+@container (max-width: 620px) {
+  .aw-in { aspect-ratio: auto; grid-template-columns: 1fr; padding: 40px 24px 28px; text-align: center; gap: 20px; }
+  [dir="ltr"] .aw-in { padding: 40px 24px 28px; }
+  .aw-title { font-size: clamp(30px, 10cqw, 44px); }
+  .aw-dates { justify-content: center; margin-top: 14px; flex-direction: column; align-items: center; gap: 2px; }
+  .aw-heb, .aw-greg { font-size: 19px; }
+  .aw-side { flex-direction: row-reverse; justify-content: center; gap: 18px; }
+  .aw-logos { border-radius: 12px; padding: 8px 12px; gap: 10px; }
+  .aw-logos img { height: 44px; }
+  .aw-candle { width: 64px; }
+  .aw-ribbon { top: 16px; inset-inline-start: -38px; font-size: 14px; padding: 4px 44px; }
+}
