@@ -70,3 +70,38 @@
     });
   });
 })();
+
+/* חיצים במפת המיזמים (עמוד הבית): מהעיגול המרכזי אל כל כרטיס */
+(function () {
+  var box = document.querySelector('.proj');
+  if (!box) return;
+  var svg = box.querySelector('.parrows'), hub = box.querySelector('.phub');
+  var NS = 'http://www.w3.org/2000/svg';
+  function draw() {
+    svg.innerHTML = '';
+    if (getComputedStyle(svg).display === 'none') return;
+    var b = box.getBoundingClientRect(), h = hub.getBoundingClientRect();
+    var cx = h.left + h.width / 2 - b.left, cy = h.top + h.height / 2 - b.top, r = h.width / 2 + 16;
+    box.querySelectorAll('.pcard').forEach(function (c) {
+      var k = c.getBoundingClientRect();
+      var L = k.left - b.left, R = k.right - b.left, T = k.top - b.top, B = k.bottom - b.top;
+      var tx = Math.max(L, Math.min(cx, R)), ty = Math.max(T, Math.min(cy, B));
+      if (tx === cx && ty === cy) return;
+      var dx = tx - cx, dy = ty - cy, d = Math.sqrt(dx * dx + dy * dy), ux = dx / d, uy = dy / d;
+      var x1 = cx + ux * r, y1 = cy + uy * r, x2 = tx - ux * 10, y2 = ty - uy * 10;
+      if (d - r < 30) return;
+      var ln = document.createElementNS(NS, 'line');
+      ln.setAttribute('x1', x1); ln.setAttribute('y1', y1);
+      ln.setAttribute('x2', x2 - ux * 8); ln.setAttribute('y2', y2 - uy * 8);
+      svg.appendChild(ln);
+      var px = -uy, py = ux, s = 9;
+      var hd = document.createElementNS(NS, 'path');
+      hd.setAttribute('d', 'M' + x2 + ' ' + y2 + 'L' + (x2 - ux * 16 + px * s) + ' ' + (y2 - uy * 16 + py * s) + 'L' + (x2 - ux * 16 - px * s) + ' ' + (y2 - uy * 16 - py * s) + 'Z');
+      svg.appendChild(hd);
+    });
+  }
+  draw();
+  window.addEventListener('resize', draw);
+  window.addEventListener('load', draw);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+})();
