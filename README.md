@@ -13,7 +13,7 @@ src/he/*.html        תוכן העמודים בעברית – כאן עורכי�
 src/en/*.html        תוכן העמודים באנגלית (17 עמודים)
 templates/layout.html  כותרת עליונה, תפריט, פוטר – משותף לכל העמודים
 assets/css/site.css  העיצוב כולו (צבעים, גופנים, פריסה)
-assets/js/site.js    תפריט נייד, תפריטי משנה, טפסים (תצוגה מקדימה)
+assets/js/site.js    תפריט נייד, תפריטי משנה, טפסי יצירת קשר/הרצאות (גיבוי מייל או endpoint)
 assets/img/          לוגו, אייקונים, תמונות, איורי עלים לפי קבוצת עמודים, תמונות שיתוף
 assets/img/photos/   שמונה תמונות אווירה מקוריות ב־AVIF, עם חלופות WebP
 build.py             בונה את dist/ מהמקורות (python3, ללא תלויות)
@@ -83,7 +83,7 @@ python3 build.py && python3 -m http.server 8787 --directory dist
 האתר נבנה כך שיהיה קל להעביר אותו לוורדפרס או לכל אחסון אחר:
 - כל עמוד הוא קובץ HTML אחד ב־`src/` עם מבנה סמנטי פשוט (`section`, `h2`, `article.card` וכו').
 - העיצוב כולו ב־`site.css` אחד, עם משתני צבע בראש הקובץ.
-- הטפסים הם תצוגה מקדימה בלבד; החיבור לווטסאפ של פיני ול־info@yakirli.org ייעשה בוורדפרס.
+- החל ב־23.10.2026: הטפסים למשפחות, התנדבות, סבים, הנצחה ותפוצה מחוברים לקישורי Google Forms. טפסים לפנייה כללית ולהזמנת הרצאה הם טפסי HTML מקומיים שפותחים טיוטת מייל אם `YAKIRLI_FORMS_ENDPOINT` ריק. שרת `tools/site-forms-backend.gs` מוכן להתקנה אך לא פורסם; התראות על Google Forms דורשות טריגרים שלא הותקנו. המצב המלא ב־[`docs/handoff-current-forms.md`](docs/handoff-current-forms.md).
 - תרומות דרך JGive (קישור חיצוני), ללא סליקה באתר.
 
 ## צילומי מסך לביקורת PR
@@ -103,6 +103,7 @@ AXE_PATH="$NODE_PATH/axe-core/axe.min.js" REVIEW_OUT=/tmp/yakirli-review node to
 ```bash
 python3 build.py --base /yakirli-site
 python3 tools/check_links.py --base /yakirli-site
+python3 tools/check_forms.py
 python3 build.py
 python3 tools/check_links.py
 node tools/test_navigation.cjs
@@ -114,3 +115,10 @@ node tools/test_navigation.cjs
 ### גרפיקות
 
 מפת האיורים, האייקונים, תמונות השיתוף ומגבלות הלוגו: `docs/graphics.md`. איורי ההירו נבחרים דרך `--page-art` ב־CSS. קובצי המקור לתמונות השיתוף הם `assets/img/og-he.svg` ו־`og-en.svg`; יש לייצא PNG בגודל 1200×630 עם גופן Assistant לאחר עריכה.
+
+
+## חיבור טפסים והתראות – מצב עדכני
+
+**מצב ההשקה והחלטות תוכן:** [`docs/handoff-site-launch.md`](docs/handoff-site-launch.md). **מסמך המסירה על הטפסים:** [`docs/handoff-current-forms.md`](docs/handoff-current-forms.md). מדריך התקנה: [`docs/forms-notifications-setup.md`](docs/forms-notifications-setup.md). שורת הפקודה `python3 tools/check_forms.py` בודקת את נוכחות החיבורים בקוד בלבד, לא מסירה חיה של פניות.
+
+**זהירות:** Google Apps Script Web App מחזיר הפניות ועלול להיתקל ב־CORS בדפדפן. אין להפעיל `YAKIRLI_FORMS_ENDPOINT` לפני בדיקת הגשה אמיתית כולל קליטת שורה והתראה במייל. לעולם אין להתחייב שההגשה הושלמה בלי אישור אמין. המייל הפרטי והתשובות הרגישות אינם נשמרים בקוד האתר הפומבי.

@@ -13,6 +13,7 @@
  *
  * הגיליון נוצר אוטומטית בשליחה הראשונה. מייל נוסף לקבלת עותק (למשל info@yakirli.org)
  * אפשר להגדיר ב-Project Settings ← Script properties, בשם CC_EMAIL.
+ * חובה להגדיר ALERT_EMAIL ככתובת המייל הפרטית להתראות – לא נשמרת בגיט.
  */
 
 const SHEET_NAME = 'פניות מהאתר – יקיר לי';
@@ -21,13 +22,26 @@ const MAX_FIELD = 5000;
 
 function doPost(e) {
   try {
-    const data = JSON.parse((e && e.postData && e.postData.contents) || '{}');
+    const raw = (e && e.postData && e.postData.contents) || '{}';
+    if (raw.length > 60000) return json_({ ok: false, error: 'too_large' });
+    const data = JSON.parse(raw);
+    if (!Object.prototype.hasOwnProperty.call(FORM_TITLES, data._form)) {
+      return json_({ ok: false, error: 'unknown_form' });
+    }
+    // Never accept a request that cannot be sent to the private alert mailbox.
+    const recipient = PropertiesService.getScriptProperties().getProperty('ALERT_EMAIL');
+    if (!recipient) return json_({ ok: false, error: 'missing_alert_email' });
     // מלכודת לרובוטים: שדה נסתר שבני אדם לא ממלאים
     if (data._hp) return json_({ ok: true });
-    const kind = FORM_TITLES[data._form] ? data._form : 'contact';
+    const kind = data._form;
     const fields = Array.isArray(data.fields) ? data.fields.slice(0, 30) : [];
     const rows = fields
-      .map(f => ({ key: String(f.label || '').slice(0, 200), value: String(f.value || '').slice(0, MAX_FIELD) }))
+      .map((f, i) => {
+        const rawLabel = String(f.label || '').slice(0, 200);
+        // The visitor controls the JSON payload; labels can also be malicious.
+        const key = /^[\s\u0000-\u001f]*[=+\-@]/.test(rawLabel) ? ('שדה ' + (i + 1)) : rawLabel;
+        return { key: key, value: String(f.value || '').slice(0, MAX_FIELD) };
+      })
       .filter(f => f.key && f.value);
     if (!rows.length) return json_({ ok: false, error: 'empty' });
 
@@ -53,7 +67,7 @@ function saveRow_(kind, rows, page) {
   if (id) { try { ss = SpreadsheetApp.openById(id); } catch (e) { ss = null; } }
   if (!ss) {
     ss = SpreadsheetApp.create(SHEET_NAME);
-    ss.setSpreadsheetLocale('iw_IL');
+    ss.setSpreadsheetLocale('he_IL');
     props.setProperty('SHEET_ID', ss.getId());
     const first = ss.getSheets()[0];
     first.setName('קרא אותי');
@@ -76,17 +90,23 @@ function saveRow_(kind, rows, page) {
       header.push(r.key);
     }
   });
+  // Treat visitor input as text; do not execute submitted formulas in Sheets.
+  const safeCell_ = value => {
+    const v = String(value == null ? '' : value);
+    return /^[\s\u0000-\u001f]*[=+\-@]/.test(v) ? "'" + v : v;
+  };
   const line = header.map(h => {
     if (h === 'תאריך') return new Date();
-    if (h === 'עמוד') return page;
+    if (h === 'עמוד') return safeCell_(page);
     const f = rows.find(r => r.key === h);
-    return f ? f.value : '';
+    return f ? safeCell_(f.value) : '';
   });
   sh.appendRow(line);
 }
 
 function notify_(kind, rows, page) {
-  const to = Session.getEffectiveUser().getEmail();
+  const to = PropertiesService.getScriptProperties().getProperty('ALERT_EMAIL');
+  if (!to) throw new Error('ALERT_EMAIL must be configured in Script properties');
   const cc = PropertiesService.getScriptProperties().getProperty('CC_EMAIL') || '';
   const title = FORM_TITLES[kind];
   const esc = v => String(v == null ? '' : v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -96,14 +116,17 @@ function notify_(kind, rows, page) {
   const id = PropertiesService.getScriptProperties().getProperty('SHEET_ID');
   const sheetLink = id ? '<p><a href="https://docs.google.com/spreadsheets/d/' + id + '">לכל הפניות בגיליון</a></p>' : '';
   const html = '<div dir="rtl" style="direction:rtl;text-align:right;font-family:Arial,sans-serif;color:#18213a;max-width:640px">' +
-    '<h2 style="color:#1C1A4A;margin:0 0 6px">' + esc(title) + ' מהאתר</h2>' +
+    '<h2 style="color:#1C1A4A;margin:0 0 6px">טופס חדש מהאתר</h2>' +
+    '<p style="margin:0 0 8px"><strong>שם הטופס:</strong> ' + esc(title) + '</p>' +
     '<p style="color:#555;margin:0 0 14px">' + esc(Utilities.formatDate(new Date(), 'Asia/Jerusalem', 'dd.MM.yyyy HH:mm')) + (page ? ' · ' + esc(page) : '') + '</p>' +
     '<table dir="rtl" style="border-collapse:collapse;width:100%">' + cells + '</table>' + sheetLink + '</div>';
-  const text = title + ' מהאתר\n\n' + rows.map(r => r.key + ': ' + r.value).join('\n');
+  const text = 'טופס חדש מהאתר\nשם הטופס: ' + title + '\n\n' + rows.map(r => r.key + ': ' + r.value).join('\n\n');
   const emailRow = rows.find(r => /mail|מייל|אימייל/i.test(r.key) && /@/.test(r.value));
-  const msg = { to: to, subject: 'פנייה חדשה מהאתר – ' + title, body: text, htmlBody: html, name: 'אתר יקיר לי' };
+  const msg = { to: to, subject: 'טופס חדש מהאתר - ' + title, body: text, htmlBody: html, name: 'אתר יקיר לי' };
   if (cc) msg.cc = cc;
-  if (emailRow) msg.replyTo = emailRow.value;
+  if (emailRow && /^[^\s<>@\r\n]+@[^\s<>@\r\n]+\.[^\s<>@\r\n]+$/.test(emailRow.value)) {
+    msg.replyTo = emailRow.value;
+  }
   MailApp.sendEmail(msg);
 }
 

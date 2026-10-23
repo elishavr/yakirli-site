@@ -10,7 +10,7 @@
        python3 build.py --base /yakirli-site  -> dist/ לכתובת משנה (GitHub Pages)
        python3 build.py --site-url https://www.yakirli.org
 """
-import argparse, html, pathlib, re, shutil, time
+import argparse, html, os, pathlib, re, shutil, time
 
 ROOT = pathlib.Path(__file__).resolve().parent
 SRC, TPL, DIST = ROOT / 'src', ROOT / 'templates' / 'layout.html', ROOT / 'dist'
@@ -171,7 +171,7 @@ def render_page(layout, base, site, build_id, lang, pid, path, title, group, bod
         'og_locale': 'en_US' if lang == 'en' else 'he_IL', 'base': base, 'site': site, 'build': build_id,
         'page': pid, 'group': group or 'none', 'home': path_of(lang, 'home'),
         'donate': path_of(lang, 'donate'), 'access': path_of(lang, 'access'), 'privacy': path_of(lang, 'privacy'), 'terms': path_of(lang, 'terms'),
-        'analytics': analytics_tag(), 'forms_endpoint': FORMS_ENDPOINT,
+        'analytics': analytics_tag(), 'forms_endpoint': html.escape(FORMS_ENDPOINT, quote=True),
         'alt_path': path_of(alt_lang, pid if pid in PATHS else 'home'), 'alt_lang': alt_lang,
         'nav': nav_html(lang, pid, group), 'foot_nav': foot_nav_html(lang), 'content': body,
     }
@@ -190,9 +190,14 @@ def main():
     ap.add_argument('--base', default='', help='נתיב בסיס, למשל /yakirli-site (ללא / בסוף)')
     ap.add_argument('--analytics', default='yakirli', help='קוד האתר ב-GoatCounter (yakirli.goatcounter.com). ריק לכיבוי')
     ap.add_argument('--site-url', default='https://www.yakirli.org', help='כתובת האתר ל-canonical ול-sitemap')
+    ap.add_argument('--forms-endpoint', default=os.environ.get('YAKIRLI_FORMS_ENDPOINT', ''),
+                    help='Google Apps Script /exec URL; empty uses the explicit email-draft fallback')
     a = ap.parse_args()
-    global ANALYTICS_CODE
+    global ANALYTICS_CODE, FORMS_ENDPOINT
     ANALYTICS_CODE = a.analytics.strip()
+    FORMS_ENDPOINT = a.forms_endpoint.strip()
+    if FORMS_ENDPOINT and not re.fullmatch(r'https://script\.google\.com/macros/s/[A-Za-z0-9_-]+/exec', FORMS_ENDPOINT):
+        raise SystemExit('Invalid --forms-endpoint: expected an HTTPS Google Apps Script /exec URL')
     base = a.base.rstrip('/')
     site = a.site_url.rstrip('/')
     build_id = time.strftime('%Y%m%d%H%M')
