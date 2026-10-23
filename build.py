@@ -81,10 +81,10 @@ T = {
                skip='דילוג לתוכן', brand_aria='יקיר לי – לעמוד הבית', home_sr='לעמוד הבית', brand_name='יקיר לי',
                brand_tag='יד ולב לשכול האזרחי', menu='תפריט', main_menu='תפריט ראשי', donate='לתרומה',
                lang_long='English – לאתר באנגלית', lang_short='EN', nav='ניווט', contact='יצירת קשר',
-               phone='טלפון ווטסאפ', email='אימייל', mail='דואר', address='ת"ד 1208, אפרת 9043500',
+               phone='טלפון / וואטסאפ', email='אימייל', mail='דואר', address='ת"ד 1208, אפרת 9043500',
                newsletter='הצטרפות לרשימת התפוצה', join='הצטרפות', nl_sent='זו גרסת תצוגה: ההרשמה לא נשמרה.',
                access='הצהרת נגישות', privacy='מדיניות פרטיות', reg='יקיר לי – יד ולב לשכול האזרחי (ע"ר 580616001)', credits='סמלי הרשויות: ויקישיתוף (CC BY-SA) והאתרים הרשמיים',
-               wa='שליחת הודעת ווטסאפ ליקיר לי', foot_tag='יד ולב לשכול האזרחי (ע"ר 580616001)',
+               wa='שליחת הודעת וואטסאפ ליקיר לי', foot_tag='יד ולב לשכול האזרחי (ע"ר 580616001)',
                sub_toggle='פתיחת תפריט משנה', reach_out='פנו אלינו', site='יקיר לי', site_long='יקיר לי – יד ולב לשכול האזרחי'),
     'en': dict(
                terms='Terms of use', nw='(opens in a new window)', req_consent='To send, please tick the confirmation box.',
