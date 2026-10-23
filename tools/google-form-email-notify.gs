@@ -4,10 +4,12 @@
  * One installable spreadsheet "On form submit" trigger is required in EACH Sheet.
  * Never paste actual family submissions into test runs or version control.
  */
-const YAKIR_LI_NOTIFY_TO = 'pini1951@gmail.com';
+// The private address is configured inside Apps Script (Script Properties), not public GitHub.
+const YAKIR_LI_NOTIFY_TO = PropertiesService.getScriptProperties().getProperty('ALERT_EMAIL');
 
 function yakirLiOnFormSubmit(e) {
   if (!e || !e.namedValues) throw new Error('Run from an actual form-submit trigger, not the Run button.');
+  if (!YAKIR_LI_NOTIFY_TO) throw new Error('Configure script property ALERT_EMAIL to your private notification mailbox first.');
   const title = SpreadsheetApp.getActiveSpreadsheet().getName().replace(/\s*\(תגובות\)\s*$/, '').trim();
   const rows = Object.keys(e.namedValues).map(key => ({
     key: key,
