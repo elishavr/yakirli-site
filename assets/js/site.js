@@ -1,4 +1,4 @@
-/* Navigation and preview forms. No form data is stored or transmitted. */
+/* Navigation and email draft fallbacks. Google Forms submit off-site. */
 (function () {
   'use strict';
   var head = document.querySelector('.site-head');
@@ -92,12 +92,12 @@
         if (!value) return;
         var label = el.id && form.querySelector('label[for="' + el.id + '"]');
         if (!label) label = el.closest('label');
-        var title = label ? label.textContent.replace(/\\s+/g, ' ').trim() : (el.name || el.id || 'Field');
+        var title = label ? label.textContent.replace(/\s+/g, ' ').trim() : (el.name || el.id || 'Field');
         filled.push(title + ': ' + value);
       });
       var title = names[lang][kind];
       var subject = (lang === 'he' ? 'טופס חדש מהאתר - ' : 'New website form - ') + title;
-      var body = (lang === 'he' ? 'שם הטופס: ' : 'Form: ') + title + '\\n\\n' + filled.join('\\n\\n');
+      var body = (lang === 'he' ? 'שם הטופס: ' : 'Form: ') + title + '\n\n' + filled.join('\n\n');
       window.location.href = 'mailto:info@yakirli.org?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     });
   });
