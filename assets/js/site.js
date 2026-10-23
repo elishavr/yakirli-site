@@ -61,60 +61,45 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  document.querySelectorAll('form').forEach(function (form) {
+  // The only native forms left (contact and lecture requests) prepare an email
+  // in the visitor's email app. The visitor must explicitly send it.
+  // Never claim a form was submitted automatically; we cannot guarantee mailto delivery.
+  document.querySelectorAll('form[data-mailto-form]').forEach(function (form) {
+    form.removeAttribute('novalidate');
+    var submit = form.querySelector('button[type="submit"]');
+    var lang = document.documentElement.lang === 'he' ? 'he' : 'en';
+    var kind = form.getAttribute('data-mailto-form');
+    var names = {
+      he: {contact: 'פנייה כללית', lectures: 'הזמנת הרצאה'},
+      en: {contact: 'General inquiry', lectures: 'Lecture booking'}
+    };
+    if (submit) submit.textContent = lang === 'he' ? 'פתיחת הודעת דוא"ל' : 'Open email draft';
     var status = form.querySelector('.sent');
-    if (status) status.setAttribute('role', 'status');
+    if (status) {
+      status.hidden = false;
+      status.textContent = lang === 'he'
+        ? 'השליחה תפתח הודעה בתוכנת הדוא"ל שלך. יש ללחוץ על שליחה בתוכנת הדוא"ל כדי שהפנייה תגיע. לחלופין אפשר לפנות בווטסאפ.'
+        : 'This opens a draft in your email app. Please press Send in the email app for the request to reach us. You can also use WhatsApp.';
+    }
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
-      // תיבת האישור (מדיניות פרטיות / דיוור) חייבת להיות מסומנת לפני שליחה
-      var consent = form.querySelector('input[type="checkbox"][required]');
-      var err = form.querySelector('.form-err');
-      if (consent && !consent.checked) {
-        if (!err) {
-          err = document.createElement('p');
-          err.className = 'form-err'; err.setAttribute('role', 'alert');
-          err.id = (consent.id || 'f') + '-err';
-          err.textContent = document.body.getAttribute('data-req') || '';
-          consent.closest('label').after(err);
-          consent.setAttribute('aria-describedby', err.id);
-        }
-        consent.setAttribute('aria-invalid', 'true');
-        consent.focus();
-        if (status) status.hidden = true;
-        return;
-      }
-      if (consent) consent.removeAttribute('aria-invalid');
-      if (err) err.remove();
-      if (status) status.hidden = false;
-      if (window.goatcounter && window.goatcounter.count) {
-        window.goatcounter.count({ path: 'form-' + (form.closest('[id]') ? form.closest('[id]').id : 'form'), title: 'שליחת טופס', event: true });
-      }
+      if (!form.reportValidity()) return;
+      var filled = [];
+      form.querySelectorAll('input, select, textarea').forEach(function (el) {
+        if (el.type === 'checkbox' && !el.checked) return;
+        if (el.type === 'radio' && !el.checked) return;
+        var value = el.type === 'checkbox' ? (lang === 'he' ? 'כן' : 'Yes') : el.value.trim();
+        if (!value) return;
+        var label = el.id && form.querySelector('label[for="' + el.id + '"]');
+        if (!label) label = el.closest('label');
+        var title = label ? label.textContent.replace(/\\s+/g, ' ').trim() : (el.name || el.id || 'Field');
+        filled.push(title + ': ' + value);
+      });
+      var title = names[lang][kind];
+      var subject = (lang === 'he' ? 'טופס חדש מהאתר - ' : 'New website form - ') + title;
+      var body = (lang === 'he' ? 'שם הטופס: ' : 'Form: ') + title + '\\n\\n' + filled.join('\\n\\n');
+      window.location.href = 'mailto:info@yakirli.org?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     });
-  });
-
-  // קישורים שנפתחים בחלון חדש – הודעה לקוראי מסך
-  var nw = document.body.getAttribute('data-nw');
-  if (nw) document.querySelectorAll('a[target="_blank"]').forEach(function (a) {
-    if (a.querySelector('.sr-only')) return;
-    var s = document.createElement('span'); s.className = 'sr-only'; s.textContent = ' ' + nw;
-    a.appendChild(s);
-    if (a.hasAttribute('aria-label')) a.setAttribute('aria-label', a.getAttribute('aria-label') + ' ' + nw);
-  });
-
-  // מדידת פעולות חשובות (ללא מידע אישי): וואטסאפ, טלפון, מייל, תרומה, הורדת קבצים
-  document.addEventListener('click', function (ev) {
-    var a = ev.target.closest('a[href]');
-    if (!a || !window.goatcounter || !window.goatcounter.count) return;
-    var h = a.getAttribute('href'), kind = null;
-    if (/wa\.me|whatsapp/.test(h)) kind = 'whatsapp';
-    else if (/^tel:/.test(h)) kind = 'phone';
-    else if (/^mailto:/.test(h)) kind = 'email';
-    else if (/jgive\.com/.test(h)) kind = 'donate';
-    else if (/\.pdf($|\?)/.test(h)) kind = 'download';
-    else if (/zoom\.us/.test(h)) kind = 'zoom';
-    else if (/docs\.google\.com\/forms|forms\.gle/.test(h)) kind = 'google-form';
-    else if (/memoriz/.test(h)) kind = 'memorial-wall';
-    if (kind) window.goatcounter.count({ path: 'click-' + kind, title: location.pathname, event: true });
   });
 })();
 
