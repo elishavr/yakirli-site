@@ -22,7 +22,7 @@ PATHS = {
     'legislation': 'legislation', 'week': 'awareness-week', 'lectures': 'lectures',
     'research': 'research', 'memorial': 'remembrance',
     'media': 'media', 'contact': 'contact', 'donate': 'donate',
-    'access': 'accessibility', 'privacy': 'privacy',
+    'access': 'accessibility', 'privacy': 'privacy', 'terms': 'terms-of-use',
 }
 # Match the page-specific photo backgrounds in site.css; legal pages have none.
 HERO_PHOTOS = {
@@ -71,7 +71,14 @@ NAV = {
 GROUP_HOME = {'support': 'eighth', 'public': 'public', 'data': 'legislation'}  # לאן מוביל שם הקבוצה
 
 T = {
-    'he': dict(skip='דילוג לתוכן', brand_aria='יקיר לי – לעמוד הבית', brand_name='יקיר לי',
+    'he': dict(
+               terms='תנאי שימוש', nw='(נפתח בחלון חדש)', req_consent='כדי לשלוח, יש לסמן את תיבת האישור.',
+               nl_consent='בהרשמה אתם מסכימים לקבל מאיתנו עדכונים בדוא"ל. אפשר להסיר את עצמכם בכל עת.',
+               a11y_open='תפריט נגישות', a11y_title='התאמות נגישות', a11y_close='סגירת תפריט הנגישות',
+               a11y_size='גודל טקסט', a11y_smaller='הקטנת טקסט', a11y_bigger='הגדלת טקסט', a11y_minus='א−', a11y_plus='א+',
+               a11y_contrast='ניגודיות גבוהה', a11y_links='הדגשת קישורים', a11y_font='גופן פשוט', a11y_spacing='ריווח טקסט',
+               a11y_motion='עצירת אנימציות', a11y_reset='איפוס הגדרות',
+               skip='דילוג לתוכן', brand_aria='יקיר לי – לעמוד הבית', home_sr='לעמוד הבית', brand_name='יקיר לי',
                brand_tag='יד ולב לשכול האזרחי', menu='תפריט', main_menu='תפריט ראשי', donate='לתרומה',
                lang_long='English – לאתר באנגלית', lang_short='EN', nav='ניווט', contact='יצירת קשר',
                phone='טלפון ווטסאפ', email='אימייל', mail='דואר', address='ת"ד 1208, אפרת 9043500',
@@ -79,7 +86,14 @@ T = {
                access='הצהרת נגישות', privacy='מדיניות פרטיות', reg='יקיר לי – יד ולב לשכול האזרחי (ע"ר 580616001)', credits='סמלי הרשויות: ויקישיתוף (CC BY-SA) והאתרים הרשמיים',
                wa='שליחת הודעת ווטסאפ ליקיר לי', foot_tag='יד ולב לשכול האזרחי (ע"ר 580616001)',
                sub_toggle='פתיחת תפריט משנה', reach_out='פנו אלינו', site='יקיר לי', site_long='יקיר לי – יד ולב לשכול האזרחי'),
-    'en': dict(skip='Skip to content', brand_aria='Yakir Li – home', brand_name='Yakir Li',
+    'en': dict(
+               terms='Terms of use', nw='(opens in a new window)', req_consent='To send, please tick the confirmation box.',
+               nl_consent='By signing up you agree to receive email updates from us. You can unsubscribe at any time.',
+               a11y_open='Accessibility menu', a11y_title='Accessibility settings', a11y_close='Close accessibility menu',
+               a11y_size='Text size', a11y_smaller='Smaller text', a11y_bigger='Larger text', a11y_minus='A−', a11y_plus='A+',
+               a11y_contrast='High contrast', a11y_links='Highlight links', a11y_font='Plain font', a11y_spacing='Text spacing',
+               a11y_motion='Stop animations', a11y_reset='Reset settings',
+               skip='Skip to content', brand_aria='Yakir Li – home', home_sr='home page', brand_name='Yakir Li',
                brand_tag='Civilian Bereavement Support', menu='Menu', main_menu='Main menu', donate='Donate',
                lang_long='עברית – לאתר בעברית', lang_short='עב', nav='Navigation', contact='Contact',
                phone='Phone / WhatsApp', email='Email', mail='Mail', address='P.O. Box 1208, Efrat 9043500, Israel',
@@ -128,6 +142,15 @@ def description_of(body):
     d = html.unescape(re.sub(r'<[^>]+>', '', m.group(1))) if m else ''
     return html.escape(d.strip()[:300], quote=True)
 
+ANALYTICS_CODE = ''  # נקבע ב-main() לפי --analytics
+
+def analytics_tag():
+    """GoatCounter: מדידת כניסות בלי עוגיות ובלי איסוף מידע מזהה. ריק = כבוי."""
+    if not ANALYTICS_CODE:
+        return ''
+    return (f'<script data-goatcounter="https://{ANALYTICS_CODE}.goatcounter.com/count" '
+            'async src="https://gc.zgo.at/count.js"></script>')
+
 def render_page(layout, base, site, build_id, lang, pid, path, title, group, body):
     t = T[lang]
     # סימון העמוד הנוכחי בתת-התפריט
@@ -145,7 +168,8 @@ def render_page(layout, base, site, build_id, lang, pid, path, title, group, bod
         'alt_he': site + path_of('he', pid if pid in PATHS else 'home'), 'alt_en': site + path_of('en', pid if pid in PATHS else 'home'),
         'og_locale': 'en_US' if lang == 'en' else 'he_IL', 'base': base, 'site': site, 'build': build_id,
         'page': pid, 'group': group or 'none', 'home': path_of(lang, 'home'),
-        'donate': path_of(lang, 'donate'), 'access': path_of(lang, 'access'), 'privacy': path_of(lang, 'privacy'),
+        'donate': path_of(lang, 'donate'), 'access': path_of(lang, 'access'), 'privacy': path_of(lang, 'privacy'), 'terms': path_of(lang, 'terms'),
+        'analytics': analytics_tag(),
         'alt_path': path_of(alt_lang, pid if pid in PATHS else 'home'), 'alt_lang': alt_lang,
         'nav': nav_html(lang, pid, group), 'foot_nav': foot_nav_html(lang), 'content': body,
     }
@@ -162,8 +186,11 @@ def render_page(layout, base, site, build_id, lang, pid, path, title, group, bod
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--base', default='', help='נתיב בסיס, למשל /yakirli-site (ללא / בסוף)')
+    ap.add_argument('--analytics', default='yakirli', help='קוד האתר ב-GoatCounter (yakirli.goatcounter.com). ריק לכיבוי')
     ap.add_argument('--site-url', default='https://www.yakirli.org', help='כתובת האתר ל-canonical ול-sitemap')
     a = ap.parse_args()
+    global ANALYTICS_CODE
+    ANALYTICS_CODE = a.analytics.strip()
     base = a.base.rstrip('/')
     site = a.site_url.rstrip('/')
     build_id = time.strftime('%Y%m%d%H%M')
@@ -195,10 +222,17 @@ def main():
     for old, new in (('/mortality-data/', '/about/#data'), ('/en/mortality-data/', '/en/about/#data')):
         d = DIST / old.strip('/'); d.mkdir(parents=True, exist_ok=True)
         (d / 'index.html').write_text(f'<!DOCTYPE html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url={base}{new}"><link rel="canonical" href="{site}{new}"><a href="{base}{new}">{base}{new}</a>', encoding='utf-8')
+    # אזור אישי – לוח נתוני הגלישה (לא מקושר מהאתר, לא באינדקס של מנועי חיפוש)
+    adm = (ROOT / 'templates' / 'admin.html').read_text(encoding='utf-8')
+    adm = adm.replace('{{build}}', build_id).replace('{{analytics_code}}', ANALYTICS_CODE).replace('{{base}}', base)
+    if base:
+        adm = re.sub(r'(href|src)="/(?!/)', lambda m: f'{m.group(1)}="{base}/', adm)
+    (DIST / 'admin').mkdir()
+    (DIST / 'admin' / 'index.html').write_text(adm, encoding='utf-8')
     (DIST / 'sitemap.xml').write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
         ''.join(f'  <url><loc>{u}</loc></url>\n' for u in urls) + '</urlset>\n', encoding='utf-8')
-    (DIST / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nSitemap: {site}/sitemap.xml\n', encoding='utf-8')
+    (DIST / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nDisallow: /admin/\nSitemap: {site}/sitemap.xml\n', encoding='utf-8')
     print(f'built {len(urls)} pages -> {DIST}  (base="{base}")')
 
 if __name__ == '__main__':

@@ -66,9 +66,99 @@
     if (status) status.setAttribute('role', 'status');
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
+      // תיבת האישור (מדיניות פרטיות / דיוור) חייבת להיות מסומנת לפני שליחה
+      var consent = form.querySelector('input[type="checkbox"][required]');
+      var err = form.querySelector('.form-err');
+      if (consent && !consent.checked) {
+        if (!err) {
+          err = document.createElement('p');
+          err.className = 'form-err'; err.setAttribute('role', 'alert');
+          err.id = (consent.id || 'f') + '-err';
+          err.textContent = document.body.getAttribute('data-req') || '';
+          consent.closest('label').after(err);
+          consent.setAttribute('aria-describedby', err.id);
+        }
+        consent.setAttribute('aria-invalid', 'true');
+        consent.focus();
+        if (status) status.hidden = true;
+        return;
+      }
+      if (consent) consent.removeAttribute('aria-invalid');
+      if (err) err.remove();
       if (status) status.hidden = false;
+      if (window.goatcounter && window.goatcounter.count) {
+        window.goatcounter.count({ path: 'form-' + (form.closest('[id]') ? form.closest('[id]').id : 'form'), title: 'שליחת טופס', event: true });
+      }
     });
   });
+
+  // קישורים שנפתחים בחלון חדש – הודעה לקוראי מסך
+  var nw = document.body.getAttribute('data-nw');
+  if (nw) document.querySelectorAll('a[target="_blank"]').forEach(function (a) {
+    if (a.querySelector('.sr-only')) return;
+    var s = document.createElement('span'); s.className = 'sr-only'; s.textContent = ' ' + nw;
+    a.appendChild(s);
+    if (a.hasAttribute('aria-label')) a.setAttribute('aria-label', a.getAttribute('aria-label') + ' ' + nw);
+  });
+
+  // מדידת פעולות חשובות (ללא מידע אישי): וואטסאפ, טלפון, מייל, תרומה, הורדת קבצים
+  document.addEventListener('click', function (ev) {
+    var a = ev.target.closest('a[href]');
+    if (!a || !window.goatcounter || !window.goatcounter.count) return;
+    var h = a.getAttribute('href'), kind = null;
+    if (/wa\.me|whatsapp/.test(h)) kind = 'whatsapp';
+    else if (/^tel:/.test(h)) kind = 'phone';
+    else if (/^mailto:/.test(h)) kind = 'email';
+    else if (/jgive\.com/.test(h)) kind = 'donate';
+    else if (/\.pdf($|\?)/.test(h)) kind = 'download';
+    else if (/zoom\.us/.test(h)) kind = 'zoom';
+    else if (/docs\.google\.com\/forms|forms\.gle/.test(h)) kind = 'google-form';
+    else if (/memoriz/.test(h)) kind = 'memorial-wall';
+    if (kind) window.goatcounter.count({ path: 'click-' + kind, title: location.pathname, event: true });
+  });
+})();
+
+/* תפריט נגישות: גודל טקסט, ניגודיות, הדגשת קישורים, גופן, ריווח, עצירת אנימציות. נשמר בדפדפן בלבד. */
+(function () {
+  var box = document.getElementById('a11y');
+  if (!box) return;
+  var btn = box.querySelector('.a11y-btn'), panel = box.querySelector('.a11y-panel');
+  var root = document.documentElement, KEY = 'yl-a11y', FLAGS = ['contrast', 'links', 'font', 'spacing', 'motion'];
+  var st = {};
+  try { st = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { st = {}; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
+  function apply() {
+    [1, 2, 3].forEach(function (n) { root.classList.toggle('a11y-t' + n, st.t === n); });
+    FLAGS.forEach(function (k) {
+      root.classList.toggle('a11y-' + k, !!st[k]);
+      var b = panel.querySelector('[data-a11y="' + k + '"]');
+      if (b) b.setAttribute('aria-pressed', String(!!st[k]));
+    });
+    var v = panel.querySelector('#a11y-size-v');
+    if (v) v.textContent = ({ 0: '100%', 1: '115%', 2: '130%', 3: '150%' })[st.t || 0];
+  }
+  function setOpen(open, focusBtn) {
+    panel.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+    if (open) panel.querySelector('button').focus();
+    else if (focusBtn) btn.focus();
+  }
+  btn.addEventListener('click', function () { setOpen(panel.hidden); });
+  box.querySelector('.a11y-x').addEventListener('click', function () { setOpen(false, true); });
+  panel.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-a11y]');
+    if (!b) return;
+    var k = b.getAttribute('data-a11y');
+    if (k === 't+') st.t = Math.min(3, (st.t || 0) + 1);
+    else if (k === 't-') st.t = Math.max(0, (st.t || 0) - 1);
+    else if (k === 'reset') st = {};
+    else st[k] = !st[k];
+    if (!st.t) delete st.t;
+    save(); apply();
+  });
+  box.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && !panel.hidden) { ev.stopPropagation(); setOpen(false, true); } });
+  document.addEventListener('click', function (ev) { if (!panel.hidden && !box.contains(ev.target)) setOpen(false); });
+  apply();
 })();
 
 /* חיצים במפת המיזמים (עמוד הבית): מהעיגול המרכזי אל כל כרטיס */

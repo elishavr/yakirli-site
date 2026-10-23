@@ -553,3 +553,55 @@ body.page-memorial .hero .ph, body.page-donate .hero .ph { background: radial-gr
   .proj { grid-template-columns: 1fr; gap: 14px; }
   .pcard { padding: 22px 20px; }
 }
+
+/* ---------- תפריט נגישות (23.10.2026) ---------- */
+.a11y { position: fixed; bottom: 20px; inset-inline-start: 20px; z-index: 45; }
+.a11y-btn { width: 52px; height: 52px; border-radius: 50%; border: 0; background: var(--navy); color: #fff; display: grid; place-items: center; cursor: pointer; box-shadow: 0 3px 12px rgba(28, 26, 74, .2); }
+.a11y-btn svg { width: 30px; height: 30px; fill: currentColor; }
+.a11y-btn:hover, .a11y-btn[aria-expanded="true"] { background: var(--teal-dk); }
+.a11y-panel { position: absolute; bottom: 64px; inset-inline-start: 0; width: min(320px, calc(100vw - 32px)); max-height: calc(100vh - 110px); overflow: auto; background: #fff; color: var(--ink); border-radius: var(--radius); box-shadow: var(--shadow-lg); border: 1px solid var(--line); padding: 18px; font-size: 16px; }
+.a11y-panel[hidden] { display: none; }
+.a11y-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.a11y-top h2 { font-size: 20px; }
+.a11y-x { border: 0; background: none; font-size: 28px; line-height: 1; cursor: pointer; color: var(--navy); width: 40px; height: 40px; border-radius: 50%; }
+.a11y-x:hover { background: var(--cloud); }
+.a11y-size { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: var(--cloud); border-radius: var(--radius-sm); margin-bottom: 10px; }
+.a11y-size span { flex: 1; font-weight: 700; color: var(--navy); }
+.a11y-size button { min-width: 44px; min-height: 40px; border-radius: var(--pill); border: 2px solid var(--navy); background: #fff; color: var(--navy); font: inherit; font-weight: 800; cursor: pointer; }
+.a11y-size output { min-width: 48px; text-align: center; font-weight: 700; }
+.a11y-opts { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.a11y-opts button { width: 100%; min-height: 44px; text-align: start; padding: 8px 14px; border-radius: var(--radius-sm); border: 2px solid var(--line); background: #fff; color: var(--navy); font: inherit; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.a11y-opts button::after { content: ""; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--muted); flex: 0 0 auto; }
+.a11y-opts button[aria-pressed="true"] { border-color: var(--teal-dk); background: var(--teal-bg); }
+.a11y-opts button[aria-pressed="true"]::after { background: var(--teal-dk); border-color: var(--teal-dk); box-shadow: inset 0 0 0 3px #fff; }
+.a11y-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+.a11y-foot button { border: 0; background: none; font: inherit; font-weight: 700; color: var(--teal-dk); text-decoration: underline; cursor: pointer; padding: 6px 0; }
+.foot-legal { padding-inline-start: 84px; }
+@media (max-width: 640px) { .a11y { bottom: 16px; inset-inline-start: 16px; } .a11y-btn { width: 50px; height: 50px; } .foot-legal { padding-inline-start: var(--gut); } }
+@media print { .a11y { display: none !important; } }
+
+/* מצבי התאמה – המחלקות נקבעות על <html> */
+html.a11y-t1 main, html.a11y-t1 .site-foot { zoom: 1.15; }
+html.a11y-t2 main, html.a11y-t2 .site-foot { zoom: 1.3; }
+html.a11y-t3 main, html.a11y-t3 .site-foot { zoom: 1.5; }
+html.a11y-links a:not(.btn):not(.brand):not(.wa-float) { text-decoration: underline !important; text-decoration-thickness: 2px !important; text-underline-offset: 3px; }
+html.a11y-links a { outline: 2px dashed currentColor; outline-offset: 2px; }
+html.a11y-font body, html.a11y-font button, html.a11y-font input, html.a11y-font select, html.a11y-font textarea { font-family: Arial, 'Segoe UI', sans-serif !important; }
+html.a11y-spacing main p, html.a11y-spacing main li, html.a11y-spacing .site-foot li { line-height: 1.9 !important; letter-spacing: .03em !important; word-spacing: .12em !important; }
+html.a11y-spacing main p { margin-bottom: .6em; }
+html.a11y-motion { scroll-behavior: auto; }
+html.a11y-motion *, html.a11y-motion *::before, html.a11y-motion *::after { animation: none !important; transition: none !important; }
+html.a11y-contrast { --ink: #000; --muted: #222; --navy: #0B0A2A; --teal-dk: #0B4A44; --teal-ink: #0B4A44; --line: #555; --mist: #777; --on-navy-muted: #fff; --cloud: #fff; }
+html.a11y-contrast body { background: #fff; color: #000; }
+html.a11y-contrast .hero, html.a11y-contrast .cta { background: #000 !important; background-image: none !important; }
+html.a11y-contrast .hero::before, html.a11y-contrast .cta::before { display: none !important; }
+html.a11y-contrast .card, html.a11y-contrast .step, html.a11y-contrast .form, html.a11y-contrast input, html.a11y-contrast select, html.a11y-contrast textarea { border: 2px solid #000 !important; }
+html.a11y-contrast a:not(.btn) { text-decoration: underline; }
+html.a11y-contrast .site-foot { background: #000; }
+
+/* יידוע ואישור בטפסים */
+.form-privacy { margin-top: 18px; color: var(--muted); font-size: 15.5px; line-height: 1.55; }
+.form-err { margin-top: 12px; color: #A12D17; font-weight: 700; }
+.nl-note { margin-top: 10px; font-size: 14px; line-height: 1.5; color: var(--on-navy-muted); }
+.nl-note a { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
+.sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }

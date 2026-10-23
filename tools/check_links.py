@@ -28,9 +28,9 @@ def check(root, base):
     # Redirect stubs for removed pages (e.g. /mortality-data/ -> /about/#data) are not real pages
     pages = {p.relative_to(root).as_posix(): Page(p.read_text()) for p in root.rglob('*.html') if 'http-equiv="refresh"' not in p.read_text()}
     errors, external = [], set()
-    indexes = [p for p in pages if p.endswith('index.html')]
-    if len(indexes) != 34:
-        errors.append(f'Expected 34 pages, found {len(indexes)}')
+    indexes = [p for p in pages if p.endswith('index.html') and not p.startswith('admin/')]
+    if len(indexes) != 36:
+        errors.append(f'Expected 36 pages, found {len(indexes)}')
     for required in ('404.html', 'sitemap.xml', 'robots.txt'):
         if not (root / required).is_file():
             errors.append(f'Missing {required}')
@@ -46,7 +46,7 @@ def check(root, base):
             errors.append(f'{name}: incorrect lang/dir')
         if sum(t == 'h1' for t, _ in page.nodes) != 1:
             errors.append(f'{name}: expected one h1')
-        if name in indexes:
+        if name in indexes and not name.startswith('admin/'):
             alternates = {a.get('hreflang'): a.get('href') for t, a in page.nodes if t == 'link' and a.get('rel') == 'alternate'}
             for other in ('he', 'en'):
                 suffix = name.removeprefix('en/').removesuffix('index.html')
@@ -101,8 +101,8 @@ def check(root, base):
                 errors.append(f'{css.name}: missing CSS asset {url}')
     if (root / 'sitemap.xml').exists():
         sitemap = ET.parse(root / 'sitemap.xml')
-        if len(sitemap.getroot()) != 34:
-            errors.append('Sitemap must have 34 entries')
+        if len(sitemap.getroot()) != 36:
+            errors.append('Sitemap must have 36 entries')
     return dict(pages=len(indexes), errors=errors, external_links=sorted(external))
 
 if __name__ == '__main__':

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>האזור האישי – נתוני האתר · יקיר לי</title>
+<link rel="icon" href="/assets/img/icon-32.png" sizes="32x32" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&display=swap">
+<style>
+:root {
+  --navy: #1C1A4A; --navy-deep: #13122F; --teal: #2A9D93; --teal-dk: #1E7A72; --teal-ink: #176860; --teal-lt: #9ADCD3; --teal-bg: #E3F3F1;
+  --warm: #E6896F; --cloud: #F4F6F9; --mist: #E9EEF4; --line: #D9E0E8; --ink: #232B3A; --muted: #5C6675; --err: #A12D17;
+  --radius: 18px; color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--cloud); color: var(--ink); font-family: 'Assistant', 'Segoe UI', Arial, sans-serif; font-size: 17px; line-height: 1.55; }
+a { color: var(--teal-dk); }
+:focus-visible { outline: 3px solid var(--teal-dk); outline-offset: 3px; border-radius: 6px; }
+.skip { position: absolute; top: -100px; right: 16px; background: var(--navy); color: #fff; padding: 10px 16px; border-radius: 0 0 12px 12px; z-index: 10; }
+.skip:focus { top: 0; }
+header { background: var(--navy); color: #fff; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+.head { display: flex; align-items: center; gap: 14px; padding-block: 16px; flex-wrap: wrap; }
+.head img { width: 44px; height: 44px; }
+.head .t1 { font-weight: 800; font-size: 22px; line-height: 1.1; }
+.head .t2 { font-size: 14px; color: #C9CCE3; }
+.head .sp { flex: 1; }
+.head a, .head button.link { color: #fff; font: inherit; font-size: 15px; background: none; border: 1.5px solid rgba(255,255,255,.5); border-radius: 999px; padding: 6px 14px; text-decoration: none; cursor: pointer; }
+.head a:hover, .head button.link:hover { background: rgba(255,255,255,.12); }
+main { padding-block: 28px 60px; }
+h2.big { margin: 0 0 6px; color: var(--navy); font-size: clamp(26px, 3vw, 34px); line-height: 1.2; }
+h2 { margin: 0 0 14px; color: var(--navy); font-size: 20px; }
+.sub { color: var(--muted); margin: 0 0 22px; }
+.card { background: #fff; border-radius: var(--radius); border: 1px solid var(--mist); padding: 22px; box-shadow: 0 3px 14px rgba(28,26,74,.05); }
+.login { max-width: 620px; margin: 10px auto 0; }
+.login label { display: block; font-weight: 700; color: var(--navy); margin: 16px 0 6px; }
+.login input[type=password], .login input[type=text] { width: 100%; min-height: 48px; border: 1.5px solid var(--line); border-radius: 12px; padding: 10px 14px; font: inherit; direction: ltr; text-align: left; }
+.chk { display: flex; gap: 8px; align-items: center; margin-top: 12px; font-size: 16px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 8px 24px; border-radius: 999px; border: 2px solid transparent; font: inherit; font-weight: 700; cursor: pointer; text-decoration: none; }
+.btn-p { background: var(--teal-dk); color: #fff; }
+.btn-p:hover { background: var(--navy); }
+.btn-s { background: #fff; color: var(--navy); border-color: var(--navy); }
+.btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+.msg { margin-top: 14px; padding: 12px 14px; border-radius: 12px; font-weight: 600; }
+.msg.err { background: #FBE7E2; color: var(--err); }
+.msg.info { background: var(--teal-bg); color: var(--teal-ink); }
+details { margin-top: 18px; background: var(--cloud); border-radius: 12px; padding: 12px 16px; }
+summary { font-weight: 700; color: var(--navy); cursor: pointer; }
+ol { padding-inline-start: 22px; margin: 10px 0 0; }
+ol li { margin-bottom: 6px; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; direction: ltr; unicode-bidi: isolate; }
+.bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+.seg { display: inline-flex; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 4px; flex-wrap: wrap; }
+.seg button { border: 0; background: none; font: inherit; font-weight: 600; padding: 7px 14px; border-radius: 999px; cursor: pointer; color: var(--navy); }
+.seg button[aria-pressed=true] { background: var(--navy); color: #fff; }
+.demo-tag { background: #FFF1C9; color: #6B4A00; padding: 4px 12px; border-radius: 999px; font-weight: 700; font-size: 14px; }
+.upd { color: var(--muted); font-size: 14px; margin-inline-start: auto; }
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 14px; }
+.kpi .l { color: var(--muted); font-size: 15px; font-weight: 600; }
+.kpi .n { font-size: 38px; font-weight: 800; color: var(--navy); line-height: 1.1; margin-top: 4px; font-variant-numeric: tabular-nums; }
+.kpi .s { font-size: 14px; color: var(--muted); margin-top: 4px; overflow-wrap: anywhere; }
+.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 14px; }
+.chart { width: 100%; height: 240px; display: block; }
+.chart .gl { stroke: var(--mist); }
+.chart .ax { fill: var(--muted); font-size: 12px; font-family: inherit; }
+.chart .ln { fill: none; stroke: var(--teal-dk); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.chart .ar { fill: var(--teal); opacity: .14; }
+.chart .dt { fill: var(--teal-dk); }
+.chart .hv { fill: transparent; }
+.tip { position: absolute; pointer-events: none; background: var(--navy); color: #fff; font-size: 14px; padding: 6px 10px; border-radius: 8px; white-space: nowrap; transform: translate(50%, -120%); }
+.chartbox { position: relative; }
+table { width: 100%; border-collapse: collapse; font-size: 16px; }
+th { text-align: start; color: var(--muted); font-size: 14px; font-weight: 600; padding: 0 0 8px; border-bottom: 1px solid var(--line); }
+td { padding: 9px 0; border-bottom: 1px solid var(--mist); vertical-align: middle; }
+td.num, th.num { text-align: end; font-variant-numeric: tabular-nums; font-weight: 700; color: var(--navy); width: 70px; }
+.rowbar { display: block; height: 6px; background: var(--teal-bg); border-radius: 3px; margin-top: 5px; }
+.rowbar i { display: block; height: 100%; background: var(--teal); border-radius: 3px; }
+.path { display: block; color: var(--muted); font-size: 13px; direction: ltr; text-align: right; unicode-bidi: isolate; }
+.empty { color: var(--muted); padding: 10px 0; }
+.note { color: var(--muted); font-size: 14px; margin-top: 18px; }
+.loading { opacity: .5; pointer-events: none; }
+@media (max-width: 860px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .grid2 { grid-template-columns: 1fr; } }
+@media (max-width: 420px) { .kpi .n { font-size: 30px; } .seg button { padding: 7px 10px; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">דילוג לתוכן</a>
+<header>
+  <div class="wrap head">
+    <img src="/assets/img/mark.png" alt="" width="44" height="44">
+    <div><h1 class="t1" style="margin:0;color:#fff;font-size:22px">האזור האישי</h1><div class="t2">יקיר לי – נתוני הגלישה באתר</div></div>
+    <div class="sp"></div>
+    <a href="/">לאתר</a>
+    <button class="link" type="button" id="logout" hidden>התנתקות</button>
+  </div>
+</header>
+<main id="main" class="wrap">
+
+<section id="login" class="login card" aria-labelledby="login-h">
+  <h2 id="login-h" class="big">כניסה לנתוני האתר</h2>
+  <p class="sub">הנתונים נאספים בשירות GoatCounter, בלי עוגיות ובלי מידע מזהה על הגולשים. כדי לראות אותם כאן, הדביקו את מפתח הגישה (API key) של החשבון.</p>
+  <form id="login-form" novalidate>
+    <label for="key">מפתח גישה</label>
+    <input id="key" type="password" autocomplete="off" spellcheck="false" aria-describedby="key-help">
+    <p id="key-help" class="note" style="margin-top:6px">המפתח נשמר רק בדפדפן שלכם, במכשיר הזה. הוא לא נשלח לשום מקום חוץ מ־GoatCounter.</p>
+    <label for="code">כתובת החשבון</label>
+    <input id="code" type="text" autocomplete="off" spellcheck="false" value="{{analytics_code}}" aria-describedby="code-help">
+    <p id="code-help" class="note" style="margin-top:6px">החלק הראשון בכתובת: <code><span id="code-show">{{analytics_code}}</span>.goatcounter.com</code></p>
+    <label class="chk"><input type="checkbox" id="remember" checked> לזכור אותי במכשיר הזה</label>
+    <div class="btns">
+      <button class="btn btn-p" type="submit">כניסה</button>
+      <button class="btn btn-s" type="button" id="demo">תצוגה עם נתונים לדוגמה</button>
+    </div>
+    <div id="login-msg" class="msg err" role="alert" hidden></div>
+  </form>
+  <details>
+    <summary>איך מקבלים מפתח גישה? (פעם אחת בלבד)</summary>
+    <ol>
+      <li>נכנסים ל־<a href="https://www.goatcounter.com/signup" target="_blank" rel="noopener">goatcounter.com</a> ופותחים חשבון חינמי. בשדה הקוד כותבים <code>{{analytics_code}}</code>.</li>
+      <li>אחרי הכניסה: בתפריט העליון בוחרים את שם המשתמש ← <b>API</b>.</li>
+      <li>לוחצים <b>New API key</b>, נותנים שם (למשל "האזור האישי"), מסמנים הרשאה לקריאת נתונים (<b>Read statistics</b>) ושומרים.</li>
+      <li>מעתיקים את המפתח, ומדביקים אותו כאן.</li>
+    </ol>
+    <p class="note">אפשר תמיד לראות את הנתונים גם ישירות בלוח הבקרה של GoatCounter.</p>
+  </details>
+</section>
+
+<section id="dash" hidden aria-labelledby="dash-h">
+  <h2 id="dash-h" class="big">נתוני האתר</h2>
+  <p class="sub">כמה אנשים הגיעו לאתר, לאילו עמודים, ומאיפה. מספר המבקרים סופר כל אדם פעם אחת ביום בכל עמוד.</p>
+  <div class="bar">
+    <div class="seg" role="group" aria-label="תקופה">
+      <button type="button" data-days="1">היום</button>
+      <button type="button" data-days="7">7 ימים</button>
+      <button type="button" data-days="30" aria-pressed="true">30 ימים</button>
+      <button type="button" data-days="90">3 חודשים</button>
+      <button type="button" data-days="365">שנה</button>
+    </div>
+    <span id="demo-tag" class="demo-tag" hidden>נתונים לדוגמה – לא אמיתיים</span>
+    <span class="upd" id="upd" aria-live="polite"></span>
+  </div>
+  <div id="dash-msg" class="msg err" role="alert" hidden></div>
+
+  <div class="kpis">
+    <div class="card kpi"><div class="l">צפיות בעמודים</div><div class="n" id="k-views">–</div><div class="s" id="k-views-s"></div></div>
+    <div class="card kpi"><div class="l">ממוצע ליום</div><div class="n" id="k-avg">–</div><div class="s" id="k-avg-s"></div></div>
+    <div class="card kpi"><div class="l">פניות ולחיצות על יצירת קשר</div><div class="n" id="k-contact">–</div><div class="s">וואטסאפ, טלפון, מייל וטפסים</div></div>
+    <div class="card kpi"><div class="l">העמוד הנצפה ביותר</div><div class="n" id="k-top" style="font-size:22px;line-height:1.3">–</div><div class="s" id="k-top-s"></div></div>
+  </div>
+
+  <div class="card">
+    <h2>צפיות לפי יום</h2>
+    <div class="chartbox"><svg class="chart" id="chart" role="img" aria-labelledby="chart-desc"><desc id="chart-desc"></desc></svg><div class="tip" id="tip" hidden></div></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card"><h2>העמודים הנצפים</h2><div id="t-pages"></div></div>
+    <div class="card"><h2>מאיפה הגיעו</h2><div id="t-refs"></div></div>
+    <div class="card"><h2>פעולות באתר</h2><div id="t-events"></div></div>
+    <div class="card"><h2>סוג המכשיר</h2><div id="t-sizes"></div></div>
+    <div class="card"><h2>מערכת הפעלה</h2><div id="t-systems"></div></div>
+    <div class="card"><h2>מדינות</h2><div id="t-locs"></div></div>
+  </div>
+  <p class="note">הנתונים מצטברים ואנונימיים: אין כאן שמות, כתובות IP או פרטים מזהים. לפרטים נוספים: <a id="gc-link" href="https://www.goatcounter.com/" target="_blank" rel="noopener">לוח הבקרה המלא ב־GoatCounter</a> · <a href="/privacy/">מדיניות הפרטיות</a></p>
+</section>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  var BASE = '{{base}}';
+  var PAGES = {
+    '/': 'בית', '/about/': 'אודות', '/eighth-day/': 'היום השמיני', '/bereaved-parents/': 'הורים שכולים',
+    '/grandparents/': 'סבים וסבתות שחוו אובדן נכד/ה', '/volunteers/': 'מתנדבים והכשרה', '/public-advocacy/': 'פעילות ציבורית',
+    '/legislation/': 'קידום חקיקה', '/awareness-week/': 'שבוע המודעות', '/lectures/': 'הרצאות', '/research/': 'מחקרים',
+    '/remembrance/': 'הנצחה', '/media/': 'מדיה', '/contact/': 'צרו קשר', '/donate/': 'תרומה',
+    '/accessibility/': 'הצהרת נגישות', '/privacy/': 'מדיניות פרטיות', '/terms-of-use/': 'תנאי שימוש'
+  };
+  var EVENTS = {
+    'click-whatsapp': 'לחיצה על וואטסאפ', 'click-phone': 'לחיצה על טלפון', 'click-email': 'לחיצה על מייל',
+    'click-donate': 'מעבר לדף התרומה', 'click-download': 'הורדת קובץ', 'click-zoom': 'מעבר למפגש זום',
+    'click-google-form': 'מעבר לטופס הרשמה (סבים וסבתות)', 'click-memorial-wall': 'מעבר לקיר הזיכרון'
+  };
+  var FORMS = { 'contact-form': 'טופס פנייה', 'en-contact-form': 'טופס פנייה (אנגלית)', 'newsletter-form': 'הרשמה לרשימת התפוצה', 'parents-form': 'טופס הורים', 'volunteers-form': 'טופס התנדבות', 'lectures-form': 'הזמנת הרצאה' };
+  var SIZES = { phone: 'טלפון', largephone: 'טלפון גדול', tablet: 'טאבלט', desktop: 'מחשב', desktophd: 'מחשב (מסך גדול)', unknown: 'לא ידוע' };
+  var KEY = 'yl-gc-key', CODE = 'yl-gc-code';
+  var $ = function (id) { return document.getElementById(id); };
+  var state = { key: '', code: $('code').value.trim(), days: 30, demo: false };
+  var nf = new Intl.NumberFormat('he-IL');
+
+  function store(k, v) { try { if (v) localStorage.setItem(k, v); else localStorage.removeItem(k); } catch (e) {} }
+  function load(k) { try { return localStorage.getItem(k) || ''; } catch (e) { return ''; } }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+  function normPath(p) {
+    if (BASE && p.indexOf(BASE) === 0) p = p.slice(BASE.length) || '/';
+    p = p.split('?')[0].split('#')[0];
+    if (p.slice(-10) === 'index.html') p = p.slice(0, -10);
+    if (p.charAt(p.length - 1) !== '/' && p.indexOf('.') < 0) p += '/';
+    return p;
+  }
+  function pageName(p, title) {
+    var en = p.indexOf('/en/') === 0, key = en ? p.slice(3) : p;
+    var n = PAGES[key];
+    if (n) return n + (en ? ' (אנגלית)' : '');
+    return title ? title.replace(/ – (יקיר לי|Yakir Li).*$/, '') : p;
+  }
+  function eventName(p) {
+    if (EVENTS[p]) return EVENTS[p];
+    if (p.indexOf('form-') === 0) return 'שליחת ' + (FORMS[p.slice(5)] || 'טופס');
+    return p;
+  }
+
+  function range(days) {
+    var end = new Date(); end.setMinutes(59, 59, 0);
+    var start = new Date(); start.setHours(0, 0, 0, 0); start.setDate(start.getDate() - (days - 1));
+    var iso = function (d) { return d.toISOString().replace(/\.\d{3}Z$/, 'Z').replace(/:\d\d:\d\dZ$/, ':00:00Z'); };
+    return { start: iso(start), end: iso(end), q: 'start=' + encodeURIComponent(iso(start)) + '&end=' + encodeURIComponent(iso(end)) };
+  }
+
+  function api(path) {
+    return fetch('https://' + state.code + '.goatcounter.com/api/v0/' + path, {
+      headers: { 'Authorization': 'Bearer ' + state.key }
+    }).then(function (r) {
+      if (r.status === 401 || r.status === 403) throw new Error('auth');
+      if (r.status === 429) throw new Error('rate');
+      if (!r.ok) throw new Error('http' + r.status);
+      return r.json();
+    });
+  }
+
+  async function fetchAll(days) {
+    var rg = range(days), out = {};
+    out.total = await api('stats/total?' + rg.q); await sleep(260);
+    out.hits = await api('stats/hits?' + rg.q + '&daily=true&limit=100'); await sleep(260);
+    out.refs = await api('stats/toprefs?' + rg.q + '&limit=10'); await sleep(260);
+    out.sizes = await api('stats/sizes?' + rg.q); await sleep(260);
+    out.systems = await api('stats/systems?' + rg.q + '&limit=8'); await sleep(260);
+    out.locs = await api('stats/locations?' + rg.q + '&limit=10');
+    return out;
+  }
+
+  // ---- נתונים לדוגמה (לתצוגה לפני פתיחת החשבון) ----
+  function demoData(days) {
+    var stats = [], seed = 7, rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+    var paths = [['/', 'בית', 0.30], ['/bereaved-parents/', '', 0.14], ['/eighth-day/', '', 0.12], ['/grandparents/', '', 0.09], ['/about/', '', 0.08],
+      ['/contact/', '', 0.07], ['/donate/', '', 0.05], ['/awareness-week/', '', 0.05], ['/lectures/', '', 0.04], ['/volunteers/', '', 0.03], ['/en/', '', 0.03]];
+    var total = 0, daysArr = [];
+    for (var i = days - 1; i >= 0; i--) {
+      var d = new Date(); d.setDate(d.getDate() - i);
+      var wk = d.getDay() === 6 ? 0.45 : 1, v = Math.round((38 + rnd() * 30) * wk);
+      daysArr.push({ day: d.toISOString().slice(0, 10), daily: v }); total += v;
+    }
+    var hits = paths.map(function (p, idx) {
+      return { path: p[0], title: p[1], event: false, count: Math.round(total * p[2]), stats: daysArr.map(function (x) { return { day: x.day, daily: Math.round(x.daily * p[2]) }; }) };
+    });
+    var ev = [['click-whatsapp', 0.035], ['click-phone', 0.02], ['click-donate', 0.025], ['form-contact-form', 0.01], ['click-download', 0.015], ['click-zoom', 0.012]];
+    ev.forEach(function (e) { hits.push({ path: e[0], event: true, count: Math.max(1, Math.round(total * e[1])), stats: [] }); });
+    return {
+      total: { total: total, total_events: 0, stats: daysArr },
+      hits: { hits: hits },
+      refs: { stats: [{ name: 'Google', count: Math.round(total * .38) }, { name: 'Facebook', count: Math.round(total * .21) }, { name: 'WhatsApp', count: Math.round(total * .09) }, { name: 'ynet.co.il', count: Math.round(total * .02) }] },
+      sizes: { stats: [{ id: 'phone', name: 'Phones', count: Math.round(total * .48) }, { id: 'largephone', name: 'Large phones', count: Math.round(total * .2) }, { id: 'desktop', name: 'Computer monitors', count: Math.round(total * .22) }, { id: 'tablet', name: 'Tablets', count: Math.round(total * .1) }] },
+      systems: { stats: [{ name: 'Android', count: Math.round(total * .45) }, { name: 'iOS', count: Math.round(total * .25) }, { name: 'Windows', count: Math.round(total * .24) }, { name: 'macOS', count: Math.round(total * .06) }] },
+      locs: { stats: [{ name: 'Israel', count: Math.round(total * .9) }, { name: 'United States', count: Math.round(total * .06) }, { name: 'United Kingdom', count: Math.round(total * .02) }] }
+    };
+  }
+
+  // ---- הצגה ----
+  function table(el, rows, headName) {
+    if (!rows.length) { el.innerHTML = '<p class="empty">אין עדיין נתונים לתקופה הזו.</p>'; return; }
+    var max = Math.max.apply(null, rows.map(function (r) { return r.n; })) || 1;
+    el.innerHTML = '<table><thead><tr><th scope="col">' + esc(headName) + '</th><th scope="col" class="num">מבקרים</th></tr></thead><tbody>' +
+      rows.map(function (r) {
+        return '<tr><td>' + esc(r.name) + (r.sub ? '<span class="path">' + esc(r.sub) + '</span>' : '') +
+          '<span class="rowbar" aria-hidden="true"><i style="width:' + Math.max(2, Math.round(r.n / max * 100)) + '%"></i></span></td><td class="num">' + nf.format(r.n) + '</td></tr>';
+      }).join('') + '</tbody></table>';
+  }
+
+  function drawChart(series) {
+    var svg = $('chart'), W = svg.clientWidth || 600, H = 240, L = 44, R = 12, T = 14, B = 30;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    var max = Math.max(4, Math.max.apply(null, series.map(function (s) { return s.v; })));
+    var step = Math.pow(10, Math.floor(Math.log10(max))); var top = Math.ceil(max / step) * step; if (top / step > 6) step *= 2; top = Math.ceil(max / step) * step;
+    var n = series.length, xw = (W - L - R) / Math.max(1, n - 1);
+    // ציר הזמן מימין לשמאל, כמו בקריאה בעברית
+    var X = function (i) { return n === 1 ? (W - R + L) / 2 : W - R - i * xw; }, Y = function (v) { return T + (H - T - B) * (1 - v / top); };
+    var g = '';
+    for (var v = 0; v <= top; v += step) g += '<line class="gl" x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(v) + '" y2="' + Y(v) + '"/><text class="ax" x="' + (L - 8) + '" y="' + (Y(v) + 4) + '" text-anchor="end">' + nf.format(v) + '</text>';
+    var every = Math.ceil(n / 7);
+    series.forEach(function (s, i) { if (i % every === 0 || i === n - 1) g += '<text class="ax" x="' + X(i) + '" y="' + (H - 8) + '" text-anchor="middle">' + s.label + '</text>'; });
+    var pts = series.map(function (s, i) { return X(i) + ',' + Y(s.v); });
+    if (n > 1) g += '<path class="ar" d="M' + X(0) + ',' + Y(0) + ' L' + pts.join(' L') + ' L' + X(n - 1) + ',' + Y(0) + 'Z"/><polyline class="ln" points="' + pts.join(' ') + '"/>';
+    if (n <= 31) series.forEach(function (s, i) { g += '<circle class="dt" cx="' + X(i) + '" cy="' + Y(s.v) + '" r="3"/>'; });
+    series.forEach(function (s, i) { g += '<rect class="hv" data-i="' + i + '" x="' + (X(i) - xw / 2) + '" y="' + T + '" width="' + Math.max(xw, 8) + '" height="' + (H - T - B) + '"/>'; });
+    var total = series.reduce(function (a, s) { return a + s.v; }, 0);
+    svg.innerHTML = '<desc id="chart-desc">צפיות לפי יום: סך הכול ' + nf.format(total) + ' ב־' + n + ' ימים, השיא ' + nf.format(max) + ' ביום.</desc>' + g;
+    var tip = $('tip');
+    svg.onmousemove = function (ev) {
+      var r = ev.target.closest && ev.target.closest('.hv'); if (!r) { tip.hidden = true; return; }
+      var s = series[+r.getAttribute('data-i')], bb = svg.getBoundingClientRect(), sc = bb.width / W;
+      tip.textContent = s.full + ': ' + nf.format(s.v) + ' צפיות';
+      tip.style.right = 'auto'; tip.style.left = (X(+r.getAttribute('data-i')) * sc) + 'px'; tip.style.top = (Y(s.v) * sc) + 'px';
+      tip.style.transform = 'translate(-50%, -120%)'; tip.hidden = false;
+    };
+    svg.onmouseleave = function () { tip.hidden = true; };
+  }
+
+  function render(d) {
+    var days = state.days, hits = (d.hits.hits || []);
+    var pagesH = hits.filter(function (h) { return !h.event; }), eventsH = hits.filter(function (h) { return h.event; });
+    // צפיות לפי יום – סכום העמודים (בלי אירועים)
+    var byDay = {};
+    (d.total.stats || []).forEach(function (s) { byDay[s.day] = 0; });
+    pagesH.forEach(function (h) { (h.stats || []).forEach(function (s) { byDay[s.day] = (byDay[s.day] || 0) + (s.daily || 0); }); });
+    var dayKeys = Object.keys(byDay).sort().reverse();
+    var series = dayKeys.map(function (k) { var dt = new Date(k + 'T12:00:00'); return { v: byDay[k], label: dt.getDate() + '.' + (dt.getMonth() + 1), full: dt.toLocaleDateString('he-IL', { weekday: 'long', day: 'numeric', month: 'long' }) }; });
+    var views = pagesH.reduce(function (a, h) { return a + h.count; }, 0);
+    $('k-views').textContent = nf.format(views);
+    $('k-views-s').textContent = days === 1 ? 'מאז חצות' : 'ב־' + days + ' הימים האחרונים';
+    $('k-avg').textContent = nf.format(Math.round(views / Math.max(1, dayKeys.length || days)));
+    var best = series.reduce(function (a, s) { return s.v > (a ? a.v : -1) ? s : a; }, null);
+    $('k-avg-s').textContent = best && days > 1 ? 'השיא: ' + best.full + ' (' + nf.format(best.v) + ')' : '';
+    var contact = eventsH.filter(function (h) { return /^(click-(whatsapp|phone|email)|form-)/.test(h.path); }).reduce(function (a, h) { return a + h.count; }, 0);
+    $('k-contact').textContent = nf.format(contact);
+    // עמודים – מאחדים כתובות זהות (למשל עם או בלי index.html)
+    var agg = {};
+    pagesH.forEach(function (h) { var p = normPath(h.path); if (!agg[p]) agg[p] = { name: pageName(p, h.title), sub: p, n: 0 }; agg[p].n += h.count; });
+    var pageRows = Object.keys(agg).map(function (k) { return agg[k]; }).sort(function (a, b) { return b.n - a.n; });
+    $('k-top').textContent = pageRows[0] ? pageRows[0].name : '–';
+    $('k-top-s').textContent = pageRows[0] ? nf.format(pageRows[0].n) + ' צפיות' : '';
+    table($('t-pages'), pageRows.slice(0, 12), 'עמוד');
+    table($('t-refs'), (d.refs.stats || []).map(function (s) { return { name: s.name || 'כניסה ישירה / לא ידוע', n: s.count }; }), 'מקור');
+    table($('t-events'), eventsH.map(function (h) { return { name: eventName(h.path), n: h.count }; }).sort(function (a, b) { return b.n - a.n; }), 'פעולה');
+    table($('t-sizes'), (d.sizes.stats || []).map(function (s) { return { name: SIZES[s.id] || s.name || 'לא ידוע', n: s.count }; }), 'מכשיר');
+    table($('t-systems'), (d.systems.stats || []).map(function (s) { return { name: s.name || 'לא ידוע', n: s.count }; }), 'מערכת');
+    var dn = (window.Intl && Intl.DisplayNames) ? new Intl.DisplayNames(['he'], { type: 'region' }) : null;
+    table($('t-locs'), (d.locs.stats || []).map(function (s) {
+      var nm = s.name || 'לא ידוע';
+      if (dn && s.id && /^[A-Z]{2}$/.test(s.id)) { try { nm = dn.of(s.id); } catch (e) {} }
+      return { name: nm, n: s.count };
+    }), 'מדינה');
+    drawChart(series);
+    $('upd').textContent = state.demo ? '' : 'עודכן ' + new Date().toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  async function refresh() {
+    var dash = $('dash'), msg = $('dash-msg');
+    msg.hidden = true; dash.classList.add('loading'); dash.setAttribute('aria-busy', 'true');
+    try {
+      var d = state.demo ? demoData(state.days) : await fetchAll(state.days);
+      render(d);
+    } catch (e) {
+      if (e.message === 'auth') { logout(); showLoginErr('המפתח לא התקבל. בדקו שהעתקתם אותו במלואו ושיש לו הרשאה לקריאת נתונים.'); }
+      else if (e.message === 'rate') { msg.textContent = 'יותר מדי בקשות ברגע אחד. נסו שוב בעוד כמה שניות.'; msg.hidden = false; }
+      else { msg.textContent = 'לא הצלחנו לטעון את הנתונים. בדקו את החיבור לאינטרנט ואת כתובת החשבון, ונסו שוב.'; msg.hidden = false; }
+    } finally { dash.classList.remove('loading'); dash.removeAttribute('aria-busy'); }
+  }
+
+  function showDash() {
+    $('login').hidden = true; $('dash').hidden = false; $('logout').hidden = false;
+    $('demo-tag').hidden = !state.demo;
+    $('gc-link').href = 'https://' + (state.code || 'www') + '.goatcounter.com/';
+    refresh();
+  }
+  function showLoginErr(t) { var m = $('login-msg'); m.textContent = t; m.hidden = false; }
+  function logout() {
+    store(KEY, ''); state.key = ''; state.demo = false;
+    $('dash').hidden = true; $('login').hidden = false; $('logout').hidden = true; $('key').value = '';
+  }
+
+  $('code').addEventListener('input', function () { $('code-show').textContent = this.value.trim() || '…'; });
+  $('login-form').addEventListener('submit', function (ev) {
+    ev.preventDefault(); $('login-msg').hidden = true;
+    var k = $('key').value.trim(), c = $('code').value.trim().toLowerCase();
+    if (!k) { showLoginErr('הדביקו את מפתח הגישה.'); $('key').focus(); return; }
+    if (!/^[a-z0-9-]+$/.test(c)) { showLoginErr('כתובת החשבון צריכה להכיל אותיות באנגלית, ספרות ומקפים בלבד.'); $('code').focus(); return; }
+    state.key = k; state.code = c; state.demo = false;
+    store(CODE, c);
+    if ($('remember').checked) store(KEY, k); else store(KEY, '');
+    showDash();
+  });
+  $('demo').addEventListener('click', function () { state.demo = true; showDash(); });
+  $('logout').addEventListener('click', function () { logout(); $('key').focus(); });
+  document.querySelectorAll('.seg button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('.seg button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      state.days = +b.getAttribute('data-days'); refresh();
+    });
+  });
+  var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { if (!$('dash').hidden) refresh(); }, 400); });
+
+  var savedCode = load(CODE); if (savedCode) { state.code = savedCode; $('code').value = savedCode; $('code-show').textContent = savedCode; }
+  var savedKey = load(KEY); if (savedKey) { state.key = savedKey; showDash(); }
+})();
+</script>
+</body>
+</html>

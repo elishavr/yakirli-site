@@ -26,14 +26,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&display=swap">
 <link rel="stylesheet" href="/assets/css/site.css?v={{build}}">
+<script>try{var a=JSON.parse(localStorage.getItem('yl-a11y')||'{}');var c=document.documentElement.classList;if(a.t)c.add('a11y-t'+a.t);['contrast','links','font','motion','spacing'].forEach(function(k){if(a[k])c.add('a11y-'+k)})}catch(e){}</script>
+{{analytics}}
 </head>
-<body class="page-{{page}} group-{{group}}">
+<body class="page-{{page}} group-{{group}}" data-nw="{{t.nw}}" data-req="{{t.req_consent}}">
 <a class="skip" href="#main">{{t.skip}}</a>
 <header class="site-head" id="top">
   <div class="wrap head-in">
-    <a class="brand" href="{{home}}" aria-label="{{t.brand_aria}}">
+    <a class="brand" href="{{home}}">
       <img src="/assets/img/mark.png" alt="" width="52" height="52">
-      <span class="brand-txt"><span class="brand-name">{{t.brand_name}}</span><span class="brand-tag">{{t.brand_tag}}</span></span>
+      <span class="brand-txt"><span class="brand-name">{{t.brand_name}}</span> <span class="brand-tag">{{t.brand_tag}}</span></span><span class="sr-only"> – {{t.home_sr}}</span>
     </a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mainnav">
       <span class="menu-ico" aria-hidden="true"><i></i><i></i><i></i></span><span>{{t.menu}}</span>
@@ -81,14 +83,37 @@
         <input id="nl-email" type="email" dir="ltr" placeholder="email@example.com" autocomplete="email">
         <button class="btn btn-p btn-sm" type="submit">{{t.join}}</button>
       </div>
+      <p class="nl-note">{{t.nl_consent}} <a href="{{privacy}}">{{t.privacy}}</a></p>
       <p class="sent" hidden>{{t.nl_sent}}</p>
     </form>
   </div>
   <div class="wrap foot-legal">
-    <div><a href="{{access}}">{{t.access}}</a><a href="{{privacy}}">{{t.privacy}}</a></div>
+    <div><a href="{{access}}">{{t.access}}</a><a href="{{privacy}}">{{t.privacy}}</a><a href="{{terms}}">{{t.terms}}</a></div>
     <div class="small">{{t.reg}} · {{t.credits}}</div>
   </div>
 </footer>
+<div class="a11y" id="a11y">
+  <button class="a11y-btn" type="button" aria-expanded="false" aria-controls="a11y-panel" aria-label="{{t.a11y_open}}">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4" r="2"/><path d="M4 7.5c2.6.8 5.3 1.2 8 1.2s5.4-.4 8-1.2l.5 1.9c-2 .6-4.1 1-6.2 1.2V14l2.3 7.2-1.9.6L12 15.2l-2.7 6.6-1.9-.6L9.7 14v-3.4c-2.1-.2-4.2-.6-6.2-1.2z"/></svg>
+  </button>
+  <div class="a11y-panel" id="a11y-panel" role="group" aria-labelledby="a11y-h" hidden>
+    <div class="a11y-top"><h2 id="a11y-h">{{t.a11y_title}}</h2><button class="a11y-x" type="button" aria-label="{{t.a11y_close}}">&times;</button></div>
+    <div class="a11y-size" role="group" aria-labelledby="a11y-size-l">
+      <span id="a11y-size-l">{{t.a11y_size}}</span>
+      <button type="button" data-a11y="t-" aria-label="{{t.a11y_smaller}}">{{t.a11y_minus}}</button>
+      <output id="a11y-size-v" aria-live="polite">100%</output>
+      <button type="button" data-a11y="t+" aria-label="{{t.a11y_bigger}}">{{t.a11y_plus}}</button>
+    </div>
+    <ul class="a11y-opts">
+      <li><button type="button" data-a11y="contrast" aria-pressed="false">{{t.a11y_contrast}}</button></li>
+      <li><button type="button" data-a11y="links" aria-pressed="false">{{t.a11y_links}}</button></li>
+      <li><button type="button" data-a11y="font" aria-pressed="false">{{t.a11y_font}}</button></li>
+      <li><button type="button" data-a11y="spacing" aria-pressed="false">{{t.a11y_spacing}}</button></li>
+      <li><button type="button" data-a11y="motion" aria-pressed="false">{{t.a11y_motion}}</button></li>
+    </ul>
+    <div class="a11y-foot"><button type="button" data-a11y="reset">{{t.a11y_reset}}</button><a href="{{access}}">{{t.access}}</a></div>
+  </div>
+</div>
 <a class="wa-float" href="https://wa.me/972505335148" target="_blank" rel="noopener" aria-label="{{t.wa}}">
   <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.4.7 4.7 2 6.6L4.4 28l6.7-1.7c1.5.8 3.2 1.2 4.9 1.2 6.6 0 12-5.3 12-11.9S22.6 3 16 3zm0 21.8c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.9 1 1-3.8-.2-.3A9.8 9.8 0 0 1 6.2 15c0-5.4 4.4-9.8 9.8-9.8s9.8 4.4 9.8 9.8-4.4 9.8-9.8 9.8zm5.4-7.3c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.4-1.5-.9-.8-1.5-1.8-1.6-2.1-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 2.5 1.1 3 .9 3.6.8.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.7-.4z"/></svg>
 </a>
