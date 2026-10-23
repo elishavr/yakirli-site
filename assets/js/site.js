@@ -73,13 +73,13 @@
       he: {contact: 'פנייה כללית', lectures: 'הזמנת הרצאה'},
       en: {contact: 'General inquiry', lectures: 'Lecture booking'}
     };
-    if (submit) submit.textContent = lang === 'he' ? 'פתיחת הודעת דוא"ל' : 'Open email draft';
+    if (submit) submit.textContent = lang === 'he' ? 'שליחה במייל' : 'Send by email';
     var status = form.querySelector('.sent');
     if (status) {
       status.hidden = false;
       status.textContent = lang === 'he'
-        ? 'השליחה תפתח הודעה בתוכנת הדוא"ל שלך. יש ללחוץ על שליחה בתוכנת הדוא"ל כדי שהפנייה תגיע. לחלופין אפשר לפנות בווטסאפ.'
-        : 'This opens a draft in your email app. Please press Send in the email app for the request to reach us. You can also use WhatsApp.';
+        ? 'ייפתח מייל מוכן – רק ללחוץ "שלח". אפשר גם בוואטסאפ: 050-533-5148'
+        : 'A ready email will open – just press Send. Or WhatsApp us: +972-50-533-5148';
     }
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
