@@ -72,11 +72,11 @@
     var M = {
       he: { names: { contact: 'פנייה כללית', lectures: 'הזמנת הרצאה' }, send: 'שליחה', sending: 'שולח…',
             ok: 'הפנייה נשלחה. תודה, נחזור אליכם בהקדם.',
-            bad: 'משהו השתבש והפנייה לא נשלחה. אפשר לנסות שוב, או לפנות בוואטסאפ: 050-533-5148',
+            bad: 'לא התקבל אישור מסירה. ייתכן שהפנייה נקלטה למרות התקלה. לפני שליחה חוזרת אפשר לוודא איתנו בוואטסאפ: 050-533-5148',
             mailBtn: 'שליחה במייל', mailHint: 'ייפתח מייל מוכן – רק ללחוץ "שלח". אפשר גם בוואטסאפ: 050-533-5148', yes: 'כן' },
       en: { names: { contact: 'General inquiry', lectures: 'Lecture booking' }, send: 'Send', sending: 'Sending…',
             ok: 'Your message was sent. Thank you – we will get back to you soon.',
-            bad: 'Something went wrong and your message was not sent. Please try again, or WhatsApp us: +972-50-533-5148',
+            bad: 'We could not confirm delivery. Your message may still have reached us. Before resending, please check via WhatsApp: +972-50-533-5148',
             mailBtn: 'Send by email', mailHint: 'A ready email will open – just press Send. Or WhatsApp us: +972-50-533-5148', yes: 'Yes' }
     }[lang];
     var status = form.querySelector('.sent');
@@ -95,8 +95,22 @@
       });
       return out;
     }
+    // A phone OR an email is required, but neither channel is compulsory alone.
+    var phone = form.querySelector('.fields input[type="tel"]');
+    var email = form.querySelector('.fields input[type="email"]');
+    if (phone) phone.addEventListener('input', function () { phone.setCustomValidity(''); });
+    if (email && phone) email.addEventListener('input', function () { phone.setCustomValidity(''); });
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
+      if (form.classList.contains('busy')) return;
+      if (phone && email) {
+        phone.setCustomValidity('');
+        if (!phone.value.trim() && !email.value.trim()) {
+          phone.setCustomValidity(lang === 'he'
+            ? 'נא להזין טלפון או כתובת אימייל כדי שנוכל לחזור אליכם.'
+            : 'Please provide a phone number or an email so we can respond.');
+        }
+      }
       if (!form.reportValidity()) return;
       var fields = collect();
       if (!endpoint) {

@@ -7,6 +7,24 @@
 // The private address is configured inside Apps Script (Script Properties), not public GitHub.
 const YAKIR_LI_NOTIFY_TO = PropertiesService.getScriptProperties().getProperty('ALERT_EMAIL');
 
+/** After setting Script property ALERT_EMAIL, run once to install the trigger.
+ * Does not modify existing responses. A second run will not create duplicates.
+ */
+function yakirLiInstallTrigger() {
+  const email = PropertiesService.getScriptProperties().getProperty('ALERT_EMAIL');
+  if (!email) throw new Error('Configure Script property ALERT_EMAIL first.');
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss) throw new Error('Open Apps Script from the actual responses spreadsheet.');
+  const existing = ScriptApp.getProjectTriggers().filter(t =>
+    t.getHandlerFunction() === 'yakirLiOnFormSubmit');
+  if (existing.length) {
+    console.log('An existing trigger was found; no duplicate created.');
+    return;
+  }
+  ScriptApp.newTrigger('yakirLiOnFormSubmit').forSpreadsheet(ss).onFormSubmit().create();
+  console.log('Installed On form submit for ' + ss.getName());
+}
+
 function yakirLiOnFormSubmit(e) {
   if (!e || !e.namedValues) throw new Error('Run from an actual form-submit trigger, not the Run button.');
   if (!YAKIR_LI_NOTIFY_TO) throw new Error('Configure script property ALERT_EMAIL to your private notification mailbox first.');
