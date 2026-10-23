@@ -1,4 +1,4 @@
-> **עדכון מחייב ל־23.10.2026:** קרא קודם את [`docs/handoff-current-forms.md`](docs/handoff-current-forms.md) ואת [`docs/forms-notifications-setup.md`](docs/forms-notifications-setup.md). אלו מתעדים את המצב העדכני של הטפסים, התראות המייל, המגבלות וההחלטות הפתוחות. **אין להסתמך על הנחיות ישנות בהמשך קובץ זה הטוענות שהטפסים עדיין בתצוגה בלבד.**
+> **עדכון מחייב ל־23.10.2026:** קרא קודם את [`docs/handoff-site-launch.md`](docs/handoff-site-launch.md) (מצב כלל האתר), את [`docs/handoff-current-forms.md`](docs/handoff-current-forms.md) ואת [`docs/forms-notifications-setup.md`](docs/forms-notifications-setup.md). אלו מתעדים את המצב העדכני של הטפסים, התראות המייל, המגבלות וההחלטות הפתוחות. **אין להסתמך על הנחיות ישנות בהמשך קובץ זה הטוענות שהטפסים עדיין בתצוגה בלבד.**
 
 # אתר יקיר לי – הנחיות לעבודה (Claude Code)
 
