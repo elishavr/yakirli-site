@@ -61,44 +61,61 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // The only native forms left (contact and lecture requests) prepare an email
-  // in the visitor's email app. The visitor must explicitly send it.
-  // Never claim a form was submitted automatically; we cannot guarantee mailto delivery.
+  // טופס פנייה והזמנת הרצאה: שליחה ישירה ל-Google Apps Script של העמותה (data-forms בגוף העמוד).
+  // אם הכתובת לא הוגדרה עדיין – גיבוי: פתיחת מייל מוכן ל-info@yakirli.org.
+  var endpoint = document.body.getAttribute('data-forms') || '';
   document.querySelectorAll('form[data-mailto-form]').forEach(function (form) {
     form.removeAttribute('novalidate');
     var submit = form.querySelector('button[type="submit"]');
     var lang = document.documentElement.lang === 'he' ? 'he' : 'en';
     var kind = form.getAttribute('data-mailto-form');
-    var names = {
-      he: {contact: 'פנייה כללית', lectures: 'הזמנת הרצאה'},
-      en: {contact: 'General inquiry', lectures: 'Lecture booking'}
-    };
-    if (submit) submit.textContent = lang === 'he' ? 'שליחה במייל' : 'Send by email';
+    var M = {
+      he: { names: { contact: 'פנייה כללית', lectures: 'הזמנת הרצאה' }, send: 'שליחה', sending: 'שולח…',
+            ok: 'הפנייה נשלחה. תודה, נחזור אליכם בהקדם.',
+            bad: 'משהו השתבש והפנייה לא נשלחה. אפשר לנסות שוב, או לפנות בוואטסאפ: 050-533-5148',
+            mailBtn: 'שליחה במייל', mailHint: 'ייפתח מייל מוכן – רק ללחוץ "שלח". אפשר גם בוואטסאפ: 050-533-5148', yes: 'כן' },
+      en: { names: { contact: 'General inquiry', lectures: 'Lecture booking' }, send: 'Send', sending: 'Sending…',
+            ok: 'Your message was sent. Thank you – we will get back to you soon.',
+            bad: 'Something went wrong and your message was not sent. Please try again, or WhatsApp us: +972-50-533-5148',
+            mailBtn: 'Send by email', mailHint: 'A ready email will open – just press Send. Or WhatsApp us: +972-50-533-5148', yes: 'Yes' }
+    }[lang];
     var status = form.querySelector('.sent');
-    if (status) {
-      status.hidden = false;
-      status.textContent = lang === 'he'
-        ? 'ייפתח מייל מוכן – רק ללחוץ "שלח". אפשר גם בוואטסאפ: 050-533-5148'
-        : 'A ready email will open – just press Send. Or WhatsApp us: +972-50-533-5148';
+    if (status) status.setAttribute('role', 'status');
+    function show(text, bad) { if (!status) return; status.textContent = text; status.classList.toggle('bad', !!bad); status.hidden = false; }
+    if (!endpoint) { if (submit) submit.textContent = M.mailBtn; show(M.mailHint); }
+    function collect() {
+      var out = [];
+      form.querySelectorAll('.fields input, .fields select, .fields textarea').forEach(function (el) {
+        if (el.type === 'checkbox' && el.required) return; // תיבת האישור – לא נשלחת כשדה
+        if ((el.type === 'checkbox' || el.type === 'radio') && !el.checked) return;
+        var value = el.type === 'checkbox' ? M.yes : el.value.trim();
+        if (!value) return;
+        var label = (el.id && form.querySelector('label[for="' + el.id + '"]')) || el.closest('label');
+        out.push({ label: label ? label.textContent.replace(/\s+/g, ' ').trim() : (el.name || el.id), value: value });
+      });
+      return out;
     }
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
       if (!form.reportValidity()) return;
-      var filled = [];
-      form.querySelectorAll('input, select, textarea').forEach(function (el) {
-        if (el.type === 'checkbox' && !el.checked) return;
-        if (el.type === 'radio' && !el.checked) return;
-        var value = el.type === 'checkbox' ? (lang === 'he' ? 'כן' : 'Yes') : el.value.trim();
-        if (!value) return;
-        var label = el.id && form.querySelector('label[for="' + el.id + '"]');
-        if (!label) label = el.closest('label');
-        var title = label ? label.textContent.replace(/\s+/g, ' ').trim() : (el.name || el.id || 'Field');
-        filled.push(title + ': ' + value);
-      });
-      var title = names[lang][kind];
-      var subject = (lang === 'he' ? 'טופס חדש מהאתר - ' : 'New website form - ') + title;
-      var body = (lang === 'he' ? 'שם הטופס: ' : 'Form: ') + title + '\n\n' + filled.join('\n\n');
-      window.location.href = 'mailto:info@yakirli.org?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      var fields = collect();
+      if (!endpoint) {
+        var title = M.names[kind];
+        var body = fields.map(function (f) { return f.label + ': ' + f.value; }).join('\n\n');
+        window.location.href = 'mailto:info@yakirli.org?subject=' + encodeURIComponent((lang === 'he' ? 'פנייה מהאתר – ' : 'Website message – ') + title) + '&body=' + encodeURIComponent(body);
+        return;
+      }
+      var hp = form.querySelector('[name="_hp"]');
+      form.classList.add('busy'); if (submit) submit.textContent = M.sending;
+      fetch(endpoint, { method: 'POST', body: JSON.stringify({ _form: kind, _page: location.pathname, _hp: hp ? hp.value : '', fields: fields }) })
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+          if (!res || !res.ok) throw new Error('fail');
+          form.reset(); show(M.ok);
+          if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: 'form-' + kind + '-form', title: 'שליחת טופס', event: true });
+        })
+        .catch(function () { show(M.bad, true); })
+        .then(function () { form.classList.remove('busy'); if (submit) submit.textContent = M.send; });
     });
   });
 })();

@@ -143,6 +143,8 @@ def description_of(body):
     return html.escape(d.strip()[:300], quote=True)
 
 ANALYTICS_CODE = ''  # נקבע ב-main() לפי --analytics
+# כתובת קליטת הטפסים (Google Apps Script – tools/site-forms-backend.gs). ריק = גיבוי: פתיחת מייל מוכן.
+FORMS_ENDPOINT = ''
 
 def analytics_tag():
     """GoatCounter: מדידת כניסות בלי עוגיות ובלי איסוף מידע מזהה. ריק = כבוי."""
@@ -169,7 +171,7 @@ def render_page(layout, base, site, build_id, lang, pid, path, title, group, bod
         'og_locale': 'en_US' if lang == 'en' else 'he_IL', 'base': base, 'site': site, 'build': build_id,
         'page': pid, 'group': group or 'none', 'home': path_of(lang, 'home'),
         'donate': path_of(lang, 'donate'), 'access': path_of(lang, 'access'), 'privacy': path_of(lang, 'privacy'), 'terms': path_of(lang, 'terms'),
-        'analytics': analytics_tag(),
+        'analytics': analytics_tag(), 'forms_endpoint': FORMS_ENDPOINT,
         'alt_path': path_of(alt_lang, pid if pid in PATHS else 'home'), 'alt_lang': alt_lang,
         'nav': nav_html(lang, pid, group), 'foot_nav': foot_nav_html(lang), 'content': body,
     }
