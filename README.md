@@ -119,6 +119,6 @@ node tools/test_navigation.cjs
 
 ## חיבור טפסים והתראות – מצב עדכני
 
-**מסמך המסירה לקריאה ראשונה בידי Claude/Codex:** [`docs/handoff-current-forms.md`](docs/handoff-current-forms.md). מדריך התקנה: [`docs/forms-notifications-setup.md`](docs/forms-notifications-setup.md). שורת הפקודה `python3 tools/check_forms.py` בודקת את נוכחות החיבורים בקוד בלבד, לא מסירה חיה של פניות.
+**מצב ההשקה והחלטות תוכן:** [`docs/handoff-site-launch.md`](docs/handoff-site-launch.md). **מסמך המסירה על הטפסים:** [`docs/handoff-current-forms.md`](docs/handoff-current-forms.md). מדריך התקנה: [`docs/forms-notifications-setup.md`](docs/forms-notifications-setup.md). שורת הפקודה `python3 tools/check_forms.py` בודקת את נוכחות החיבורים בקוד בלבד, לא מסירה חיה של פניות.
 
 **זהירות:** Google Apps Script Web App מחזיר הפניות ועלול להיתקל ב־CORS בדפדפן. אין להפעיל `YAKIRLI_FORMS_ENDPOINT` לפני בדיקת הגשה אמיתית כולל קליטת שורה והתראה במייל. לעולם אין להתחייב שההגשה הושלמה בלי אישור אמין. המייל הפרטי והתשובות הרגישות אינם נשמרים בקוד האתר הפומבי.
