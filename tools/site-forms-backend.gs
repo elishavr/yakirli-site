@@ -36,7 +36,12 @@ function doPost(e) {
     const kind = data._form;
     const fields = Array.isArray(data.fields) ? data.fields.slice(0, 30) : [];
     const rows = fields
-      .map(f => ({ key: String(f.label || '').slice(0, 200), value: String(f.value || '').slice(0, MAX_FIELD) }))
+      .map((f, i) => {
+        const rawLabel = String(f.label || '').slice(0, 200);
+        // The visitor controls the JSON payload; labels can also be malicious.
+        const key = /^[\s\u0000-\u001f]*[=+\-@]/.test(rawLabel) ? ('שדה ' + (i + 1)) : rawLabel;
+        return { key: key, value: String(f.value || '').slice(0, MAX_FIELD) };
+      })
       .filter(f => f.key && f.value);
     if (!rows.length) return json_({ ok: false, error: 'empty' });
 
