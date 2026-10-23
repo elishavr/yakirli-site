@@ -77,15 +77,10 @@
         <li>{{t.mail}}: {{t.address}}</li>
       </ul>
     </div>
-    <form class="nl" novalidate>
-      <label class="fh" for="nl-email">{{t.newsletter}}</label>
-      <div class="nl-row">
-        <input id="nl-email" type="email" dir="ltr" placeholder="email@example.com" autocomplete="email">
-        <button class="btn btn-p btn-sm" type="submit">{{t.join}}</button>
-      </div>
-      <p class="nl-note">{{t.nl_consent}} <a href="{{privacy}}">{{t.privacy}}</a></p>
-      <p class="sent" hidden>{{t.nl_sent}}</p>
-    </form>
+    <div class="nl" role="group" aria-label="{{t.newsletter}}">
+  <div class="fh">{{t.newsletter}}</div>
+  <a class="btn btn-p btn-sm" href="https://forms.gle/xws9C5CZQajKypWSA" target="_blank" rel="noopener noreferrer">{{t.join}}</a>
+</div>
   </div>
   <div class="wrap foot-legal">
     <div><a href="{{access}}">{{t.access}}</a><a href="{{privacy}}">{{t.privacy}}</a><a href="{{terms}}">{{t.terms}}</a></div>
