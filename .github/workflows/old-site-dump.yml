@@ -1,0 +1,32 @@
+name: old-site-dump
+on:
+  push:
+    branches: [old-site-dump]
+permissions:
+  contents: write
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch pages and files from yakirli.org
+        run: |
+          set -u
+          mkdir -p dump/pages dump/files
+          UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124 Safari/537.36"
+          for p in education shakulot information lulav team contact wide-support eighth-day lectures-mudaot awareness-week video candles about-2025 en/education en/shakulot en/lulav; do
+            f=$(echo "$p" | tr / _)
+            curl -sSL -A "$UA" "https://yakirli.org/$p/" -o "dump/pages/$f.html" || echo "FAIL $p"
+          done
+          # all upload links referenced anywhere in src + the dumped pages
+          grep -rhoE 'https://yakirli\.org/wp-content/uploads/[^"<> ]+\.(pdf|PDF)' src dump/pages | sed 's/&amp;/\&/g' | sort -u > dump/files/list.txt
+          i=0
+          while read -r u; do
+            i=$((i+1)); name=$(python3 -c "import sys,urllib.parse;print(urllib.parse.unquote(sys.argv[1].rsplit('/',1)[1]))" "$u")
+            curl -sSL -A "$UA" "$u" -o "dump/files/$name" && echo "$u	$name" >> dump/files/map.tsv || echo "FAIL $u" >> dump/files/map.tsv
+          done < dump/files/list.txt
+          ls -la dump/files
+      - name: Commit dump
+        run: |
+          git config user.name "github-actions"; git config user.email "actions@github.com"
+          git add dump && git commit -m "old site dump" && git push
