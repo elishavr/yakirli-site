@@ -22,7 +22,7 @@ PATHS = {
     'legislation': 'legislation', 'week': 'awareness-week', 'lectures': 'lectures',
     'research': 'research', 'memorial': 'remembrance',
     'media': 'media', 'contact': 'contact', 'donate': 'donate',
-    'education': 'education-circles', 'letters': 'family-letters', 'lulav': 'lulav',
+    'letters': 'family-letters',
     'access': 'accessibility', 'privacy': 'privacy', 'terms': 'terms-of-use',
 }
 # Match the page-specific photo backgrounds in site.css; legal pages have none.
@@ -32,7 +32,7 @@ HERO_PHOTOS = {
     'public': 'public', 'legislation': 'public', 'week': 'public', 'lectures': 'public',
     'research': 'data', 'memorial': 'memorial',
     'media': 'media', 'contact': 'contact', 'donate': 'donate',
-    'education': 'public', 'letters': 'support', 'lulav': 'donate',
+    'letters': 'support',
 }
 
 # Pages whose hero uses a newer photo than the shared group image
