@@ -610,3 +610,15 @@ html.a11y-contrast .site-foot { background: #000; }
 .hp { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 .sent.bad { background: #FBE7E2; color: #A12D17; }
 .form.busy button[type="submit"] { opacity: .6; pointer-events: none; }
+
+/* added 26.10.2026: footer social links, family letters, mobile-safe lists */
+.foot-social { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 14px; font-weight: 600; }
+.letters { display: grid; gap: 14px; }
+.letter { background: var(--cloud); border: 1px solid var(--mist); border-radius: var(--radius-sm); padding: 0 22px; }
+.letter summary { cursor: pointer; font-weight: 700; color: var(--teal-dk); padding: 18px 0; font-size: 19px; }
+.letter[open] summary { border-bottom: 1px solid var(--mist); margin-bottom: 14px; }
+.letter .prose { padding-bottom: 18px; max-width: 72ch; }
+.letter h4 { margin: 18px 0 6px; font-size: 17px; color: var(--ink); }
+.mlist .mt small { display: block; font-weight: 400; color: var(--ink-soft, #555); }
+.mlist .nolink { color: var(--ink-soft, #777); font-size: 15px; }
+.sub-h { margin: 32px 0 14px; }

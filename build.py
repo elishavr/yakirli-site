@@ -22,6 +22,7 @@ PATHS = {
     'legislation': 'legislation', 'week': 'awareness-week', 'lectures': 'lectures',
     'research': 'research', 'memorial': 'remembrance',
     'media': 'media', 'contact': 'contact', 'donate': 'donate',
+    'education': 'education-circles', 'letters': 'family-letters', 'lulav': 'lulav',
     'access': 'accessibility', 'privacy': 'privacy', 'terms': 'terms-of-use',
 }
 # Match the page-specific photo backgrounds in site.css; legal pages have none.
@@ -31,6 +32,7 @@ HERO_PHOTOS = {
     'public': 'public', 'legislation': 'public', 'week': 'public', 'lectures': 'public',
     'research': 'data', 'memorial': 'memorial',
     'media': 'media', 'contact': 'contact', 'donate': 'donate',
+    'education': 'public', 'letters': 'support', 'lulav': 'donate',
 }
 
 # Pages whose hero uses a newer photo than the shared group image
@@ -72,7 +74,7 @@ GROUP_HOME = {'support': 'eighth', 'public': 'public', 'data': 'legislation'}  #
 
 T = {
     'he': dict(
-               terms='תנאי שימוש', nw='(נפתח בחלון חדש)', req_consent='כדי לשלוח, יש לסמן את תיבת האישור.',
+               terms='תנאי שימוש', follow='עקבו אחרינו', nw='(נפתח בחלון חדש)', req_consent='כדי לשלוח, יש לסמן את תיבת האישור.',
                nl_consent='בהרשמה אתם מסכימים לקבל מאיתנו עדכונים בדוא"ל. אפשר להסיר את עצמכם בכל עת.',
                a11y_open='תפריט נגישות', a11y_title='התאמות נגישות', a11y_close='סגירת תפריט הנגישות',
                a11y_size='גודל טקסט', a11y_smaller='הקטנת טקסט', a11y_bigger='הגדלת טקסט', a11y_minus='א−', a11y_plus='א+',
@@ -87,7 +89,7 @@ T = {
                wa='שליחת הודעת וואטסאפ ליקיר לי', foot_tag='יד ולב לשכול האזרחי (ע"ר 580616001)',
                sub_toggle='פתיחת תפריט משנה', reach_out='פנו אלינו', site='יקיר לי', site_long='יקיר לי – יד ולב לשכול האזרחי'),
     'en': dict(
-               terms='Terms of use', nw='(opens in a new window)', req_consent='To send, please tick the confirmation box.',
+               terms='Terms of use', follow='Follow us', nw='(opens in a new window)', req_consent='To send, please tick the confirmation box.',
                nl_consent='By signing up you agree to receive email updates from us. You can unsubscribe at any time.',
                a11y_open='Accessibility menu', a11y_title='Accessibility settings', a11y_close='Close accessibility menu',
                a11y_size='Text size', a11y_smaller='Smaller text', a11y_bigger='Larger text', a11y_minus='A−', a11y_plus='A+',
