@@ -174,3 +174,43 @@
 | `src/he/volunteers.html` | [תמונה: מפגש הכשרת מתנדבים] | תמונה ללא הוראות צילום גלויות | בקשת המשתמש; ההנחיה נשמרה בדוח הפנימי |
 
 בעמוד הקשר בשתי השפות נוסף קישור חיוג סביב מספר הטלפון הקיים; הטקסט ומספר הטלפון לא השתנו. יתר שינויי הסקירה והבדיקות מתועדים ב־[visitor-review.md](visitor-review.md).
+
+
+## עדכון נוסחים מאושר 26.10.2026
+
+פיני אישר בשיחה את הנוסחים מתוך מסמך הנוסחים המוצעים, לאחר שהבהיר שהליווי תלוי בפניית המשפחה או בהעברת מידע לרשות או לעמותה. העדכון כולל את כל המופעים המקבילים ואת הגרסה האנגלית. לא שונו טפסים, שירותים, נתונים, מכתבי משפחות, מסמכים משפטיים או סימוני תוכן חסר.
+
+| שפה ועמוד | לפני | אחרי | סיבה |
+|---|---|---|---|
+| he/home | אנחנו מגיעים אליכם כשהשבעה מסתיימת, ונשארים לצדכם לאורך השנים – כמה שתצטרכו. | מיזם "היום השמיני" נועד לקדם קשר וליווי למשפחות לאחר השבעה ובהמשך הדרך. הליווי מתואם לאחר פנייה לעמותה או לרשות המקומית, בהתאם לרצון המשפחה, לצרכיה ולמענה הזמין. | דיוק היקף המענה בהתאם לאישור פיני |
+| he/home | מתנדבי היום השמיני מגיעים אל המשפחה כשהשבעה מסתיימת. | במסגרת מיזם "היום השמיני", מתנדבים שעברו הכשרה מלווים משפחות לאחר השבעה, בתיאום ובהתאם לפעילות המקומית ולזמינות המתנדבים. | דיוק היקף המענה בהתאם לאישור פיני |
+| he/parents | מתנדבי היום השמיני מגיעים אליכם כשהשבעה מסתיימת. | במסגרת מיזם "היום השמיני", מתנדבים שעברו הכשרה מלווים משפחות לאחר השבעה, בתיאום ובהתאם לפעילות המקומית ולזמינות המתנדבים. | דיוק היקף המענה בהתאם לאישור פיני |
+| he/volunteers | הצטרפו למיזם היום השמיני והיו שם בשביל משפחות שחוו שכול אזרחי, מיד כשהשבעה מסתיימת. | הצטרפו למיזם היום השמיני לליווי משפחות שחוו שכול אזרחי לאחר השבעה, בתיאום ובהתאם לפעילות המקומית. | דיוק היקף המענה בהתאם לאישור פיני |
+| he/volunteers | רכזים ואנשי מקצוע לצדכם לאורך הדרך. | ההכשרה כוללת הכוונה למתנדבים בנוגע לליווי המשפחות ולפנייה לגורמי מקצוע בעת הצורך. | דיוק היקף המענה בהתאם לאישור פיני |
+| he/grandparents | תמיכה אישית ומקצועית | אפשרויות תמיכה | דיוק היקף המענה בהתאם לאישור פיני |
+| he/grandparents | מענה מותאם על ידי מומחים לאובדן. | אפשר לפנות אלינו לבירור אפשרויות התמיכה האישית והקבוצתית, בהתאם לצורך ולמסגרות הזמינות. | דיוק היקף המענה בהתאם לאישור פיני |
+| he/donate | צמד מתנדבים שמגיע אל המשפחה כשהשבעה מסתיימת. | ליווי משפחות לאחר השבעה באמצעות מתנדבים שעברו הכשרה, בתיאום ובהתאם לפעילות המקומית ולזמינות המתנדבים. | דיוק היקף המענה בהתאם לאישור פיני |
+| he/donate | <p class="flow-msg"><strong>וגם:</strong> טיפול רגשי מסובסד לבני משפחה שחוו אובדן.</p> | <p class="flow-msg">אפשר לפנות לעמותה לבירור אפשרויות לסיוע במימון טיפול רגשי. הסיוע כפוף לתנאי התוכניות ולמשאבים הזמינים.</p> | דיוק היקף המענה בהתאם לאישור פיני |
+| he/eighth | כשהשבעה מסתיימת, מתחיל המענה של "היום השמיני" למשפחה, בשיתוף הקהילה, הרשות המקומית ואנשי המקצוע לפי הצורך. | מיזם "היום השמיני" נועד לקדם קשר וליווי למשפחות לאחר השבעה ובהמשך הדרך. הליווי מתואם לאחר פנייה לעמותה או לרשות המקומית, בהתאם לרצון המשפחה, לצרכיה ולמענה הזמין. | דיוק היקף המענה בהתאם לאישור פיני |
+| he/eighth | <li>פשיעה בקרב נוער</li> |  | דיוק היקף המענה בהתאם לאישור פיני |
+| he/eighth | בסדק שנשאר, האור מאפשר להזדקף. | קשר מתמשך עם המשפחה מאפשר להקשיב לצרכיה ולבחון יחד איזו עזרה מתאימה לה. | דיוק היקף המענה בהתאם לאישור פיני |
+| he/eighth | ביום השמיני לא תהיה אף משפחה לבד | המטרה שלנו היא שיותר משפחות יקבלו קשר וליווי גם לאחר השבעה. | דיוק היקף המענה בהתאם לאישור פיני |
+| he/eighth | הקהילה מחבקת אתכם ביום השמיני ולאחריו. | קהילה ששומרת על קשר עם משפחות שחוו אובדן, גם לאחר השבעה. | דיוק היקף המענה בהתאם לאישור פיני |
+| en/home | Support begins when shiva ends and continues over the years, guided by each family’s needs. | The Day After Shiva aims to build contact and support for families after shiva and in the years that follow. Support is coordinated after the family contacts Yakir Li or the local authority, taking into account their wishes, needs and the support available. | דיוק היקף המענה בהתאם לאישור פיני |
+| en/home | Day After Shiva volunteers reach the family when the shiva ends. | Trained volunteers support families after shiva through The Day After Shiva program. Arrangements depend on local activity and volunteer availability. | דיוק היקף המענה בהתאם לאישור פיני |
+| en/parents | Day After Shiva volunteers accompany the family after the shiva. | Trained volunteers support families after shiva through The Day After Shiva program. Arrangements depend on local activity and volunteer availability. | דיוק היקף המענה בהתאם לאישור פיני |
+| en/volunteers | Join the Day After Shiva program and accompany families facing civilian bereavement right after the shiva. | Join The Day After Shiva to support families facing civilian bereavement after shiva, in coordination with local activity. | דיוק היקף המענה בהתאם לאישור פיני |
+| en/volunteers | Guidance from coordinators and professionals along the way. | Training includes guidance on supporting families and seeking professional advice when needed. | דיוק היקף המענה בהתאם לאישור פיני |
+| en/grandparents | Personal and professional support | Support options | דיוק היקף המענה בהתאם לאישור פיני |
+| en/grandparents | Tailored help from bereavement specialists. | Contact us to explore individual and group support options, depending on your needs and the services available. | דיוק היקף המענה בהתאם לאישור פיני |
+| en/donate | A pair of volunteers accompanying a family after the shiva. | Support for families after shiva from trained volunteers, coordinated according to local activity and volunteer availability. | דיוק היקף המענה בהתאם לאישור פיני |
+| en/donate | <p class="flow-msg"><strong>And also:</strong> subsidized emotional therapy for family members who have experienced loss.</p> | <p class="flow-msg">Contact Yakir Li to ask about possible financial assistance for emotional therapy. Assistance depends on program conditions and available resources.</p> | דיוק היקף המענה בהתאם לאישור פיני |
+| en/eighth | When shiva ends, The Day After Shiva begins supporting the family, together with the community, the local authority and professionals as needed. | The Day After Shiva aims to build contact and support for families after shiva and in the years that follow. Support is coordinated after the family contacts Yakir Li or the local authority, taking into account their wishes, needs and the support available. | דיוק היקף המענה בהתאם לאישור פיני |
+| en/eighth | <li>Youth delinquency</li> |  | דיוק היקף המענה בהתאם לאישור פיני |
+| en/eighth | Through the crack that remains, the light lets us stand tall. | Staying in touch with a family helps us listen to their needs and explore together what help would suit them. | דיוק היקף המענה בהתאם לאישור פיני |
+| en/eighth | After shiva, no family will be left alone | Our goal is for more families to have contact and support after shiva. | דיוק היקף המענה בהתאם לאישור פיני |
+| en/eighth | the community embraces you on the day after shiva and beyond. | a community that stays in touch with families who have experienced loss, after shiva and beyond. | דיוק היקף המענה בהתאם לאישור פיני |
+| he/parents | הסבר ליד הפנייה | כדי שנוכל להציע מענה, חשוב שתפנו אלינו. גם אם חלף זמן מהאובדן, אפשר ליצור קשר ולברר אילו אפשרויות ליווי ותמיכה זמינות עבורכם. | דיוק היקף המענה בהתאם לאישור פיני |
+| he/contact | הסבר ליד הפנייה | כדי שנוכל להציע מענה, חשוב שתפנו אלינו. גם אם חלף זמן מהאובדן, אפשר ליצור קשר ולברר אילו אפשרויות ליווי ותמיכה זמינות עבורכם. | דיוק היקף המענה בהתאם לאישור פיני |
+| en/parents | הסבר ליד הפנייה | Please contact us so that we can explore how to help. Even if time has passed since your loss, you can reach out to ask what support options are available to you. | דיוק היקף המענה בהתאם לאישור פיני |
+| en/contact | הסבר ליד הפנייה | Please contact us so that we can explore how to help. Even if time has passed since your loss, you can reach out to ask what support options are available to you. | דיוק היקף המענה בהתאם לאישור פיני |
