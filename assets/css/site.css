@@ -622,3 +622,16 @@ html.a11y-contrast .site-foot { background: #000; }
 .mlist .mt small { display: block; font-weight: 400; color: var(--ink-soft, #555); }
 .mlist .nolink { color: var(--ink-soft, #777); font-size: 15px; }
 .sub-h { margin: 32px 0 14px; }
+
+/* תוספות מהמצגת (26.10.2026) */
+.card-ul { margin: 10px 0 0; padding-inline-start: 20px; display: grid; gap: 6px; }
+.step .card-ul { font-size: .95em; }
+.motto { font-size: 1.15em; font-weight: 700; color: var(--navy); border-inline-start: 4px solid var(--teal); padding-inline-start: 14px; }
+.motto span { display: block; font-size: .75em; font-weight: 600; color: var(--teal-ink); }
+.data-frame { margin-top: 14px; color: var(--navy); }
+.quote .sec-head { text-align: center; }
+.form-q { max-width: 720px; margin: 0 auto 28px; background: #fff; border: 2px dashed var(--teal); border-radius: var(--radius-sm); padding: 20px 24px; text-align: center; }
+.form-q-label { font-size: 14px; font-weight: 700; color: var(--teal-ink); margin-bottom: 6px; }
+.form-q-text { font-size: clamp(18px, 2vw, 22px); font-weight: 700; color: var(--navy); margin: 0 0 10px; }
+.form-q-opts { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: center; margin: 0; font-weight: 600; }
+.flow-msg { text-align: center; margin: 26px auto 0; font-size: 18px; color: var(--navy); max-width: 720px; }
