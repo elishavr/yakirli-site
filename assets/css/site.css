@@ -465,6 +465,12 @@ body.page-memorial .hero .ph, body.page-donate .hero .ph { background: radial-gr
 .page-home .hero .ph::before { background-position: 40% center; }
 
 /* About: mortality data section (moved from its own page, 19.10.2026) */
+.mortality-table tbody th { background: #FCE6D0; color: #8A3F12; }
+.mortality-table tbody td,
+.mortality-table tbody tr.latest td { background: transparent; color: var(--ink); font-weight: 400; }
+.mortality-table tbody tr.latest th { background: #FCE6D0; color: #8A3F12; }
+html.a11y-contrast .mortality-table tbody th { background: #fff; color: #000; }
+.data-intro { margin-bottom: 28px; }
 #data .tbl-title { margin: 36px 0 14px; font-size: 1.25rem; }
 #data .data-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 28px; }
 
