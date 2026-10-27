@@ -641,3 +641,10 @@ html.a11y-contrast .site-foot { background: #000; }
 .form-q-text { font-size: clamp(18px, 2vw, 22px); font-weight: 700; color: var(--navy); margin: 0 0 10px; }
 .form-q-opts { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: center; margin: 0; font-weight: 600; }
 .flow-msg { text-align: center; margin: 26px auto 0; font-size: 18px; color: var(--navy); max-width: 720px; }
+
+/* 27.10.2026: Pini requested a smaller About portrait and registered-association label. */
+.page-about .hero-photo { max-width: 220px; }
+.brand-tag small { font-size: .8em; white-space: nowrap; }
+@media (max-width: 860px) { .page-about .hero-photo { max-width: 170px; } }
+
+@media (max-width: 640px) { html[lang="he"] .brand-tag { display: block; font-size: 10px; line-height: 1.2; } }
