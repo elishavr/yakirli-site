@@ -10,7 +10,7 @@
   --warm: #E6896F; --warm-dk: #D5735A; --warm-bg: #FBEAE4;
   --cloud: #F4F6F9; --mist: #E9EEF4; --line: #D9E0E8; --white: #FFFFFF;
   --ink: #232B3A; --muted: #5C6675; --on-navy-muted: #C9CCE3;
-  --todo: #FFF1C9; --todo-ink: #6B4A00;
+  --todo: #FFE14D; --todo-ink: #4A2E00;
   --radius: 20px; --radius-sm: 12px; --pill: 999px;
   --shadow: 0 3px 14px rgba(28, 26, 74, .05);
   --shadow-lg: 0 10px 28px rgba(28, 26, 74, .10);
@@ -34,7 +34,7 @@ a:hover { color: var(--navy); }
 bdi { unicode-bidi: isolate; }
 .wrap { max-width: calc(var(--wrap) + 2 * var(--gut)); margin-inline: auto; padding-inline: var(--gut); }
 .small { font-size: 15px; }
-.todo { background: var(--todo); color: var(--todo-ink); padding: 2px 8px; border-radius: 6px; display: inline; box-decoration-break: clone; }
+.todo { background: var(--todo); color: var(--todo-ink); font-weight: 700; outline: 2px solid #E8A200; padding: 2px 8px; border-radius: 6px; display: inline; box-decoration-break: clone; }
 .skip { position: absolute; top: -120px; inset-inline-start: 16px; background: var(--navy); color: #fff; padding: 10px 16px; border-radius: 0 0 12px 12px; z-index: 100; font-weight: 700; text-decoration: none; }
 .skip:focus { top: 0; color: #fff; }
 .hero :focus-visible, .cta :focus-visible, .site-foot :focus-visible { outline-color: var(--warm); }
