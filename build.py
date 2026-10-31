@@ -81,7 +81,7 @@ T = {
                a11y_contrast='ניגודיות גבוהה', a11y_links='הדגשת קישורים', a11y_font='גופן פשוט', a11y_spacing='ריווח טקסט',
                a11y_motion='עצירת אנימציות', a11y_reset='איפוס הגדרות',
                skip='דילוג לתוכן', brand_aria='יקיר לי – לעמוד הבית', home_sr='לעמוד הבית', brand_name='יקיר לי',
-               brand_tag='יד ולב לשכול האזרחי', brand_reg='(ע"ר)', menu='תפריט', main_menu='תפריט ראשי', donate='לתרומה',
+               brand_tag='יד ולב לשכול האזרחי', brand_reg='(ע"ר)', menu='תפריט', main_menu='תפריט ראשי', donate='תמכו בפעילות',
                lang_long='English – לאתר באנגלית', lang_short='EN', nav='ניווט', contact='יצירת קשר',
                phone='טלפון / וואטסאפ', email='אימייל', mail='דואר', address='ת"ד 1208, אפרת 9043500',
                newsletter='הצטרפות לרשימת התפוצה', join='הצטרפות', nl_sent='זו גרסת תצוגה: ההרשמה לא נשמרה.',
@@ -96,7 +96,7 @@ T = {
                a11y_contrast='High contrast', a11y_links='Highlight links', a11y_font='Plain font', a11y_spacing='Text spacing',
                a11y_motion='Stop animations', a11y_reset='Reset settings',
                skip='Skip to content', brand_aria='Yakir Li – home', home_sr='home page', brand_name='Yakir Li',
-               brand_tag='Civilian Bereavement Support', brand_reg='(Registered nonprofit)', menu='Menu', main_menu='Main menu', donate='Donate',
+               brand_tag='Civilian Bereavement Support', brand_reg='(Registered nonprofit)', menu='Menu', main_menu='Main menu', donate='Support Our Work',
                lang_long='עברית – לאתר בעברית', lang_short='עב', nav='Navigation', contact='Contact',
                phone='Phone / WhatsApp', email='Email', mail='Mail', address='P.O. Box 1208, Efrat 9043500, Israel',
                newsletter='Join our mailing list', join='Join', nl_sent='Preview version: the sign-up was not saved.',
@@ -228,7 +228,7 @@ def main():
                '<a class="btn btn-s" href="/en/" lang="en">English</a></div></div></div></section>')
     (DIST / '404.html').write_text(render_page(layout, base, site, build_id, 'he', 'notfound', '/404.html', 'העמוד לא נמצא', '', nf_body), encoding='utf-8')
     # עמודים שהוסרו – הפניה לכתובת החדשה (19.10.2026: נתוני פטירה עברו לאודות)
-    for old, new in (('/mortality-data/', '/about/#data'), ('/en/mortality-data/', '/en/about/#data')):
+    for old, new in (('/mortality-data/', '/research/#data'), ('/en/mortality-data/', '/en/research/#data')):
         d = DIST / old.strip('/'); d.mkdir(parents=True, exist_ok=True)
         (d / 'index.html').write_text(f'<!DOCTYPE html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url={base}{new}"><link rel="canonical" href="{site}{new}"><a href="{base}{new}">{base}{new}</a>', encoding='utf-8')
     # אזור אישי – לוח נתוני הגלישה (לא מקושר מהאתר, לא באינדקס של מנועי חיפוש)
