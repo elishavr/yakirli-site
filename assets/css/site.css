@@ -643,8 +643,29 @@ html.a11y-contrast .site-foot { background: #000; }
 .flow-msg { text-align: center; margin: 26px auto 0; font-size: 18px; color: var(--navy); max-width: 720px; }
 
 /* 27.10.2026: Pini requested a smaller About portrait and registered-association label. */
-.page-about .hero-photo { max-width: 220px; }
+.page-about .hero-photo { max-width: 150px; }
 .brand-tag small { font-size: .8em; white-space: nowrap; }
-@media (max-width: 860px) { .page-about .hero-photo { max-width: 170px; } }
+@media (max-width: 860px) { .page-about .hero-photo { max-width: 120px; } }
 
 @media (max-width: 640px) { html[lang="he"] .brand-tag { display: block; font-size: 10px; line-height: 1.2; } }
+
+/* 31.10.2026: עדכונים לבקשת פיני */
+/* אודות – תמונת דסי קטנה יותר */
+.page-about img.photo { max-width: 260px; }
+@media (max-width: 860px) { .page-about img.photo { max-width: 200px; } }
+/* אודות – שמות השלוחות במקום סמלים */
+.chips.branch-names { gap: 10px; }
+.chips.branch-names li { font-size: 16.5px; padding: 9px 20px; }
+/* המעגל שלנו – חיצים אל "המשפחה" */
+.ccenter { overflow: visible; }
+.carrow { position: absolute; width: 46px; height: 18px; pointer-events: none; }
+.carrow svg { display: block; width: 100%; height: 100%; fill: none; stroke: var(--teal-dk); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.carrow.a1 { top: -34px; right: -42px; transform: rotate(135deg); }
+.carrow.a2 { top: -34px; left: -42px; transform: rotate(45deg); }
+.carrow.a3 { bottom: -34px; right: -42px; transform: rotate(-135deg); }
+.carrow.a4 { bottom: -34px; left: -42px; transform: rotate(-45deg); }
+@media (max-width: 1100px) {
+  .carrow { width: 38px; height: 16px; }
+  .carrow.a1 { top: -26px; right: -34px; } .carrow.a2 { top: -26px; left: -34px; }
+  .carrow.a3 { bottom: -26px; right: -34px; } .carrow.a4 { bottom: -26px; left: -34px; }
+}
