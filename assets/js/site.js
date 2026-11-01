@@ -73,11 +73,13 @@
       he: { names: { contact: 'פנייה כללית', lectures: 'הזמנת הרצאה' }, send: 'שליחה', sending: 'שולח…',
             ok: 'הפנייה נשלחה. תודה, נחזור אליכם בהקדם.',
             bad: 'לא התקבל אישור מסירה. ייתכן שהפנייה נקלטה למרות התקלה. לפני שליחה חוזרת אפשר לוודא איתנו בוואטסאפ: 050-533-5148',
-            mailBtn: 'שליחה במייל', mailHint: 'ייפתח מייל מוכן – רק ללחוץ "שלח". אפשר גם בוואטסאפ: 050-533-5148', yes: 'כן' },
+            mailBtn: 'שליחה במייל', mailHint: 'ייפתח מייל מוכן – רק ללחוץ "שלח". אפשר גם לשלוח את הפנייה בוואטסאפ.', yes: 'כן',
+            waBtn: 'שליחה בוואטסאפ', waTitle: 'פנייה מהאתר – ' },
       en: { names: { contact: 'General inquiry', lectures: 'Lecture booking' }, send: 'Send', sending: 'Sending…',
             ok: 'Your message was sent. Thank you – we will get back to you soon.',
             bad: 'We could not confirm delivery. Your message may still have reached us. Before resending, please check via WhatsApp: +972-50-533-5148',
-            mailBtn: 'Send by email', mailHint: 'A ready email will open – just press Send. Or WhatsApp us: +972-50-533-5148', yes: 'Yes' }
+            mailBtn: 'Send by email', mailHint: 'A ready email will open – just press Send. You can also send your message on WhatsApp.', yes: 'Yes',
+            waBtn: 'Send on WhatsApp', waTitle: 'Website message – ' }
     }[lang];
     var status = form.querySelector('.sent');
     if (status) status.setAttribute('role', 'status');
@@ -100,9 +102,7 @@
     var email = form.querySelector('.fields input[type="email"]');
     if (phone) phone.addEventListener('input', function () { phone.setCustomValidity(''); });
     if (email && phone) email.addEventListener('input', function () { phone.setCustomValidity(''); });
-    form.addEventListener('submit', function (ev) {
-      ev.preventDefault();
-      if (form.classList.contains('busy')) return;
+    function valid() {
       if (phone && email) {
         phone.setCustomValidity('');
         if (!phone.value.trim() && !email.value.trim()) {
@@ -111,7 +111,24 @@
             : 'Please provide a phone number or an email so we can respond.');
         }
       }
-      if (!form.reportValidity()) return;
+      return form.reportValidity();
+    }
+    // שליחה בוואטסאפ: אותה פנייה, כהודעה מוכנה לוואטסאפ של העמותה (050-533-5148). אושר בעיקרון 1.11.2026.
+    if (submit) {
+      var wa = document.createElement('button');
+      wa.type = 'button'; wa.className = 'btn btn-s btn-wa'; wa.textContent = M.waBtn;
+      submit.insertAdjacentElement('afterend', wa);
+      wa.addEventListener('click', function () {
+        if (!valid()) return;
+        var text = M.waTitle + M.names[kind] + '\n\n' + collect().map(function (f) { return f.label + ': ' + f.value; }).join('\n');
+        window.open('https://wa.me/972505335148?text=' + encodeURIComponent(text), '_blank', 'noopener');
+        if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: 'form-' + kind + '-whatsapp', title: 'שליחה בוואטסאפ', event: true });
+      });
+    }
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      if (form.classList.contains('busy')) return;
+      if (!valid()) return;
       var fields = collect();
       if (!endpoint) {
         var title = M.names[kind];
