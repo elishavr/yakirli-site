@@ -672,3 +672,6 @@ html.a11y-contrast .site-foot { background: #000; }
 
 /* old-site items pending decision (1.11.2026) */
 .eyebrow.todo{display:inline-block;margin-top:24px;margin-bottom:8px}
+.aw-past{margin:0;max-width:460px;justify-self:center}
+.aw-past img{width:100%;height:auto;border-radius:14px;box-shadow:0 6px 24px rgba(19,18,47,.12);display:block}
+.aw-past figcaption{text-align:center;font-size:.9rem;color:#5b6070;margin-top:8px}
