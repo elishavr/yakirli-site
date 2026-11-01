@@ -669,3 +669,6 @@ html.a11y-contrast .site-foot { background: #000; }
   .carrow.a1 { top: -26px; right: -34px; } .carrow.a2 { top: -26px; left: -34px; }
   .carrow.a3 { bottom: -26px; right: -34px; } .carrow.a4 { bottom: -26px; left: -34px; }
 }
+
+/* old-site items pending decision (1.11.2026) */
+.eyebrow.todo{display:inline-block;margin-top:24px;margin-bottom:8px}
