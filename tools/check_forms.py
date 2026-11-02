@@ -5,15 +5,17 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 EXPECTED = {
-    "parents": "https://forms.gle/7eRk3rNXaiQVjGLB9",
+    "parents": {"he": "1FAIpQLSe5hLRLG4wtiijy4eSqazjzYy9NBIOJ1nJi4Eb4XIzOMYiCDw", "en": "1FAIpQLSfVty0on3VKBk3d-dIdRkaHTtbZ1lmnCRDOwQY2PfQfNBBRWQ"},
     "volunteers": "https://forms.gle/ahSZVd6EmDSEDSpr7",
     "grandparents": "https://forms.gle/2uMikARD47gepYtYA",
-    "memorial": "https://forms.gle/zPN8mnVpLRy5kgzs9",
+    "memorial": "1FAIpQLSchhvFDIo2ZFOlYn3JFEJd1yOySCOY_Nj9NVVgAUgL-QMqgUw",
     "contact": "https://forms.gle/xws9C5CZQajKypWSA",
 }
 issues = []
 for lang in ("he", "en"):
     for page, target in EXPECTED.items():
+        if isinstance(target, dict):
+            target = target[lang]
         body = (ROOT / "src" / lang / f"{page}.html").read_text(encoding="utf-8")
         if target not in body:
             issues.append(f"Missing {page} Google Form link in {lang}")
