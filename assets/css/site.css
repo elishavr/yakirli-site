@@ -715,3 +715,6 @@ html.a11y-contrast .site-foot { background: #000; }
 /* טופס גוגל מוטמע */
 .gform-embed { width: 100%; min-height: 1100px; border: 0; display: block; margin: 0 auto 16px; }
 @media (max-width: 640px) { .gform-embed { min-height: 1400px; } }
+
+/* 2.11.2026: Pini asked to remove his portrait from the About hero; text now spans the hero. */
+.page-about .hero-in.has-founder { grid-template-columns: 1fr; max-width: 900px; }
