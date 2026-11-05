@@ -228,3 +228,22 @@
   window.addEventListener('load', draw);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
 })();
+
+/* Click-to-load YouTube player (privacy-friendly: nothing loads before the click) */
+(function () {
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest ? e.target.closest('.vid-play') : null;
+    if (!btn) return;
+    var box = btn.closest('.vid');
+    if (!box || !box.getAttribute('data-yt')) return;
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(box.getAttribute('data-yt')) + '?autoplay=1&rel=0';
+    f.title = box.getAttribute('data-title') || 'YouTube video';
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.setAttribute('allowfullscreen', '');
+    f.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+    var frame = btn.parentNode;
+    frame.replaceChild(f, btn);
+    f.focus();
+  });
+})();
