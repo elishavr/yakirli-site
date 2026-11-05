@@ -680,7 +680,7 @@ html.a11y-contrast .site-foot { background: #000; }
 :root {
   --navy: #35556F; --navy-2: #4B6C88; --navy-deep: #2B4660;
   --on-navy-muted: #E4EDF5;
-  --teal-bg: #E6F3F0;
+  --teal-bg: #CDE4EB; /* 6.11.2026: טורקיז בהיר – אושר בצ'אט (ניגודיות טקסט ≥5:1) */
   --warm: #F0A58D; --warm-dk: #E59378; --warm-bg: #FCEFE9;
   --amber: #F1C783;
   --cloud: #F6F8FA;
