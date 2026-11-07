@@ -746,3 +746,12 @@ html.a11y-contrast .site-foot { background: #000; }
   .mainnav > ul > li > .sub-name { display: flex; justify-content: space-between; width: 100%; padding: 14px 6px; font-size: 19px; border-radius: 0; border-bottom: 1px solid var(--mist); box-shadow: none; }
   .mainnav > ul > li > .sub-name:hover { background: none; }
 }
+/* media: video grid top-aligned; collapsible long link list */
+.vgrid { align-items: start; }
+.mmore { margin-top: 1rem; }
+.mmore > summary { cursor: pointer; font-weight: 700; color: var(--teal, #1f6f6b); padding: .75rem 0; list-style: none; }
+.mmore > summary::-webkit-details-marker { display: none; }
+.mmore > summary::before { content: "+ "; }
+.mmore[open] > summary::before { content: "− "; }
+.mmore > summary:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.mlist + h3 { margin-top: 2rem; }
