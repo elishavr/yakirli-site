@@ -733,3 +733,16 @@ html.a11y-contrast .site-foot { background: #000; }
 .vid-ico path { fill: #fff; stroke: none; }
 .vid-lbl { font-weight: 800; font-size: 1.05rem; }
 .vid-note { font-size: .82rem; opacity: .85; }
+
+
+/* Group names in the main menu open their submenu (no link); the destination is the first item inside. */
+.mainnav > ul > li > .sub-name { display: flex; align-items: center; gap: 6px; width: auto; height: auto; margin: 0; padding: 9px 12px; border-radius: var(--pill); font: inherit; font-weight: 600; font-size: 16px; color: var(--navy); white-space: nowrap; background: none; }
+.mainnav > ul > li > .sub-name:hover { background: var(--cloud); }
+.mainnav > ul > li.on > .sub-name { color: var(--teal-dk); box-shadow: inset 0 -3px 0 var(--teal-lt); border-radius: 4px; }
+@media (max-width: 1180px) {
+  /* backdrop-filter made the fixed menu panel only as tall as the header, hiding most items on mobile */
+  .site-head { backdrop-filter: none; -webkit-backdrop-filter: none; background: #fff; }
+  .mainnav > ul > li.has-sub { display: block; }
+  .mainnav > ul > li > .sub-name { display: flex; justify-content: space-between; width: 100%; padding: 14px 6px; font-size: 19px; border-radius: 0; border-bottom: 1px solid var(--mist); box-shadow: none; }
+  .mainnav > ul > li > .sub-name:hover { background: none; }
+}

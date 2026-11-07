@@ -246,4 +246,13 @@
     frame.replaceChild(f, btn);
     f.focus();
   });
+  /* Lecture booking buttons preselect the matching lecture in the shared form. */
+  document.querySelectorAll('a[data-lecture]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var form = document.querySelector('form[data-mailto-form="lectures"]');
+      var sel = form && form.querySelector('select');
+      var i = Number(a.getAttribute('data-lecture'));
+      if (sel && sel.options[i]) sel.selectedIndex = i;
+    });
+  });
 })();
