@@ -84,7 +84,7 @@ def make(lang):
     f_url = find_font(LAT_BOLD, 28)
     title = 'יקיר לי' if he else 'Yakir Li'
     sub = 'יד ולב לשכול האזרחי' if he else 'Civilian Bereavement Support'
-    line = 'לצד המשפחות מהיום השמיני והלאה' if he else 'Beside families from the day the shiva ends'
+    line = 'מהיום השמיני והלאה, לצד המשפחות' if he else 'Beside families from the day the shiva ends'
     url = 'www.yakirli.org'
     if he:
         title, sub, line = rtl(title), rtl(sub), rtl(line)
