@@ -676,24 +676,25 @@ html.a11y-contrast .site-foot { background: #000; }
 .aw-past img{width:100%;height:auto;border-radius:14px;box-shadow:0 6px 24px rgba(19,18,47,.12);display:block}
 .aw-past figcaption{text-align:center;font-size:.9rem;color:#5b6070;margin-top:8px}
 
-/* ---------- צבעים רכים (אושר בצ'אט 2.11.2026) – עוקף את משתני :root שלמעלה ---------- */
+/* ---------- צבעי המותג בתצוגה הבהירה ---------- */
 :root {
-  --navy: #35556F; --navy-2: #4B6C88; --navy-deep: #2B4660;
+  --navy: #1E3B55; --navy-2: #305777; --navy-deep: #172E44;
   --on-navy-muted: #E4EDF5;
-  --teal-bg: #CDE4EB; /* 6.11.2026: טורקיז בהיר – אושר בצ'אט (ניגודיות טקסט ≥5:1) */
-  --warm: #F0A58D; --warm-dk: #E59378; --warm-bg: #FCEFE9;
+  --teal: #16887D; --teal-dk: #006C62; --teal-ink: #00574F; --teal-lt: #69C6B8; --teal-bg: #BCE1DB;
+  --warm: #F0A58D; --warm-dk: #ED987D; --warm-bg: #FCEFE9;
   --amber: #F1C783;
-  --cloud: #F6F8FA;
-  --ink: #2A3A4D;
+  --cloud: #E8F4F6; --mist: #C9E2E7; --line: #BDD3DF;
+  --ink: #24364B; --muted: #4A596C;
   --shadow: 0 3px 14px rgba(53, 85, 111, .07);
   --shadow-lg: 0 10px 28px rgba(53, 85, 111, .12);
 }
-.btn-d, .btn-d:hover { color: #2A3F55; }
+.btn-d, .btn-d:hover { color: #25354B; }
 .btn-d:hover { background: #F4B8A3; }
-.hero { background: linear-gradient(135deg, #E4F2EF 0%, #F1F6F9 58%, #FCEFE8 100%); color: var(--ink); }
+.hero { background: linear-gradient(135deg, #BFE6DF 0%, #E5F2F7 62%, #F4F8FA 100%); color: var(--ink); }
 .hero::before { opacity: .55; }
 .hero h1 { color: var(--navy); }
 .hero p { color: #44566A; }
+html:not(.a11y-contrast) .hero p { color: var(--ink); }
 .hero .eyebrow { color: var(--teal-ink); }
 .hero .btn-p, .cta .btn-p { background: var(--teal-dk); color: #fff; }
 .hero .btn-p:hover, .cta .btn-p:hover { background: var(--teal-ink); color: #fff; }
@@ -707,7 +708,7 @@ html.a11y-contrast .site-foot { background: #000; }
 .cta p { color: #44566A; }
 .cta .btn-w { background: var(--teal-dk); color: #fff; }
 .cta .btn-w:hover { background: var(--teal-ink); }
-.site-foot { background: #3E5B76; }
+.site-foot { background: #234460; }
 .step .num::after { background: var(--amber); opacity: .8; }
 .step { isolation: isolate; }
 .aw-greg { color: #F6D9A5; }
