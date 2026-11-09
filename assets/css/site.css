@@ -756,3 +756,13 @@ html:not(.a11y-contrast) .hero p { color: var(--ink); }
 .mmore[open] > summary::before { content: "− "; }
 .mmore > summary:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
 .mlist + h3 { margin-top: 2rem; }
+
+/* QA 9.11.2026 – טיוטה לאישור */
+.tbl-hint { margin: 0 0 8px; font-size: 15px; color: var(--ink); opacity: .8; }
+.subnav .wrap { scrollbar-width: thin; }
+.subnav .wrap::-webkit-scrollbar { display: block; height: 6px; }
+@media (max-width: 360px) {
+  .brand-name { font-size: 19px; }
+  .brand img { width: 42px; height: 42px; }
+  .brand { gap: 8px; }
+}
