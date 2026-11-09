@@ -110,6 +110,8 @@ CHEVRON = '<svg viewBox="0 0 20 20" aria-hidden="true" width="14" height="14"><p
 def nav_html(lang, pid, group):
     out = []
     for key, label, kids in NAV[lang]:
+        if key == 'home':  # "בית" לא מוצג בתפריט העליון (הלוגו מוביל לדף הבית); נשאר בפוטר
+            continue
         target = GROUP_HOME.get(key, key)
         on = ' class="on"' if key == group or (key == pid) else ''
         cur = ' aria-current="page"' if (kids is None and key == pid) else ''
