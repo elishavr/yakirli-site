@@ -781,3 +781,11 @@ html:not(.a11y-contrast) .hero p { color: var(--ink); }
 .sec.quote + .sec.tealbg { padding-top: 0; }
 /* בין שני אזורי טקסט קצרים רצופים – בלי ריפוד כפול */
 .sec:not(.alt) + .sec:not(.alt):not(.quote):not(.tealbg) { padding-top: 0; }
+
+/* grandparents stats: one cube + picture */
+.cube-one { background: var(--teal-bg); border-radius: var(--radius); padding: 24px 28px 16px; }
+.cube-row { display: flex; align-items: center; gap: 20px; padding: 14px 0; }
+.cube-row + .cube-row { border-top: 1px solid var(--line); }
+.cube-row .n { font-size: clamp(38px, 4.5vw, 54px); font-weight: 700; line-height: 1.1; color: var(--navy); min-width: 3ch; text-align: center; }
+.cube-row .l { font-size: 18px; line-height: 1.4; }
+.cube-note { margin: 8px 0 0; font-size: 13px; color: var(--ink); opacity: .7; }
