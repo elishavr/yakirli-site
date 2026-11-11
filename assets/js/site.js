@@ -235,9 +235,11 @@
     var btn = e.target.closest ? e.target.closest('.vid-play') : null;
     if (!btn) return;
     var box = btn.closest('.vid');
-    if (!box || !box.getAttribute('data-yt')) return;
+    if (!box || !(box.getAttribute('data-yt') || box.getAttribute('data-drive'))) return;
     var f = document.createElement('iframe');
-    f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(box.getAttribute('data-yt')) + '?autoplay=1&rel=0';
+    f.src = box.getAttribute('data-drive')
+      ? 'https://drive.google.com/file/d/' + encodeURIComponent(box.getAttribute('data-drive')) + '/preview'
+      : 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(box.getAttribute('data-yt')) + '?autoplay=1&rel=0';
     f.title = box.getAttribute('data-title') || 'YouTube video';
     f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
     f.setAttribute('allowfullscreen', '');
