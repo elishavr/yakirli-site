@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 EXPECTED = {
     "parents": {"he": "1FAIpQLSe5hLRLG4wtiijy4eSqazjzYy9NBIOJ1nJi4Eb4XIzOMYiCDw", "en": "1FAIpQLSfVty0on3VKBk3d-dIdRkaHTtbZ1lmnCRDOwQY2PfQfNBBRWQ"},
     "volunteers": "https://forms.gle/ahSZVd6EmDSEDSpr7",
-    "grandparents": "https://forms.gle/2uMikARD47gepYtYA",
+    "grandparents": "https://docs.google.com/forms/d/e/1FAIpQLSefq2anLte9kD1z3OJkNO_5lEV6585a-ZCga7Fyif37p-Rx5A/viewform",
     "memorial": "1FAIpQLSchhvFDIo2ZFOlYn3JFEJd1yOySCOY_Nj9NVVgAUgL-QMqgUw",
     "contact": "https://forms.gle/xws9C5CZQajKypWSA",
 }
