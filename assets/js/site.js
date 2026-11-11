@@ -73,12 +73,12 @@
       he: { names: { contact: 'פנייה כללית', lectures: 'הזמנת הרצאה' }, send: 'שליחה', sending: 'שולח…',
             ok: 'הפנייה נשלחה. תודה, נחזור אליכם בהקדם.',
             bad: 'לא התקבל אישור מסירה. ייתכן שהפנייה נקלטה למרות התקלה. לפני שליחה חוזרת אפשר לוודא איתנו בוואטסאפ: 050-533-5148',
-            mailBtn: 'שליחה במייל', mailHint: 'ייפתח מייל מוכן – רק ללחוץ "שלח". אפשר גם לשלוח את הפנייה בוואטסאפ.', yes: 'כן',
+            mailBtn: 'שליחה במייל', mailHint: 'ייפתח מייל מוכן – רק ללחוץ "שלח". לפנייה בוואטסאפ: 050-533-5148.', yes: 'כן',
             waBtn: 'שליחה בוואטסאפ', waTitle: 'פנייה מהאתר – ' },
       en: { names: { contact: 'General inquiry', lectures: 'Lecture booking' }, send: 'Send', sending: 'Sending…',
             ok: 'Your message was sent. Thank you – we will get back to you soon.',
             bad: 'We could not confirm delivery. Your message may still have reached us. Before resending, please check via WhatsApp: +972-50-533-5148',
-            mailBtn: 'Send by email', mailHint: 'A ready email will open – just press Send. You can also send your message on WhatsApp.', yes: 'Yes',
+            mailBtn: 'Send by email', mailHint: 'A ready email will open – just press Send. Or contact us on WhatsApp: +972-50-533-5148.', yes: 'Yes',
             waBtn: 'Send on WhatsApp', waTitle: 'Website message – ' }
     }[lang];
     var status = form.querySelector('.sent');
