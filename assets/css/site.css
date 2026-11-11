@@ -167,6 +167,7 @@ bdi { unicode-bidi: isolate; }
 .heart { width: 22px; height: 22px; flex: none; fill: var(--warm); margin-top: 4px; }
 .blist.numbered { counter-reset: n; }
 .blist.numbered li::before { counter-increment: n; content: counter(n); flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--teal-bg); color: var(--teal-ink); font-weight: 800; display: grid; place-items: center; }
+.blist.bulleted li::before { content: ""; flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--teal-ink); margin-top: .72em; }
 .chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
 .chips li { background: #fff; border: 1px solid var(--line); border-radius: var(--pill); padding: 10px 20px; font-weight: 600; color: var(--navy); }
 .sec:not(.alt) .chips li { background: var(--cloud); border-color: transparent; }
