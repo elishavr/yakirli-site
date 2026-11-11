@@ -769,3 +769,14 @@ html:not(.a11y-contrast) .hero p { color: var(--ink); }
   .brand { gap: 8px; }
 }
 
+
+/* 11.11.2026 – צמצום רווחים כללי (טיוטה לאישור פיני) */
+.sec { padding-block: clamp(32px, 4.5vw, 60px); }
+.sec-head { margin-bottom: 26px; }
+.hero-in { padding-block: clamp(28px, 4vw, 56px); }
+.cta { padding-block: clamp(36px, 4.5vw, 56px); }
+.prose h2:not(:first-child) { margin-top: 24px; }
+.prose p { margin-bottom: 10px; }
+.sec.quote + .sec.tealbg { padding-top: 0; }
+/* בין שני אזורי טקסט קצרים רצופים – בלי ריפוד כפול */
+.sec:not(.alt) + .sec:not(.alt):not(.quote):not(.tealbg) { padding-top: 0; }
