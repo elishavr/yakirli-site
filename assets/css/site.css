@@ -766,3 +766,8 @@ html:not(.a11y-contrast) .hero p { color: var(--ink); }
   .brand img { width: 42px; height: 42px; }
   .brand { gap: 8px; }
 }
+
+/* עיגולי השמחה – טקסט דסי (אודות) */
+.joy-text { margin: 18px 0 6px; padding: 4px 18px 4px 0; border-right: 3px solid #CDE4EB; color: #35556F; }
+.joy-text p { margin: 0 0 10px; }
+.joy-text footer { font-weight: 600; margin-top: 6px; }
