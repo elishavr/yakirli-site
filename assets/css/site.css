@@ -789,3 +789,10 @@ html:not(.a11y-contrast) .hero p { color: var(--ink); }
 .cube-row .n { font-size: clamp(38px, 4.5vw, 54px); font-weight: 700; line-height: 1.1; color: var(--navy); min-width: 3ch; text-align: center; }
 .cube-row .l { font-size: 18px; line-height: 1.4; }
 .cube-note { margin: 8px 0 0; font-size: 13px; color: var(--ink); opacity: .7; }
+
+/* Home: "what we did so far" strip (11.11.2026) */
+.sofar { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.sofar li { background: #CDE4EB; border-radius: 14px; padding: 22px 20px; text-align: center; }
+.sofar .n { font-size: clamp(38px, 4.5vw, 54px); font-weight: 700; line-height: 1.1; color: var(--navy); }
+.sofar .l { font-size: 18px; line-height: 1.4; margin-top: 6px; }
+@media (max-width: 720px) { .sofar { grid-template-columns: 1fr; } }
