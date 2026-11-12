@@ -70,7 +70,7 @@ NAV = {
         ('contact', 'Contact', None),
     ],
 }
-GROUP_HOME = {'support': 'eighth', 'public': 'public', 'data': 'legislation'}  # לאן מוביל שם הקבוצה
+GROUP_HOME = {'support': 'eighth', 'public': 'public', 'data': 'research'}  # לאן מוביל שם הקבוצה
 
 T = {
     'he': dict(
@@ -87,7 +87,7 @@ T = {
                newsletter='הצטרפות לרשימת התפוצה', join='הצטרפות', nl_sent='זו גרסת תצוגה: ההרשמה לא נשמרה.',
                access='הצהרת נגישות', privacy='מדיניות פרטיות', reg='יקיר לי – יד ולב לשכול האזרחי (ע"ר 580616001)', credits='',
                wa='שליחת הודעת וואטסאפ ליקיר לי', foot_tag='יד ולב לשכול האזרחי (ע"ר 580616001)',
-               sub_toggle='פתיחת תפריט משנה', reach_out='פנו אלינו', site='יקיר לי', site_long='יקיר לי – יד ולב לשכול האזרחי'),
+               sub_toggle='פתיחת תפריט משנה', reach_out='פנו אלינו', logo_alt='סמל יקיר לי', site='יקיר לי', site_long='יקיר לי – יד ולב לשכול האזרחי'),
     'en': dict(
                terms='Terms of use', follow='Follow us', nw='(opens in a new window)', req_consent='To send, please tick the confirmation box.',
                nl_consent='By signing up you agree to receive email updates from us. You can unsubscribe at any time.',
@@ -103,7 +103,7 @@ T = {
                access='Accessibility statement', privacy='Privacy policy',
                reg='Yakir Li – Civilian Bereavement Support (Registered Nonprofit 580616001)', credits='',
                wa='Send Yakir Li a WhatsApp message', foot_tag='Civilian Bereavement Support (Reg. Nonprofit 580616001)',
-               sub_toggle='Open submenu', reach_out='Reach out', site='Yakir Li', site_long='Yakir Li – Civilian Bereavement Support'),
+               sub_toggle='Open submenu', reach_out='Reach out', logo_alt='Yakir Li logo', site='Yakir Li', site_long='Yakir Li – Civilian Bereavement Support'),
 }
 CHEVRON = '<svg viewBox="0 0 20 20" aria-hidden="true" width="14" height="14"><path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 
@@ -139,6 +139,11 @@ def read_fragment(fp):
     pid, lang, path, title, group = m.groups()
     return pid, lang, path, title, group, txt[m.end():]
 
+HOME_DESC = {
+    'he': 'יקיר לי – יד ולב לשכול האזרחי: תמיכה והכרה למשפחות שחוו אובדן ושכול אזרחי, להורים ולסבים וסבתות, לצד הנצחה ופעילות ציבורית.',
+    'en': 'Yakir Li supports families who have experienced civilian bereavement: personal support for bereaved parents and grandparents, remembrance and public advocacy.',
+}
+
 def description_of(body):
     m = re.search(r'<div class="hero-txt">.*?<p>(.*?)</p>', body, re.S)
     if not m:
@@ -167,7 +172,7 @@ def render_page(layout, base, site, build_id, lang, pid, path, title, group, bod
     hero_photo = HERO_PHOTOS.get(pid)
     ctx = {
         'lang': lang, 'dir': 'ltr' if lang == 'en' else 'rtl', 'title': html.escape(full_title, quote=True),
-        'description': description_of(body), 'canonical': site + path,
+        'description': html.escape(HOME_DESC[lang], quote=True) if pid == 'home' else description_of(body), 'canonical': site + path,
         'og_image': site + '/assets/img/og-' + lang + '.png',
         'og_alt': html.escape(t['site_long'], quote=True),
         'hero_preload': (f'<link rel="preload" as="image" href="/assets/img/photos/{HERO_FILES.get(pid, hero_photo + '-v1')}.avif" type="image/avif" fetchpriority="high">' if hero_photo else ''),
