@@ -235,7 +235,7 @@ def main():
                '<a class="btn btn-s" href="/en/" lang="en">English</a></div></div></div></section>')
     (DIST / '404.html').write_text(render_page(layout, base, site, build_id, 'he', 'notfound', '/404.html', 'העמוד לא נמצא', '', nf_body), encoding='utf-8')
     # עמודים שהוסרו – הפניה לכתובת החדשה (19.10.2026: נתוני פטירה עברו לאודות)
-    for old, new in (('/mortality-data/', '/research/#data'), ('/en/mortality-data/', '/en/research/#data')):
+    for old, new in (('/mortality-data/', '/research/'), ('/en/mortality-data/', '/en/research/')):
         d = DIST / old.strip('/'); d.mkdir(parents=True, exist_ok=True)
         (d / 'index.html').write_text(f'<!DOCTYPE html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url={base}{new}"><link rel="canonical" href="{site}{new}"><a href="{base}{new}">{base}{new}</a>', encoding='utf-8')
     # אזור אישי – לוח נתוני הגלישה (לא מקושר מהאתר, לא באינדקס של מנועי חיפוש)
