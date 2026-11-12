@@ -796,3 +796,6 @@ html:not(.a11y-contrast) .hero p { color: var(--ink); }
 .sofar .n { font-size: clamp(38px, 4.5vw, 54px); font-weight: 700; line-height: 1.1; color: var(--navy); }
 .sofar .l { font-size: 18px; line-height: 1.4; margin-top: 6px; }
 @media (max-width: 720px) { .sofar { grid-template-columns: 1fr; } }
+
+/* Public activity: achievements in one cube (12.11.2026) */
+.cube-center { max-width: 640px; margin-inline: auto; }
