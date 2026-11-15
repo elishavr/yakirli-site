@@ -799,8 +799,3 @@ html:not(.a11y-contrast) .hero p { color: var(--ink); }
 
 /* Public activity: achievements in one cube (12.11.2026) */
 .cube-center { max-width: 640px; margin-inline: auto; }
-
-/* שבוע המודעות: סמל עיגולי השמחה לצד הכותרת (15.11.2026, ממתין לאישור) */
-.h1-logo { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-.h1-logo h1 { margin: 0; }
-.h1-logo img { height: 64px; width: auto; background: #fff; border-radius: 12px; padding: 6px 10px; }
