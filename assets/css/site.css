@@ -801,3 +801,9 @@ html:not(.a11y-contrast) .hero p { color: var(--ink); }
 
 /* Public activity: achievements in one cube (12.11.2026) */
 .cube-center { max-width: 640px; margin-inline: auto; }
+
+/* 15.11.2026: תת־תפריט במסך צר – שבירת שורה במקום גלילה נסתרת */
+@media (max-width: 640px) {
+  .subnav .wrap { flex-wrap: wrap; overflow-x: visible; }
+  .subnav a { padding: 6px 12px; font-size: 15px; }
+}

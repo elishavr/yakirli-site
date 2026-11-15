@@ -131,7 +131,8 @@ def nav_html(lang, pid, group):
     return '\n'.join(out)
 
 def foot_nav_html(lang):
-    return '\n'.join(f'        <li><a href="{path_of(lang, GROUP_HOME.get(k, k))}">{html.escape(l)}</a></li>' for k, l, _ in NAV[lang])
+    FOOT_LABEL = {'he': {'support': 'היום השמיני'}, 'en': {'support': 'The Day After Shiva'}}
+    return '\n'.join(f'        <li><a href="{path_of(lang, GROUP_HOME.get(k, k))}">{html.escape(FOOT_LABEL[lang].get(k, l))}</a></li>' for k, l, _ in NAV[lang])
 
 def read_fragment(fp):
     txt = fp.read_text(encoding='utf-8')
