@@ -807,3 +807,10 @@ html:not(.a11y-contrast) .hero p { color: var(--ink); }
   .subnav .wrap { flex-wrap: wrap; overflow-x: visible; }
   .subnav a { padding: 6px 12px; font-size: 15px; }
 }
+
+/* תמונות חדשות (16.11.2026): מעגל סבים וסבתות, באנר חקיקה, תמונות מהכנסת */
+.page-grandparents .stats-split .ph.ph-circle { --page-art: image-set(url(../img/photos/grandparents-circle.avif) type("image/avif"), url(../img/photos/grandparents-circle.webp) type("image/webp")); aspect-ratio: 16 / 9; min-height: 0; }
+.photo-band { padding-block: 28px 0; }
+.wide-photo { margin: 0; border-radius: var(--radius); overflow: hidden; }
+.wide-photo img { display: block; width: 100%; height: auto; }
+.knesset-photo { max-width: 820px; margin-inline: auto; }
