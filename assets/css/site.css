@@ -828,3 +828,14 @@ html:not(.a11y-contrast) .hero p { color: var(--ink); }
 .sf-opt { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: flex-end; margin-bottom: 10px; }
 .sf-rel { flex: 1 1 200px; display: flex; align-items: flex-end; gap: 8px; }
 .sf-note { font-size: 15px; color: var(--muted); margin: 6px 0 0; }
+
+/* ההישגים בשורה אחת (16.11.2026) */
+.cube-one.cube-line { max-width: none; display: flex; flex-wrap: wrap; align-items: stretch; justify-content: space-between; gap: 0 28px; }
+.cube-line .cube-row { flex: 1 1 0; min-width: 220px; padding: 10px 0; justify-content: center; }
+.cube-line .cube-row + .cube-row { border-top: 0; border-inline-start: 1px solid var(--line); padding-inline-start: 28px; }
+.cube-line .cube-note { flex: 0 0 100%; text-align: center; }
+@media (max-width: 760px) {
+  .cube-one.cube-line { display: block; }
+  .cube-line .cube-row { justify-content: flex-start; }
+  .cube-line .cube-row + .cube-row { border-inline-start: 0; border-top: 1px solid var(--line); padding-inline-start: 0; }
+}
