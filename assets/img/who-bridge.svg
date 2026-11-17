@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-labelledby="t"><title id="t">הדמיה: שני חצאי גשר שנבנים משני עברי נחל ומתקרבים זה לזה</title>
+<defs><linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CDE4EB"/><stop offset="1" stop-color="#F8E4CF"/></linearGradient>
+<radialGradient id="g"><stop offset="0" stop-color="#FFD98E" stop-opacity=".95"/><stop offset="1" stop-color="#FFD98E" stop-opacity="0"/></radialGradient></defs>
+<rect width="400" height="300" fill="url(#s)"/>
+<circle cx="200" cy="150" r="90" fill="url(#g)"/><circle cx="200" cy="150" r="22" fill="#FFE6A8"/>
+<path d="M0 190q70-40 140-16t130-10 130 22v114H0z" fill="#9DBFCB" opacity=".7"/>
+<path d="M0 214q90-24 180-6t220-14v106H0z" fill="#3E9A93" opacity=".55"/>
+<path d="M0 262q50-10 100 0t100 0 100 0 100 0v38H0z" fill="#2A9D93"/>
+<path d="M0 276q50-8 100 0t100 0 100 0 100 0v24H0z" fill="#35556F" opacity=".55"/>
+<path d="M0 172h112q4 40-6 128H0z" fill="#3E9A93"/><path d="M0 172h112" stroke="#2F7F7B" stroke-width="6"/>
+<path d="M400 172H288q-4 40 6 128h106z" fill="#3E9A93"/><path d="M400 172H288" stroke="#2F7F7B" stroke-width="6"/>
+<g fill="#F0A58D"><circle cx="22" cy="168" r="4"/><circle cx="46" cy="170" r="3"/><circle cx="372" cy="168" r="4"/><circle cx="350" cy="170" r="3"/></g>
+<path d="M104.0 172.0 L117.7 171.0 L131.3 170.0 L145.0 169.0 L158.7 168.0 L172.3 167.0 L186.0 166.0" stroke="#8A6A4C" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M117.7 167.0v8" stroke="#6B5440" stroke-width="2"/>
+<path d="M131.3 166.0v8" stroke="#6B5440" stroke-width="2"/>
+<path d="M145.0 165.0v8" stroke="#6B5440" stroke-width="2"/>
+<path d="M158.7 164.0v8" stroke="#6B5440" stroke-width="2"/>
+<path d="M172.3 163.0v8" stroke="#6B5440" stroke-width="2"/>
+<path d="M186.0 162.0v8" stroke="#6B5440" stroke-width="2"/>
+<path d="M104.0 168.0V138.0" stroke="#6B5440" stroke-width="3" stroke-linecap="round"/>
+<path d="M131.3 166.0V136.0" stroke="#6B5440" stroke-width="3" stroke-linecap="round"/>
+<path d="M158.7 164.0V134.0" stroke="#6B5440" stroke-width="3" stroke-linecap="round"/>
+<path d="M186.0 162.0V132.0" stroke="#6B5440" stroke-width="3" stroke-linecap="round"/>
+<path d="M104.0 138.0 L131.3 136.0 L158.7 134.0 L186.0 132.0" stroke="#F7EBD3" stroke-width="2" fill="none" stroke-linecap="round"/>
+<path d="M296.0 172.0 L282.3 171.0 L268.7 170.0 L255.0 169.0 L241.3 168.0 L227.7 167.0 L214.0 166.0" stroke="#8A6A4C" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M282.3 167.0v8" stroke="#6B5440" stroke-width="2"/>
+<path d="M268.7 166.0v8" stroke="#6B5440" stroke-width="2"/>
+<path d="M255.0 165.0v8" stroke="#6B5440" stroke-width="2"/>
+<path d="M241.3 164.0v8" stroke="#6B5440" stroke-width="2"/>
+<path d="M227.7 163.0v8" stroke="#6B5440" stroke-width="2"/>
+<path d="M214.0 162.0v8" stroke="#6B5440" stroke-width="2"/>
+<path d="M296.0 168.0V138.0" stroke="#6B5440" stroke-width="3" stroke-linecap="round"/>
+<path d="M268.7 166.0V136.0" stroke="#6B5440" stroke-width="3" stroke-linecap="round"/>
+<path d="M241.3 164.0V134.0" stroke="#6B5440" stroke-width="3" stroke-linecap="round"/>
+<path d="M214.0 162.0V132.0" stroke="#6B5440" stroke-width="3" stroke-linecap="round"/>
+<path d="M296.0 138.0 L268.7 136.0 L241.3 134.0 L214.0 132.0" stroke="#F7EBD3" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>
