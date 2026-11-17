@@ -878,3 +878,8 @@ html:not(.a11y-contrast) .hero p { color: var(--ink); }
 .sm-tab.c1,.sm-tab.c6,.sm-tab.c7{--c:#ED987D}
 .sm-tab.c2{--c:#006C62}.sm-tab.c3{--c:#305777}.sm-tab.c4{--c:#00574F}.sm-tab.c5{--c:#1E3B55}
 .sm-single h3 a{color:var(--navy)}
+
+/* מי אנחנו (בית): תמונה מוקטנת – 17.11.2026 */
+.page-home .split.has-img { grid-template-columns: minmax(0, 1.6fr) minmax(0, .8fr); }
+.page-home .split .ph { min-height: 0; aspect-ratio: 4 / 3; width: 100%; max-width: 300px; justify-self: center; }
+@media (max-width: 860px) { .page-home .split.has-img { grid-template-columns: 1fr; } .page-home .split .ph { max-width: 240px; } }
