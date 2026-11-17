@@ -884,3 +884,8 @@ html:not(.a11y-contrast) .hero p { color: var(--ink); }
 .page-home .split .ph { min-height: 0; aspect-ratio: 4 / 3; width: 100%; max-width: 220px; justify-self: center; }
 @media (max-width: 860px) { .page-home .split.has-img { grid-template-columns: 1fr; } .page-home .split .ph { max-width: 240px; } }
 .page-home .split .ph { --page-art: url(../img/who-bridge-logo.svg); }
+
+/* טבלת פטירות: עמודת סיכום עד גיל 24 */
+.mortality-table th.col24{background:#F4C95D;color:#1E3B55}
+.mortality-table tbody td.col24,.mortality-table tbody tr.latest td.col24{background:#FFF1C9;color:var(--ink);font-weight:700}
+html.a11y-contrast .mortality-table th.col24,html.a11y-contrast .mortality-table tbody td.col24{background:#fff;color:#000;font-weight:700}
