@@ -872,3 +872,9 @@ html:not(.a11y-contrast) .hero p { color: var(--ink); }
  .sm-tab h3{font-size:20px}
  .sm-tab li a{font-size:16px}
 }
+
+.cta-end{text-align:center;padding-block:8px}
+/* מפת האתר – צבעי המותג בלבד (17.11.2026) */
+.sm-tab.c1,.sm-tab.c6,.sm-tab.c7{--c:#ED987D}
+.sm-tab.c2{--c:#006C62}.sm-tab.c3{--c:#305777}.sm-tab.c4{--c:#00574F}.sm-tab.c5{--c:#1E3B55}
+.sm-single h3 a{color:var(--navy)}
