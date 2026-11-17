@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="t">
+<title id="t">הדמיה: מרפסת אחורית בין ערביים, שני כיסאות וכוס תה על שולחן קטן</title>
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2C4A63"/><stop offset=".55" stop-color="#8E7A8C"/><stop offset="1" stop-color="#F0B596"/></linearGradient>
+<radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFD98E" stop-opacity=".75"/><stop offset="1" stop-color="#FFD98E" stop-opacity="0"/></radialGradient>
+<radialGradient id="floorglow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFD98E" stop-opacity=".45"/><stop offset="1" stop-color="#FFD98E" stop-opacity="0"/></radialGradient>
+<g id="chair">
+<rect x="250" y="388" width="8" height="106" rx="3" fill="#6B5440"/>
+<rect x="246" y="380" width="20" height="9" rx="4" fill="#6B5440"/>
+<rect x="250" y="404" width="12" height="5" rx="2" fill="#6B5440"/><rect x="250" y="424" width="12" height="5" rx="2" fill="#6B5440"/>
+<rect x="250" y="488" width="102" height="10" rx="4" fill="#6B5440"/>
+<rect x="340" y="496" width="8" height="46" rx="3" fill="#6B5440"/>
+<rect x="250" y="494" width="8" height="48" rx="3" fill="#6B5440"/>
+<rect x="258" y="479" width="90" height="11" rx="5" fill="#35556F"/>
+</g>
+</defs>
+<!-- sky + hills -->
+<rect width="800" height="470" fill="url(#sky)"/>
+<path d="M-10 330q90-46 190-20t190 6 120-14v150H-10z" fill="#4A7F86" opacity=".9"/>
+<path d="M-10 372q120-34 240-6t250-8v110H-10z" fill="#2F6C70"/>
+<path d="M-10 410q150-22 300-4t200-2v70H-10z" fill="#244F59"/>
+<circle cx="160" cy="118" r="20" fill="#F7EBD3"/><circle cx="170" cy="112" r="19" fill="#4F5F7B"/>
+<g fill="#F7EBD3" opacity=".8"><circle cx="60" cy="90" r="1.6"/><circle cx="250" cy="80" r="1.4"/><circle cx="330" cy="140" r="1.2"/><circle cx="110" cy="190" r="1.3"/><circle cx="410" cy="96" r="1.5"/></g>
+<!-- house wall + window -->
+<rect x="470" y="0" width="330" height="470" fill="#D8C5AE"/>
+<rect x="470" y="0" width="330" height="470" fill="#35556F" opacity=".28"/>
+<rect x="540" y="190" width="150" height="170" rx="6" fill="#FFD98E"/>
+<circle cx="615" cy="275" r="150" fill="url(#glow)"/>
+<path d="M615 190v170M540 275h150" stroke="#8A6A4C" stroke-width="7" fill="none"/>
+<rect x="534" y="184" width="162" height="12" rx="4" fill="#8A6A4C"/><rect x="534" y="354" width="162" height="12" rx="4" fill="#8A6A4C"/>
+<path d="M540 190h40l-14 90h-26z" fill="#F7F1E6" opacity=".55"/>
+<!-- roof beam + posts -->
+<rect x="0" y="0" width="800" height="48" fill="#5B4636"/>
+<rect x="40" y="48" width="18" height="426" fill="#6B5440"/>
+<rect x="455" y="48" width="18" height="426" fill="#6B5440"/>
+<!-- railing -->
+<rect x="58" y="402" width="397" height="9" rx="3" fill="#8A6A4C"/>
+<g fill="#8A6A4C"><rect x="84" y="411" width="6" height="60"/><rect x="124" y="411" width="6" height="60"/><rect x="164" y="411" width="6" height="60"/><rect x="204" y="411" width="6" height="60"/><rect x="244" y="411" width="6" height="60"/><rect x="284" y="411" width="6" height="60"/><rect x="324" y="411" width="6" height="60"/><rect x="364" y="411" width="6" height="60"/><rect x="404" y="411" width="6" height="60"/></g>
+<!-- hanging lantern -->
+<path d="M335 48v54" stroke="#3B2E24" stroke-width="2"/>
+<circle cx="335" cy="125" r="80" fill="url(#glow)"/>
+<rect x="322" y="102" width="26" height="38" rx="6" fill="#FFD98E" stroke="#5B4636" stroke-width="3"/>
+<rect x="318" y="98" width="34" height="6" rx="3" fill="#5B4636"/>
+<!-- floor -->
+<rect x="0" y="470" width="800" height="130" fill="#8A6A4C"/>
+<g stroke="#6B5440" stroke-width="2" opacity=".7"><path d="M0 500h800M0 534h800M0 570h800"/></g>
+<ellipse cx="400" cy="530" rx="260" ry="56" fill="url(#floorglow)"/>
+<ellipse cx="600" cy="490" rx="150" ry="22" fill="url(#floorglow)"/>
+<!-- chairs + table -->
+<use href="#chair"/>
+<use href="#chair" transform="translate(800 0) scale(-1 1)"/>
+<rect x="397" y="472" width="6" height="70" fill="#6B5440"/>
+<ellipse cx="400" cy="542" rx="20" ry="4" fill="#6B5440"/>
+<ellipse cx="400" cy="470" rx="36" ry="7" fill="#8A6A4C"/><ellipse cx="400" cy="467" rx="36" ry="7" fill="#A67F5C"/>
+<rect x="384" y="441" width="14" height="24" rx="3" fill="#F0A58D" opacity=".85"/><rect x="384" y="441" width="14" height="5" rx="2" fill="#FFD98E" opacity=".8"/>
+<path d="M388 432q-5-9 0-15M395 432q-5-9 0-15" stroke="#F7EBD3" stroke-width="2" fill="none" opacity=".6" stroke-linecap="round"/>
+<rect x="410" y="450" width="10" height="15" rx="2" fill="#F7F1E6"/><ellipse cx="415" cy="446" rx="3.5" ry="6" fill="#F0A58D"/>
+<!-- plant -->
+<path d="M82 520h56l-8 48h-40z" fill="#C97B5E"/><rect x="78" y="514" width="64" height="9" rx="3" fill="#B56A4F"/>
+<g fill="#3E9A93"><ellipse cx="96" cy="494" rx="16" ry="12"/><ellipse cx="124" cy="490" rx="16" ry="12"/><ellipse cx="110" cy="478" rx="16" ry="12"/></g>
+<g fill="#F0A58D"><circle cx="92" cy="480" r="7"/><circle cx="122" cy="474" r="7"/><circle cx="108" cy="464" r="6"/></g>
+</svg>
