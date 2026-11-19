@@ -1,0 +1,27 @@
+name: Build candle projects
+on:
+  pull_request:
+    paths:
+      - 'candles/**'
+      - '.github/workflows/candles-build.yml'
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        app: [web, web-2025]
+    defaults:
+      run:
+        working-directory: candles/${{ matrix.app }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --no-audit --no-fund
+      - run: npm run build
+        env:
+          CI: 'false'
+      - run: test -s build/index.html && test -s build/asset-manifest.json
