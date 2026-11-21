@@ -6,7 +6,7 @@
 {{hero_preload}}
 <title>{{title}}</title>
 <meta name="description" content="{{description}}">
-<link rel="canonical" href="{{canonical}}">
+{{robots}}<link rel="canonical" href="{{canonical}}">
 <link rel="alternate" hreflang="he" href="{{alt_he}}">
 <link rel="alternate" hreflang="en" href="{{alt_en}}">
 <meta property="og:title" content="{{title}}">
@@ -28,6 +28,7 @@
 <link rel="stylesheet" href="/assets/css/site.css?v={{build}}">
 <script>try{var a=JSON.parse(localStorage.getItem('yl-a11y')||'{}');var c=document.documentElement.classList;if(a.t)c.add('a11y-t'+a.t);['contrast','links','font','motion','spacing'].forEach(function(k){if(a[k])c.add('a11y-'+k)})}catch(e){}</script>
 {{analytics}}
+<script type="application/ld+json">{{jsonld}}</script>
 </head>
 <body class="page-{{page}} group-{{group}}" data-nw="{{t.nw}}" data-req="{{t.req_consent}}" data-forms="{{forms_endpoint}}">
 <a class="skip" href="#main">{{t.skip}}</a>
@@ -77,9 +78,9 @@
         <li>{{t.mail}}: {{t.address}}</li>
       </ul>
       <div class="foot-social" aria-label="{{t.follow}}">
-        <a href="https://www.facebook.com/groups/352903998745282" target="_blank" rel="noopener">Facebook</a>
-        <a href="https://www.youtube.com/@%D7%99%D7%A7%D7%99%D7%A8%D7%9C%D7%99-%D7%99%D7%93%D7%95%D7%9C%D7%91%D7%9C%D7%A9%D7%9B%D7%95%D7%9C%D7%94%D7%90%D7%96%D7%A8%D7%97%D7%99" target="_blank" rel="noopener">YouTube</a>
-        <a href="https://www.instagram.com/pynyrbynvbyts/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com/groups/352903998745282" target="_blank" rel="noopener">{{t.fb}}</a>
+        <a href="https://www.youtube.com/@%D7%99%D7%A7%D7%99%D7%A8%D7%9C%D7%99-%D7%99%D7%93%D7%95%D7%9C%D7%91%D7%9C%D7%A9%D7%9B%D7%95%D7%9C%D7%94%D7%90%D7%96%D7%A8%D7%97%D7%99" target="_blank" rel="noopener">{{t.yt}}</a>
+        <a href="https://www.instagram.com/pynyrbynvbyts/" target="_blank" rel="noopener">{{t.ig}}</a>
       </div>
     </div>
     <div class="nl" role="group" aria-label="{{t.newsletter}}">

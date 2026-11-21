@@ -889,3 +889,7 @@ html:not(.a11y-contrast) .hero p { color: var(--ink); }
 .mortality-table th.col24{background:#F4C95D;color:#1E3B55}
 .mortality-table tbody td.col24,.mortality-table tbody tr.latest td.col24{background:#FFF1C9;color:var(--ink);font-weight:700}
 html.a11y-contrast .mortality-table th.col24,html.a11y-contrast .mortality-table tbody td.col24{background:#fff;color:#000;font-weight:700}
+
+/* מקרא לתרשים המעגל בדף הבית (21.11.2026) */
+.circle-legend{margin:20px 0 0;padding-inline-start:1.3em;display:grid;gap:10px;font-size:1.05rem;line-height:1.55}
+.circle-legend li::marker{font-weight:700}

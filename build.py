@@ -10,7 +10,7 @@
        python3 build.py --base /yakirli-site  -> dist/ לכתובת משנה (GitHub Pages)
        python3 build.py --site-url https://www.yakirli.org
 """
-import argparse, html, os, pathlib, re, shutil, time
+import argparse, html, json, os, pathlib, re, shutil, time
 
 ROOT = pathlib.Path(__file__).resolve().parent
 SRC, TPL, DIST = ROOT / 'src', ROOT / 'templates' / 'layout.html', ROOT / 'dist'
@@ -87,6 +87,7 @@ T = {
                newsletter='הצטרפות לרשימת התפוצה', join='הצטרפות', nl_sent='זו גרסת תצוגה: ההרשמה לא נשמרה.',
                access='הצהרת נגישות', privacy='מדיניות פרטיות', reg='יקיר לי – יד ולב לשכול האזרחי (ע"ר 580616001)', credits='',
                wa='שליחת הודעת וואטסאפ ליקיר לי', foot_tag='יד ולב לשכול האזרחי (ע"ר 580616001)',
+               fb='פייסבוק', yt='יוטיוב', ig='אינסטגרם',
                sub_toggle='פתיחת תפריט משנה', reach_out='פנו אלינו', logo_alt='סמל יקיר לי', site='יקיר לי', site_long='יקיר לי – יד ולב לשכול האזרחי'),
     'en': dict(
                terms='Terms of use', follow='Follow us', nw='(opens in a new window)', req_consent='To send, please tick the confirmation box.',
@@ -103,6 +104,7 @@ T = {
                access='Accessibility statement', privacy='Privacy policy',
                reg='Yakir Li – Civilian Bereavement Support (Registered Nonprofit 580616001)', credits='',
                wa='Send Yakir Li a WhatsApp message', foot_tag='Civilian Bereavement Support (Reg. Nonprofit 580616001)',
+               fb='Facebook', yt='YouTube', ig='Instagram',
                sub_toggle='Open submenu', reach_out='Reach out', logo_alt='Yakir Li logo', site='Yakir Li', site_long='Yakir Li – Civilian Bereavement Support'),
 }
 CHEVRON = '<svg viewBox="0 0 20 20" aria-hidden="true" width="14" height="14"><path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
@@ -132,7 +134,9 @@ def nav_html(lang, pid, group):
 
 def foot_nav_html(lang):
     FOOT_LABEL = {'he': {'support': 'היום השמיני'}, 'en': {'support': 'The Day After Shiva'}}
-    return '\n'.join(f'        <li><a href="{path_of(lang, GROUP_HOME.get(k, k))}">{html.escape(FOOT_LABEL[lang].get(k, l))}</a></li>' for k, l, _ in NAV[lang])
+    items = [f'        <li><a href="{path_of(lang, GROUP_HOME.get(k, k))}">{html.escape(FOOT_LABEL[lang].get(k, l))}</a></li>' for k, l, _ in NAV[lang]]
+    items.append(f'        <li><a href="{path_of(lang, "donate")}">{html.escape(T[lang]["donate"])}</a></li>')
+    return '\n'.join(items)
 
 def read_fragment(fp):
     txt = fp.read_text(encoding='utf-8')
@@ -152,6 +156,23 @@ def description_of(body):
     d = html.unescape(re.sub(r'<[^>]+>', '', m.group(1))) if m else ''
     return html.escape(d.strip()[:300], quote=True)
 
+def jsonld(lang, site):
+    """נתונים מובנים למנועי חיפוש: פרטי העמותה."""
+    t = T[lang]
+    data = {
+        '@context': 'https://schema.org', '@type': 'NGO', 'name': t['site_long'], 'alternateName': t['site'],
+        'url': site + path_of(lang, 'home'), 'logo': site + '/assets/img/icon-192.png',
+        'email': 'info@yakirli.org', 'telephone': '+972-50-533-5148', 'foundingDate': '2015',
+        'address': {'@type': 'PostalAddress', 'postOfficeBoxNumber': '1208', 'addressLocality': 'Efrat' if lang == 'en' else 'אפרת',
+                    'postalCode': '9043500', 'addressCountry': 'IL'},
+        'identifier': '580616001',
+        'sameAs': ['https://www.guidestar.org.il/organization/580616001',
+                   'https://he.wikipedia.org/wiki/%D7%A2%D7%9E%D7%95%D7%AA%D7%AA_%D7%99%D7%A7%D7%99%D7%A8_%D7%9C%D7%99',
+                   'https://www.youtube.com/@%D7%99%D7%A7%D7%99%D7%A8%D7%9C%D7%99-%D7%99%D7%93%D7%95%D7%9C%D7%91%D7%9C%D7%A9%D7%9B%D7%95%D7%9C%D7%94%D7%90%D7%96%D7%A8%D7%97%D7%99'],
+    }
+    return json.dumps(data, ensure_ascii=False).replace('</', '<\\/')
+
+NOINDEX = False  # נקבע ב-main() לפי --noindex: עותקי תצוגה ובדיקה לא נכנסים לגוגל
 ANALYTICS_CODE = ''  # נקבע ב-main() לפי --analytics
 # כתובת קליטת הטפסים (Google Apps Script – tools/site-forms-backend.gs). ריק = גיבוי: פתיחת מייל מוכן.
 FORMS_ENDPOINT = ''
@@ -184,6 +205,7 @@ def render_page(layout, base, site, build_id, lang, pid, path, title, group, bod
         'analytics': analytics_tag(), 'forms_endpoint': html.escape(FORMS_ENDPOINT, quote=True),
         'alt_path': path_of(alt_lang, pid if pid in PATHS else 'home'), 'alt_lang': alt_lang,
         'nav': nav_html(lang, pid, group), 'foot_nav': foot_nav_html(lang), 'content': body,
+        'jsonld': jsonld(lang, site), 'robots': '<meta name="robots" content="noindex">\n' if NOINDEX else '',
     }
     out = layout
     for k, v in t.items():
@@ -206,7 +228,7 @@ OLD_SITE_REDIRECTS = (
     ('/הכשרת-מתנדבים-חדש/', '/volunteers/'),
     ('/digital-memoriz/', '/remembrance/'), ('/הנצחה-דיגיטלית-יקיר-לי/', '/remembrance/'),
     ('/כתבות/', '/media/'), ('/video/', '/media/'), ('/yakir-li-online/', '/media/'),
-    ('/מחקרים-חדש/', '/research/'), ('/netunei-ptira/', '/research/'), ('/נתוני-פטירה-מעודכן/', '/research/'),
+    ('/מחקרים-חדש/', '/research/'), ('/netunei-ptira/', '/research/#data'), ('/נתוני-פטירה-מעודכן/', '/research/#data'),
     ('/shchol-ezrachi-resources/', '/research/'),
     ('/promotion-legislation/', '/legislation/'), ('/קידום-חקיקה-חדש/', '/legislation/'),
     ('/פעילות-ציבורית/', '/public-advocacy/'), ('/education/', '/public-advocacy/'),
@@ -220,10 +242,12 @@ def main():
     ap.add_argument('--base', default='', help='נתיב בסיס, למשל /yakirli-site (ללא / בסוף)')
     ap.add_argument('--analytics', default='yakirli', help='קוד האתר ב-GoatCounter (yakirli.goatcounter.com). ריק לכיבוי')
     ap.add_argument('--site-url', default='https://www.yakirli.org', help='כתובת האתר ל-canonical ול-sitemap')
+    ap.add_argument('--noindex', action='store_true', help='עותק תצוגה או בדיקה: מוסיף noindex לכל העמודים')
     ap.add_argument('--forms-endpoint', default=os.environ.get('YAKIRLI_FORMS_ENDPOINT', ''),
                     help='Google Apps Script /exec URL; empty uses the explicit email-draft fallback')
     a = ap.parse_args()
-    global ANALYTICS_CODE, FORMS_ENDPOINT
+    global ANALYTICS_CODE, FORMS_ENDPOINT, NOINDEX
+    NOINDEX = a.noindex
     ANALYTICS_CODE = a.analytics.strip()
     FORMS_ENDPOINT = a.forms_endpoint.strip()
     if FORMS_ENDPOINT and not re.fullmatch(r'https://script\.google\.com/macros/s/[A-Za-z0-9_-]+/exec', FORMS_ENDPOINT):
@@ -260,9 +284,10 @@ def main():
                '<a class="btn btn-s" href="/en/" lang="en">English</a></div></div></div></section>')
     (DIST / '404.html').write_text(render_page(layout, base, site, build_id, 'he', 'notfound', '/404.html', 'העמוד לא נמצא', '', nf_body), encoding='utf-8')
     # עמודים שהוסרו – הפניה לכתובת החדשה (19.10.2026: נתוני פטירה עברו לאודות)
-    for old, new in (('/mortality-data/', '/research/'), ('/en/mortality-data/', '/en/research/')) + OLD_SITE_REDIRECTS:
+    for old, new in (('/mortality-data/', '/research/#data'), ('/en/mortality-data/', '/en/research/#data')) + OLD_SITE_REDIRECTS:
         d = DIST / old.strip('/'); d.mkdir(parents=True, exist_ok=True)
-        (d / 'index.html').write_text(f'<!DOCTYPE html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url={base}{new}"><link rel="canonical" href="{site}{new}"><a href="{base}{new}">{base}{new}</a>', encoding='utf-8')
+        canon = new.split('#')[0]
+        (d / 'index.html').write_text(f'<!DOCTYPE html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url={base}{new}"><link rel="canonical" href="{site}{canon}"><a href="{base}{new}">{base}{new}</a>', encoding='utf-8')
     # אזור אישי – לוח נתוני הגלישה (לא מקושר מהאתר, לא באינדקס של מנועי חיפוש)
     adm = (ROOT / 'templates' / 'admin.html').read_text(encoding='utf-8')
     adm = adm.replace('{{build}}', build_id).replace('{{analytics_code}}', ANALYTICS_CODE).replace('{{base}}', base)
