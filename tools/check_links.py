@@ -26,12 +26,12 @@ class Page(HTMLParser):
 
 def check(root, base):
     # Redirect stubs for removed pages (e.g. /mortality-data/ -> /about/#data) are not real pages
-    pages = {p.relative_to(root).as_posix(): Page(p.read_text()) for p in root.rglob('*.html') if 'http-equiv="refresh"' not in p.read_text()}
+    pages = {p.relative_to(root).as_posix(): Page(p.read_text()) for p in root.rglob('*.html') if 'http-equiv="refresh"' not in p.read_text() and not p.relative_to(root).as_posix().startswith('candles/')}
     errors, external = [], set()
     indexes = [p for p in pages if p.endswith('index.html') and not p.startswith('admin/')]
     if len(indexes) != 40:
         errors.append(f'Expected 40 pages, found {len(indexes)}')
-    for required in ('404.html', 'sitemap.xml', 'robots.txt'):
+    for required in ('404.html', 'sitemap.xml', 'robots.txt', 'candles/index.html'):
         if not (root / required).is_file():
             errors.append(f'Missing {required}')
     for name, page in pages.items():
