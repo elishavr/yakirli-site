@@ -195,6 +195,26 @@ def render_page(layout, base, site, build_id, lang, pid, path, title, group, bod
         out = out.replace(f'{base}/assets', f'{base}/assets')
     return out
 
+# כתובות מאתר הוורדפרס הקודם (לפי מפת האתר שלו, 21.11.2026) – הפניה לעמוד המקביל באתר החדש
+OLD_SITE_REDIRECTS = (
+    ('/about_us/', '/about/'), ('/about-2025/', '/about/'), ('/story2/', '/about/'), ('/team/', '/about/'),
+    ('/החזון-שלנו/', '/about/'), ('/אודות-העמותה-2026/', '/about/'),
+    ('/about-en/', '/en/about/'), ('/about-eng-new/', '/en/about/'), ('/kaparot-eng/', '/en/'),
+    ('/home1/', '/'), ('/עמוד-הבית-חדש/', '/'), ('/supporting/', '/'), ('/wide-support/', '/'),
+    ('/sample-page/', '/'), ('/hello-world/', '/'), ('/עיצובים/', '/'), ('/kaparot/', '/'), ('/lulav/', '/'),
+    ('/shakulot/', '/bereaved-parents/'), ('/משפחות-שכולות-חדש/', '/bereaved-parents/'), ('/information/', '/bereaved-parents/'),
+    ('/הכשרת-מתנדבים-חדש/', '/volunteers/'),
+    ('/digital-memoriz/', '/remembrance/'), ('/הנצחה-דיגיטלית-יקיר-לי/', '/remembrance/'),
+    ('/כתבות/', '/media/'), ('/video/', '/media/'), ('/yakir-li-online/', '/media/'),
+    ('/מחקרים-חדש/', '/research/'), ('/netunei-ptira/', '/research/'), ('/נתוני-פטירה-מעודכן/', '/research/'),
+    ('/shchol-ezrachi-resources/', '/research/'),
+    ('/promotion-legislation/', '/legislation/'), ('/קידום-חקיקה-חדש/', '/legislation/'),
+    ('/פעילות-ציבורית/', '/public-advocacy/'), ('/education/', '/public-advocacy/'),
+    ('/lectures-mudaot/', '/awareness-week/'),
+    ('/flipbook/', '/eighth-day/'), ('/flipbook/היום-השמיני/', '/eighth-day/'),
+    ('/צרו-קשר-חדש/', '/contact/'), ('/privacy-policy-2/', '/privacy/'),
+)
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--base', default='', help='נתיב בסיס, למשל /yakirli-site (ללא / בסוף)')
@@ -240,7 +260,7 @@ def main():
                '<a class="btn btn-s" href="/en/" lang="en">English</a></div></div></div></section>')
     (DIST / '404.html').write_text(render_page(layout, base, site, build_id, 'he', 'notfound', '/404.html', 'העמוד לא נמצא', '', nf_body), encoding='utf-8')
     # עמודים שהוסרו – הפניה לכתובת החדשה (19.10.2026: נתוני פטירה עברו לאודות)
-    for old, new in (('/mortality-data/', '/research/'), ('/en/mortality-data/', '/en/research/')):
+    for old, new in (('/mortality-data/', '/research/'), ('/en/mortality-data/', '/en/research/')) + OLD_SITE_REDIRECTS:
         d = DIST / old.strip('/'); d.mkdir(parents=True, exist_ok=True)
         (d / 'index.html').write_text(f'<!DOCTYPE html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url={base}{new}"><link rel="canonical" href="{site}{new}"><a href="{base}{new}">{base}{new}</a>', encoding='utf-8')
     # אזור אישי – לוח נתוני הגלישה (לא מקושר מהאתר, לא באינדקס של מנועי חיפוש)
