@@ -218,6 +218,10 @@ def main():
     for sub in ('css', 'js', 'img', 'files'):
         shutil.copytree(ROOT / 'assets' / sub, DIST / 'assets' / sub)
     (DIST / '.nojekyll').write_text('')
+    # פרויקט הנרות – החבילה שהוגשה ב-yakirli.org/candles/ (נובמבר 2026), מועתקת כמו שהיא
+    live_candles = ROOT / 'candles' / 'live'
+    if live_candles.is_dir():
+        shutil.copytree(live_candles, DIST / 'candles')
 
     layout = TPL.read_text(encoding='utf-8')
     urls = []

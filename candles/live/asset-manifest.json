@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/candles/static/css/main.e1127525.css",
+    "main.js": "/candles/static/js/main.3cf9261a.js",
+    "static/js/592.599f76a2.chunk.js": "/candles/static/js/592.599f76a2.chunk.js",
+    "static/media/candle-yakir.jpeg": "/candles/static/media/candle-yakir.91bb73f01cdec8bda351.jpeg",
+    "static/media/candleCardBackground.jpg": "/candles/static/media/candleCardBackground.8f5e557feae31d5a33c9.jpg",
+    "static/media/candleOn.jpg": "/candles/static/media/candleOn.b4676e8e0a4b8d920191.jpg",
+    "static/media/Discovery_Fs-Demibold.woff": "/candles/static/media/Discovery_Fs-Demibold.b2b2d966d6e0ba911beb.woff",
+    "static/media/yakir_li_logo.png": "/candles/static/media/yakir_li_logo.9a9afe2520ebf7f1bc35.png",
+    "static/media/Discovery_Fs-Regular.woff": "/candles/static/media/Discovery_Fs-Regular.95fb8c6b961394dcec47.woff",
+    "static/media/candleOff.jpg": "/candles/static/media/candleOff.ab627fab9fe0ead1037f.jpg",
+    "index.html": "/candles/index.html",
+    "main.e1127525.css.map": "/candles/static/css/main.e1127525.css.map",
+    "main.3cf9261a.js.map": "/candles/static/js/main.3cf9261a.js.map",
+    "592.599f76a2.chunk.js.map": "/candles/static/js/592.599f76a2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e1127525.css",
+    "static/js/main.3cf9261a.js"
+  ]
+}
