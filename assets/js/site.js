@@ -61,89 +61,102 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // טופס פנייה והזמנת הרצאה: שליחה ישירה ל-Google Apps Script של העמותה (data-forms בגוף העמוד).
-  // אם הכתובת לא הוגדרה עדיין – גיבוי: פתיחת מייל מוכן ל-info@yakirli.org.
-  var endpoint = document.body.getAttribute('data-forms') || '';
-  document.querySelectorAll('form[data-mailto-form]').forEach(function (form) {
-    form.removeAttribute('novalidate');
+  // טפסי האתר המעוצבים: כל טופס נשלח מאחורי הקלעים ל-Google Form שלו (data-gform = כתובת formResponse).
+  // שדות עם name="entry.NNN"; תאריך (type=date) מפוצל ל-_year/_month/_day; data-pages = pageHistory לטופס רב-עמודי.
+  // ההתראה למייל והגיליון – בצד גוגל (Apps Script "יקיר לי – טפסי האתר והתראות").
+  var lang = document.documentElement.lang === 'he' ? 'he' : 'en';
+  var M = {
+    he: { send: 'שליחה', sending: 'שולח…', ok: 'מוקירים תודה, קיבלנו ונחזור אליכם.',
+          bad: 'משהו השתבש בשליחה. אפשר לנסות שוב, או לפנות אלינו בוואטסאפ: 050-533-5148',
+          waBtn: 'שליחה בוואטסאפ', waTitle: 'פנייה מהאתר – ', yes: 'כן',
+          either: 'נא להזין טלפון או כתובת אימייל כדי שנוכל לחזור אליכם.' },
+    en: { send: 'Send', sending: 'Sending…', ok: 'Thank you – we received your message and will get back to you.',
+          bad: 'Something went wrong. Please try again, or contact us on WhatsApp: +972-50-533-5148',
+          waBtn: 'Send on WhatsApp', waTitle: 'Website message – ', yes: 'Yes',
+          either: 'Please provide a phone number or an email so we can respond.' }
+  }[lang];
+  function track(path, title) { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: path, title: title, event: true }); }
+  document.querySelectorAll('form[data-gform]').forEach(function (form) {
+    var url = form.getAttribute('data-gform');
+    var kind = form.getAttribute('data-kind') || 'form';
+    var title = form.getAttribute('data-title') || '';
     var submit = form.querySelector('button[type="submit"]');
-    var lang = document.documentElement.lang === 'he' ? 'he' : 'en';
-    var kind = form.getAttribute('data-mailto-form');
-    var M = {
-      he: { names: { contact: 'פנייה כללית', lectures: 'הזמנת הרצאה' }, send: 'שליחה', sending: 'שולח…',
-            ok: 'הפנייה נשלחה. תודה, נחזור אליכם בהקדם.',
-            bad: 'לא התקבל אישור מסירה. ייתכן שהפנייה נקלטה למרות התקלה. לפני שליחה חוזרת אפשר לוודא איתנו בוואטסאפ: 050-533-5148',
-            mailBtn: 'שליחה במייל', mailHint: 'ייפתח מייל מוכן – רק ללחוץ "שלח". לפנייה בוואטסאפ: 050-533-5148.', yes: 'כן',
-            waBtn: 'שליחה בוואטסאפ', waTitle: 'פנייה מהאתר – ' },
-      en: { names: { contact: 'General inquiry', lectures: 'Lecture booking' }, send: 'Send', sending: 'Sending…',
-            ok: 'Your message was sent. Thank you – we will get back to you soon.',
-            bad: 'We could not confirm delivery. Your message may still have reached us. Before resending, please check via WhatsApp: +972-50-533-5148',
-            mailBtn: 'Send by email', mailHint: 'A ready email will open – just press Send. Or contact us on WhatsApp: +972-50-533-5148.', yes: 'Yes',
-            waBtn: 'Send on WhatsApp', waTitle: 'Website message – ' }
-    }[lang];
     var status = form.querySelector('.sent');
     if (status) status.setAttribute('role', 'status');
     function show(text, bad) { if (!status) return; status.textContent = text; status.classList.toggle('bad', !!bad); status.hidden = false; }
-    if (!endpoint) { if (submit) submit.textContent = M.mailBtn; show(M.mailHint); }
+    function labelOf(el) {
+      var g = el.closest('fieldset'); if (g && (el.type === 'checkbox' || el.type === 'radio') && g.querySelector('legend')) return g.querySelector('legend').textContent;
+      var l = (el.id && form.querySelector('label[for="' + el.id + '"]')) || el.closest('label');
+      return l ? l.textContent : (el.name || '');
+    }
     function collect() {
       var out = [];
       form.querySelectorAll('.fields input, .fields select, .fields textarea').forEach(function (el) {
-        if (el.type === 'checkbox' && el.required) return; // תיבת האישור – לא נשלחת כשדה
+        if (!el.name || el.name === '_hp') return;
         if ((el.type === 'checkbox' || el.type === 'radio') && !el.checked) return;
-        var value = el.type === 'checkbox' ? M.yes : el.value.trim();
-        if (!value) return;
-        var label = (el.id && form.querySelector('label[for="' + el.id + '"]')) || el.closest('label');
-        out.push({ label: label ? label.textContent.replace(/\s+/g, ' ').trim() : (el.name || el.id), value: value });
+        if (el.hasAttribute('data-today')) { var n = new Date(); el.value = n.getFullYear() + '-' + (n.getMonth() + 1) + '-' + n.getDate(); }
+        var v = el.value.trim(); if (!v) return;
+        out.push({ name: el.name, type: el.hasAttribute('data-today') ? 'date' : el.type, label: labelOf(el).replace(/\s+/g, ' ').replace(/\*/g, '').trim(), value: v });
       });
       return out;
     }
-    // A phone OR an email is required, but neither channel is compulsory alone.
+    // "טלפון או אימייל" – כשהטופס מסומן data-either
     var phone = form.querySelector('.fields input[type="tel"]');
     var email = form.querySelector('.fields input[type="email"]');
+    var either = form.hasAttribute('data-either') && phone && email;
     if (phone) phone.addEventListener('input', function () { phone.setCustomValidity(''); });
-    if (email && phone) email.addEventListener('input', function () { phone.setCustomValidity(''); });
+    if (either) email.addEventListener('input', function () { phone.setCustomValidity(''); });
+    // קבוצת תיבות סימון שחובה לסמן בה לפחות אחת
+    var groups = Array.prototype.slice.call(form.querySelectorAll('fieldset[data-required]'));
+    // בחירה שמחייבת שדה נוסף (למשל אישור המשפחה בטופס ההנצחה): data-req="#id"
+    var reqTargets = Array.prototype.slice.call(form.querySelectorAll('input[data-req]')).map(function (i) { return i.getAttribute('data-req'); });
+    form.addEventListener('change', function (ev) {
+      if (ev.target.type !== 'radio') return;
+      reqTargets.forEach(function (sel) { var t = form.querySelector(sel); if (t) t.required = false; });
+      var want = ev.target.getAttribute('data-req'); var t2 = want && form.querySelector(want); if (t2) t2.required = true;
+    });
     function valid() {
-      if (phone && email) {
-        phone.setCustomValidity('');
-        if (!phone.value.trim() && !email.value.trim()) {
-          phone.setCustomValidity(lang === 'he'
-            ? 'נא להזין טלפון או כתובת אימייל כדי שנוכל לחזור אליכם.'
-            : 'Please provide a phone number or an email so we can respond.');
-        }
-      }
+      if (either) { phone.setCustomValidity(''); if (!phone.value.trim() && !email.value.trim()) phone.setCustomValidity(M.either); }
+      groups.forEach(function (g) {
+        var boxes = g.querySelectorAll('input[type="checkbox"]'); if (!boxes.length) return;
+        var any = Array.prototype.some.call(boxes, function (b) { return b.checked; });
+        boxes[0].setCustomValidity(any ? '' : (lang === 'he' ? 'נא לסמן לפחות אפשרות אחת.' : 'Please choose at least one option.'));
+        Array.prototype.forEach.call(boxes, function (b) { b.addEventListener('change', function () { boxes[0].setCustomValidity(''); }, { once: true }); });
+      });
       return form.reportValidity();
     }
-    // שליחה בוואטסאפ: אותה פנייה, כהודעה מוכנה לוואטסאפ של העמותה (050-533-5148). אושר בעיקרון 1.11.2026.
-    if (submit) {
+    if (submit && form.hasAttribute('data-wa')) {
       var wa = document.createElement('button');
       wa.type = 'button'; wa.className = 'btn btn-s btn-wa'; wa.textContent = M.waBtn;
       submit.insertAdjacentElement('afterend', wa);
       wa.addEventListener('click', function () {
         if (!valid()) return;
-        var text = M.waTitle + M.names[kind] + '\n\n' + collect().map(function (f) { return f.label + ': ' + f.value; }).join('\n');
+        var text = M.waTitle + title + '\n\n' + collect().map(function (f) { return f.label + ': ' + f.value; }).join('\n');
         window.open('https://wa.me/972505335148?text=' + encodeURIComponent(text), '_blank', 'noopener');
-        if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: 'form-' + kind + '-whatsapp', title: 'שליחה בוואטסאפ', event: true });
+        track('form-' + kind + '-whatsapp', 'שליחה בוואטסאפ');
       });
     }
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
-      if (form.classList.contains('busy')) return;
-      if (!valid()) return;
-      var fields = collect();
-      if (!endpoint) {
-        var title = M.names[kind];
-        var body = fields.map(function (f) { return f.label + ': ' + f.value; }).join('\n\n');
-        window.location.href = 'mailto:info@yakirli.org?subject=' + encodeURIComponent((lang === 'he' ? 'פנייה מהאתר – ' : 'Website message – ') + title) + '&body=' + encodeURIComponent(body);
-        return;
-      }
+      if (form.classList.contains('busy') || !valid()) return;
       var hp = form.querySelector('[name="_hp"]');
+      if (hp && hp.value) { form.reset(); show(M.ok); return; } // ספאם
+      var body = new URLSearchParams();
+      collect().forEach(function (f) {
+        if (f.type === 'date') {
+          var d = f.value.split('-');
+          body.append(f.name + '_year', d[0]); body.append(f.name + '_month', String(+d[1])); body.append(f.name + '_day', String(+d[2]));
+        } else body.append(f.name, f.value);
+      });
+      var pg = form.querySelector('input[data-pages]:checked');
+      var pages = pg ? pg.getAttribute('data-pages') : form.getAttribute('data-pages');
+      if (pages) body.append('pageHistory', pages);
       form.classList.add('busy'); if (submit) submit.textContent = M.sending;
-      fetch(endpoint, { method: 'POST', body: JSON.stringify({ _form: kind, _page: location.pathname, _hp: hp ? hp.value : '', fields: fields }) })
-        .then(function (r) { return r.json(); })
-        .then(function (res) {
-          if (!res || !res.ok) throw new Error('fail');
-          form.reset(); show(M.ok);
-          if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: 'form-' + kind + '-form', title: 'שליחת טופס', event: true });
+      fetch(url, { method: 'POST', mode: 'no-cors', body: body })
+        .then(function () {
+          form.reset(); form.classList.add('done'); show(M.ok);
+          if (status) { status.setAttribute('tabindex', '-1'); status.focus(); }
+          track('form-' + kind + '-sent', 'שליחת טופס');
         })
         .catch(function () { show(M.bad, true); })
         .then(function () { form.classList.remove('busy'); if (submit) submit.textContent = M.send; });
@@ -251,7 +264,7 @@
   /* Lecture booking buttons preselect the matching lecture in the shared form. */
   document.querySelectorAll('a[data-lecture]').forEach(function (a) {
     a.addEventListener('click', function () {
-      var form = document.querySelector('form[data-mailto-form="lectures"]');
+      var form = document.querySelector('form[data-kind="lectures"]');
       var sel = form && form.querySelector('select');
       var i = Number(a.getAttribute('data-lecture'));
       if (sel && sel.options[i]) sel.selectedIndex = i;

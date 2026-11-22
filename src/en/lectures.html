@@ -37,16 +37,19 @@
 <div class="wrap">
 <div class="sec-head">
 <h2>Book a lecture</h2></div>
-<form class="form" data-mailto-form="lectures">
+<form class="form" data-gform="https://docs.google.com/forms/d/e/1FAIpQLSeN694CvOD24hoEmSiFni3_GLjQDNDU8A7hoXZ-Pl-gaEkrBw/formResponse" data-kind="lectures" data-title="Lecture booking" data-wa data-either>
 <div class="hp" aria-hidden="true"><label>Leave empty<input type="text" name="_hp" tabindex="-1" autocomplete="off"></label></div>
 <div class="fields">
-<div class="field"><label for="en-lectures-2-0">Full name</label><input id="en-lectures-2-0" type="text" required maxlength="200" autocomplete="name"></div>
-<div class="field"><label for="en-lectures-2-1">Organization / community</label><input id="en-lectures-2-1" type="text"></div>
-<div class="field"><label for="en-lectures-2-2">Phone</label><input id="en-lectures-2-2" type="tel" dir="ltr"></div>
-<div class="field"><label for="en-lectures-2-3">Email</label><input id="en-lectures-2-3" type="email" dir="ltr"></div>
-<div class="field"><label for="en-lectures-2-4">Which lecture?</label><select id="en-lectures-2-4" required><option value="">Select</option><option>Dasi&#x27;s Ripples</option><option>The Footprints You Left in Time</option><option>Not sure yet</option></select></div>
-<div class="field"><label for="en-lectures-2-5">Preferred date</label><input id="en-lectures-2-5" type="text"></div>
-<label class="chk full"><input type="checkbox" id="en-lectures-form-privacy" required>Your details are used only to get back to you. I agree to the <a href="/en/privacy/">privacy policy</a></label></div>
+<div class="field"><label for="l-name">Full name *</label><input id="l-name" name="entry.276203913" type="text" required maxlength="300" autocomplete="name"></div>
+<div class="field"><label for="l-org">Organization / community</label><input id="l-org" name="entry.893916994" type="text" maxlength="300"></div>
+<div class="field"><label for="l-tel">Phone</label><input id="l-tel" name="entry.585998578" type="tel" dir="ltr" autocomplete="tel" maxlength="300"></div>
+<div class="field"><label for="l-mail">Email</label><input id="l-mail" name="entry.398676132" type="email" dir="ltr" autocomplete="email" maxlength="300"></div>
+<div class="field"><label for="l-which">Which lecture? *</label><select id="l-which" name="entry.595332927" required><option value="">Choose</option><option value="האדוות של דסי">Dasi&#x27;s Ripples</option><option value="העקבות שהשארת בזמן">The Traces You Left in Time</option><option value="עדיין לא יודע/ת">Not sure yet</option></select></div>
+<div class="field"><label for="l-date">Requested date</label><input id="l-date" name="entry.2094334414" type="text" maxlength="300"></div>
+<div class="field full"><label for="l-place">Lecture venue / town</label><input id="l-place" name="entry.1106919995" type="text" maxlength="300"></div>
+<label class="chk full"><input type="checkbox" id="l-ok" name="entry.1383933602" value="כן" required>Your details will only be used to get back to you. I agree to the <a href="/en/privacy/">privacy policy</a></label>
+</div>
+<p class="form-note">Each lecture lasts an hour and a half.</p>
 <div class="form-actions"><button type="submit" class="btn btn-p">Send</button></div>
 <p class="sent" hidden></p></form>
 </div>

@@ -898,3 +898,9 @@ html.a11y-contrast .mortality-table th.col24,html.a11y-contrast .mortality-table
 .aw-btns { justify-content: center; margin-top: 24px; }
 .aw-candle { width: 10cqw; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .25)); }
 @media (max-width: 760px) { .aw-candle { width: 56px; } }
+
+/* טפסי האתר המחוברים ל-Google Forms (22.11.2026) */
+.form.done .fields, .form.done .form-actions, .form.done .form-note { display: none; }
+.form.done .sent { margin-top: 0; font-size: 1.1rem; }
+.cta .form { text-align: start; color: var(--ink); margin-top: 8px; }
+.form .chks .chk { font-weight: 400; }

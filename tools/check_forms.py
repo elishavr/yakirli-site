@@ -7,8 +7,8 @@ ROOT = Path(__file__).resolve().parents[1]
 EXPECTED = {
     "parents": {"he": "1FAIpQLSe5hLRLG4wtiijy4eSqazjzYy9NBIOJ1nJi4Eb4XIzOMYiCDw", "en": "1FAIpQLSfVty0on3VKBk3d-dIdRkaHTtbZ1lmnCRDOwQY2PfQfNBBRWQ"},
     "volunteers": "https://forms.gle/ahSZVd6EmDSEDSpr7",
-    "grandparents": "https://docs.google.com/forms/d/e/1FAIpQLSefq2anLte9kD1z3OJkNO_5lEV6585a-ZCga7Fyif37p-Rx5A/viewform",
-    "memorial": "1FAIpQLSchhvFDIo2ZFOlYn3JFEJd1yOySCOY_Nj9NVVgAUgL-QMqgUw",
+    "grandparents": "1FAIpQLSefq2anLte9kD1z3OJkNO_5lEV6585a-ZCga7Fyif37p-Rx5A/formResponse",
+    "memorial": "1FAIpQLSchhvFDIo2ZFOlYn3JFEJd1yOySCOY_Nj9NVVgAUgL-QMqgUw/formResponse",
     "contact": "https://forms.gle/xws9C5CZQajKypWSA",
 }
 issues = []
@@ -21,7 +21,7 @@ for lang in ("he", "en"):
             issues.append(f"Missing {page} Google Form link in {lang}")
     for page in ("contact", "lectures"):
         body = (ROOT / "src" / lang / f"{page}.html").read_text(encoding="utf-8")
-        if f'data-mailto-form="{page}"' not in body:
+        if f'data-kind="{page}"' not in body or "/formResponse" not in body:
             issues.append(f"Missing native form marker: {lang}/{page}")
         if not re.search(r'<input[^>]+required[^>]+autocomplete="name"', body):
             issues.append(f"Missing name validation: {lang}/{page}")
@@ -32,7 +32,7 @@ layout = (ROOT / "templates" / "layout.html").read_text(encoding="utf-8")
 if EXPECTED["contact"] not in layout:
     issues.append("Missing footer newsletter registration link")
 backend = (ROOT / "tools" / "site-forms-backend.gs").read_text(encoding="utf-8")
-notifier = (ROOT / "tools" / "google-form-email-notify.gs").read_text(encoding="utf-8")
+notifier = (ROOT / "tools" / "yakirli-forms-setup.gs").read_text(encoding="utf-8")
 for name, data in [("site backend", backend), ("Google Forms notifier", notifier)]:
     for token in ("ALERT_EMAIL", "טופס חדש מהאתר", 'dir="rtl"'):
         if token not in data:
