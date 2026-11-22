@@ -904,3 +904,5 @@ html.a11y-contrast .mortality-table th.col24,html.a11y-contrast .mortality-table
 .form.done .sent { margin-top: 0; font-size: 1.1rem; }
 .cta .form { text-align: start; color: var(--ink); margin-top: 8px; }
 .form .chks .chk { font-weight: 400; }
+.form .form-sub { margin: 10px 0 -6px; font-size: 1.1rem; color: var(--teal-ink); border-bottom: 1px solid var(--mist); padding-bottom: 6px; }
+.form .form-sub:first-of-type { margin-top: 0; }

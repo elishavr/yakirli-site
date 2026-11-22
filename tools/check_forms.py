@@ -5,11 +5,11 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 EXPECTED = {
-    "parents": {"he": "1FAIpQLSe5hLRLG4wtiijy4eSqazjzYy9NBIOJ1nJi4Eb4XIzOMYiCDw", "en": "1FAIpQLSfVty0on3VKBk3d-dIdRkaHTtbZ1lmnCRDOwQY2PfQfNBBRWQ"},
-    "volunteers": "https://forms.gle/ahSZVd6EmDSEDSpr7",
+    "parents": {"he": "1FAIpQLSe5hLRLG4wtiijy4eSqazjzYy9NBIOJ1nJi4Eb4XIzOMYiCDw/formResponse", "en": "1FAIpQLSfVty0on3VKBk3d-dIdRkaHTtbZ1lmnCRDOwQY2PfQfNBBRWQ/formResponse"},
+    "volunteers": "1FAIpQLSdTHITTjZEgh3keI6j511OjFK2R_kPi6CZDFqpeikqheomkSA/formResponse",
     "grandparents": "1FAIpQLSefq2anLte9kD1z3OJkNO_5lEV6585a-ZCga7Fyif37p-Rx5A/formResponse",
     "memorial": "1FAIpQLSchhvFDIo2ZFOlYn3JFEJd1yOySCOY_Nj9NVVgAUgL-QMqgUw/formResponse",
-    "contact": "https://forms.gle/xws9C5CZQajKypWSA",
+    "contact": "1FAIpQLSeQiYJMGweXalZaoQilrV_mcxMCQinALqAny_eNJ4OoxAzTLw/formResponse",
 }
 issues = []
 for lang in ("he", "en"):
@@ -29,7 +29,7 @@ for lang in ("he", "en"):
             issues.append(f"Missing consent requirement: {lang}/{page}")
 
 layout = (ROOT / "templates" / "layout.html").read_text(encoding="utf-8")
-if EXPECTED["contact"] not in layout:
+if "nl_href" not in layout:
     issues.append("Missing footer newsletter registration link")
 backend = (ROOT / "tools" / "site-forms-backend.gs").read_text(encoding="utf-8")
 notifier = (ROOT / "tools" / "yakirli-forms-setup.gs").read_text(encoding="utf-8")
