@@ -3,8 +3,8 @@
 אתר סטטי (HTML + CSS + מעט JS) לעמותת יקיר לי (ע"ר 580616001), דו־לשוני עברית/אנגלית.
 השפה העיצובית בהשראת [moshe.org.il](https://moshe.org.il/); המבנה והתוכן לפי ההצעה המאושרת (7.10.2026).
 
-**תצוגה חיה:** אחרי כל דחיפה ל־`main` האתר נבנה ומתפרסם אוטומטית ב־GitHub Pages
-(הקישור מופיע בלשונית Actions ובהגדרות הריפו → Pages).
+**האתר החי:** https://yakirli.org. אחרי כל דחיפה ל־`main` האתר נבנה ומתפרסם שם אוטומטית בתוך כ־5 דקות.
+עותק תצוגה ב־GitHub Pages: https://elishavr.github.io/yakirli-site/ (חסום למנועי חיפוש).
 
 ## מבנה התיקייה
 
@@ -75,8 +75,10 @@ python3 build.py && python3 -m http.server 8787 --directory dist
 
 ## פרסום
 
-דחיפה ל־`main` מפעילה את `.github/workflows/pages.yml`: בנייה עם קידומת הנתיב של הריפו ופריסה ל־GitHub Pages.
-לפרסום בדומיין www.yakirli.org (כתובת שורש) מריצים `python3 build.py` ללא `--base` ומעלים את `dist/`.
+דחיפה ל־`main` מפרסמת את האתר בשלושה מקומות:
+- **yakirli.org (האתר החי):** השרת ב־servers24 בודק את `main` כל 5 דקות, בונה, מריץ את בדיקות הקישורים והטפסים ומעלה. אם בדיקה נכשלת, האתר החי לא משתנה. לא נדרשת גישה ל־Cloudflare או ללוח האחסון. פרטים: [server/README.md](server/README.md).
+- **סביבת הבדיקה:** https://yakirli-new.staging24.link, מתעדכנת בתוך דקה.
+- **GitHub Pages:** `.github/workflows/pages.yml`, עותק תצוגה עם קידומת הנתיב של הריפו.
 
 ## העברה לוורדפרס
 
