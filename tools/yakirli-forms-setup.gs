@@ -7,7 +7,8 @@
  * - כותב ליומן (Execution log) את מבנה כל טופס, לחיבור הטפסים המעוצבים באתר
  */
 
-var ALERT_EMAIL = 'info@yakirli.org';
+// info@yakirli.org מעביר ל-pini1951, וג'ימייל מסתיר מייל שנשלח מהחשבון עצמו וחוזר בהעברה – לכן שולחים גם ישירות
+var ALERT_EMAIL = 'pini1951@gmail.com,info@yakirli.org';
 var THANKS = 'מוקירים תודה, קיבלנו ונחזור אליכם.';
 var DRAFT_TO_TRASH = '1IaAb6jRA-5N1VL2jjyRGt5PpWckm38WPJwk2Tu4CHjg';
 
