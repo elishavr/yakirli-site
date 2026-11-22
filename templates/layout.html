@@ -32,6 +32,10 @@
 </head>
 <body class="page-{{page}} group-{{group}}" data-nw="{{t.nw}}" data-req="{{t.req_consent}}" data-forms="{{forms_endpoint}}">
 <a class="skip" href="#main">{{t.skip}}</a>
+<div class="notice-bar" id="notice-bar" role="region" aria-label="{{t.nb_link}}" hidden>
+  <p>{{t.nb_text}} <a href="{{t.nb_href}}">{{t.nb_link}}</a></p>
+  <button class="notice-x" type="button" aria-label="{{t.nb_close}}">&times;</button>
+</div>
 <header class="site-head" id="top">
   <div class="wrap head-in">
     <a class="brand" href="{{home}}">
@@ -89,7 +93,7 @@
 </div>
   </div>
   <div class="wrap foot-legal">
-    <div><a href="{{access}}">{{t.access}}</a><a href="{{privacy}}">{{t.privacy}}</a><a href="{{terms}}">{{t.terms}}</a></div>
+    <div><a href="{{access}}">{{t.access}}</a><a href="{{privacy}}">{{t.privacy}}</a><a href="{{terms}}">{{t.terms}}</a><a href="{{t.nb_href}}">{{t.fb_link}}</a></div>
     <div class="small">{{t.reg}}</div>
   </div>
 </footer>

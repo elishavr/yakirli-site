@@ -88,6 +88,8 @@ T = {
                access='הצהרת נגישות', privacy='מדיניות פרטיות', reg='יקיר לי – יד ולב לשכול האזרחי (ע"ר 580616001)', credits='',
                wa='שליחת הודעת וואטסאפ ליקיר לי', foot_tag='יד ולב לשכול האזרחי (ע"ר 580616001)',
                fb='פייסבוק', yt='יוטיוב', ig='אינסטגרם',
+               nb_text='האתר שלנו התחדש 🎉 נשמח לשמוע מה דעתכם, מה חסר ומה אפשר לשפר – ואם משהו לא עובד כמו שצריך, נשמח שתעדכנו אותנו.', nb_link='כתבו לנו', nb_href='/contact/#contact-form', nb_close='סגירת ההודעה',
+               fb_link='הערות והצעות לאתר',
                sub_toggle='פתיחת תפריט משנה', reach_out='פנו אלינו', logo_alt='סמל יקיר לי', site='יקיר לי', site_long='יקיר לי – יד ולב לשכול האזרחי'),
     'en': dict(
                terms='Terms of use', follow='Follow us', nw='(opens in a new window)', req_consent='To send, please tick the confirmation box.',
@@ -105,6 +107,8 @@ T = {
                reg='Yakir Li – Civilian Bereavement Support (Registered Nonprofit 580616001)', credits='',
                wa='Send Yakir Li a WhatsApp message', foot_tag='Civilian Bereavement Support (Reg. Nonprofit 580616001)',
                fb='Facebook', yt='YouTube', ig='Instagram',
+               nb_text="Our website has been refreshed 🎉 We'd love to hear what you think, what's missing and what could be better – and if something isn't working as it should, please let us know.", nb_link='Write to us', nb_href='/en/contact/#en-contact-form', nb_close='Close this notice',
+               fb_link='Site feedback',
                sub_toggle='Open submenu', reach_out='Reach out', logo_alt='Yakir Li logo', site='Yakir Li', site_long='Yakir Li – Civilian Bereavement Support'),
 }
 CHEVRON = '<svg viewBox="0 0 20 20" aria-hidden="true" width="14" height="14"><path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'

@@ -906,3 +906,11 @@ html.a11y-contrast .mortality-table th.col24,html.a11y-contrast .mortality-table
 .form .chks .chk { font-weight: 400; }
 .form .form-sub { margin: 10px 0 -6px; font-size: 1.1rem; color: var(--teal-ink); border-bottom: 1px solid var(--mist); padding-bottom: 6px; }
 .form .form-sub:first-of-type { margin-top: 0; }
+
+/* פס הודעה: האתר התחדש (22.11.2026) */
+.notice-bar{display:flex;align-items:center;justify-content:center;gap:12px;padding:10px 48px;background:#CDE4EB;color:#1E3B55;text-align:center;font-size:1rem;line-height:1.5;position:relative}
+.notice-bar[hidden]{display:none}
+.notice-bar p{margin:0}
+.notice-bar a{color:#1E3B55;font-weight:700;text-decoration:underline}
+.notice-x{position:absolute;inset-inline-end:10px;top:50%;transform:translateY(-50%);background:none;border:0;font-size:1.6rem;line-height:1;color:#1E3B55;cursor:pointer;padding:4px 10px}
+@media (max-width:760px){.notice-bar{padding:10px 40px 10px 16px;font-size:.95rem}}

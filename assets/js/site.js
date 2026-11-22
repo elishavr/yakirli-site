@@ -271,3 +271,17 @@
     });
   });
 })();
+
+/* פס הודעה "האתר התחדש": מוצג עד 15.12.2026, וניתן לסגירה */
+(function () {
+  var bar = document.getElementById('notice-bar');
+  if (!bar) return;
+  var show = Date.now() < Date.UTC(2026, 11, 15);
+  try { if (localStorage.getItem('yl-notice-closed') === '1') show = false; } catch (e) {}
+  if (show) bar.hidden = false;
+  var x = bar.querySelector('.notice-x');
+  if (x) x.addEventListener('click', function () {
+    bar.hidden = true;
+    try { localStorage.setItem('yl-notice-closed', '1'); } catch (e) {}
+  });
+})();
