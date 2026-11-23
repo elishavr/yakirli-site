@@ -4,7 +4,7 @@
   var head = document.querySelector('.site-head');
   var btn = document.querySelector('.menu-btn');
   var nav = document.getElementById('mainnav');
-  var mobile = window.matchMedia('(max-width: 1180px)');
+  var mobile = window.matchMedia('(max-width: 1280px)');
   var groups = Array.from(document.querySelectorAll('.has-sub'));
   var background = document.querySelectorAll('main, .site-foot, .wa-float');
 

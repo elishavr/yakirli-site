@@ -36,7 +36,7 @@ HERO_PHOTOS = {
 }
 
 # Pages whose hero uses a newer photo than the shared group image
-HERO_FILES = {'home': 'home-v2', 'memorial': 'memorial-garden', 'eighth': 'eighth-training', 'grandparents': 'grandparents-v1', 'public': 'knesset-welfare-committee'}
+HERO_FILES = {'home': 'home-v2', 'memorial': 'memorial-garden', 'eighth': 'eighth-training', 'grandparents': 'grandparents-v1', 'public': 'knesset-welfare-committee', 'donate': 'home-v2'}
 
 def path_of(lang, pid):
     slug = PATHS[pid]
@@ -49,7 +49,8 @@ NAV = {
         ('home', 'בית', None),
         ('about', 'אודות', None),
         ('support', 'מעגל התמיכה', [('eighth', 'היום השמיני'), ('parents', 'הורים שכולים'),
-                                     ('grandparents', 'סבים וסבתות שחוו אובדן נכד/ה'), ('volunteers', 'מתנדבים והכשרה')]),
+                                     ('grandparents', 'סבים וסבתות שחוו אובדן נכד/ה'), ('volunteers', 'מתנדבים והכשרה'),
+                                     ('guide', 'מדריך למבקרי אבלים')]),
         ('public', 'פעילות ציבורית', [('public', 'מה אנחנו עושים'),
                                        ('week', 'שבוע המודעות'), ('lectures', 'הרצאות')]),
         ('memorial', 'הנצחה', None),
@@ -61,7 +62,8 @@ NAV = {
         ('home', 'Home', None),
         ('about', 'About', None),
         ('support', 'Support', [('eighth', 'The Day After Shiva'), ('parents', 'Bereaved Parents'),
-                                ('grandparents', 'Grandparents Who Lost a Grandchild'), ('volunteers', 'Volunteers and Training')]),
+                                ('grandparents', 'Grandparents Who Lost a Grandchild'), ('volunteers', 'Volunteers and Training'),
+                                ('guide', 'A Guide for Comforters')]),
         ('public', 'Public Advocacy', [('public', 'What we do'),
                                        ('week', 'Awareness Week'), ('lectures', 'Lectures')]),
         ('memorial', 'Remembrance', None),
@@ -201,7 +203,7 @@ def render_page(layout, base, site, build_id, lang, pid, path, title, group, bod
         'description': html.escape(HOME_DESC[lang], quote=True) if pid == 'home' else description_of(body), 'canonical': site + path,
         'og_image': site + '/assets/img/og-' + lang + '.png',
         'og_alt': html.escape(t['site_long'], quote=True),
-        'hero_preload': (f'<link rel="preload" as="image" href="/assets/img/photos/{HERO_FILES.get(pid, hero_photo + '-v1')}.avif" type="image/avif" fetchpriority="high">' if hero_photo else ''),
+        'hero_preload': ((lambda f, e: f'<link rel="preload" as="image" href="/assets/img/photos/{f}.{e}" type="image/{e}" fetchpriority="high">')(HERO_FILES.get(pid, hero_photo + '-v1'), 'avif' if (ROOT / 'assets/img/photos' / (HERO_FILES.get(pid, hero_photo + '-v1') + '.avif')).exists() else 'webp') if hero_photo else ''),
         'alt_he': site + path_of('he', pid if pid in PATHS else 'home'), 'alt_en': site + path_of('en', pid if pid in PATHS else 'home'),
         'og_locale': 'en_US' if lang == 'en' else 'he_IL', 'base': base, 'site': site, 'build': build_id,
         'page': pid, 'group': group or 'none', 'home': path_of(lang, 'home'),
